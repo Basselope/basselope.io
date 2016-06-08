@@ -1,4 +1,3 @@
 app/public/dist
-.idea/codeStyleSettings.xml
-.idea/workspace.xml
+/.idea/
 /node_modules/
