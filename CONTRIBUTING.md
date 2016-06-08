@@ -2,29 +2,36 @@
 
 ## General Workflow
 
-1. Fork the repo, clone to local computer, run `npm install` and then `gulp init` to build out the file-tree structure
-1. Cut a namespaced feature branch from master
-  - bug/...
+1. Fork the repo, clone to local computer, run `npm install` and then `gulp init` to build the project and install/prepare its dependencies.
+1. Cut a namespaced feature branch from the dev branch. Your branch should follow this naming convention:
+  - design/...
   - feat/...
-  - test/...
-  - doc/...
+  - fix/...
+  - chore/...
   - refactor/...
+  - doc/...
 1. Make commits to your feature branch. Prefix each commit like so:
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
-  - (design) ...
-1. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
-   directly to master. Include a description of your changes.
+  - `[design] ...`
+    - additions like psudo-code or rough-draft-code that is not yet in use
+  - `[feat] ...`
+    - explicitly extends the functionality of the project
+  - `[fix] ...`
+    - changes that address existing problems
+  - `[refactor] ...`
+    - improvements to design patterns & general changes that don't inherently change functionality
+  - `[chore] ...`
+    - work done on testing and build tools
+  - `[doc] ...`
+    - additions & improvements to the documentation
+  
+1. When you've completed your changes, `git pull --rebase upstream dev` changes into your branch. submit a [pull request][]
+   to the dev branch. Include a description of your changes.
 1. Your pull request will be reviewed by another maintainer. The point of code
    reviews is to help keep the codebase clean and of high quality and, equally
    as important, to help you grow as a programmer. If your code reviewer
    requests you make a change you don't understand, ask them why.
 1. Fix any issues raised by your code reviwer, and push your fixes as a single
-   new commit.
+   new commit on the same branch.
 1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
 ## Detailed Workflow
@@ -34,48 +41,57 @@
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/hackreactor-labs/<NAME_OF_REPO>.git
+git remote add upstream https://github.com/Basselope/collatio.git
 ```
 
-### Cut a namespaced feature branch from master
+### Cutting a namespaced feature branch from dev
 
 Your branch should follow this naming convention:
-  - bug/...
+  - design/...
   - feat/...
-  - test/...
-  - doc/...
+  - fix/...
+  - chore/...
   - refactor/...
+  - doc/...
 
-These commands will help you do this:
 
-``` bash
+To create a new branch locally:
 
-# Creates your branch and brings you there
+```
 git checkout -b `your-branch-name`
 ```
 
-### Make commits to your feature branch.
 
-Prefix each commit like so
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
 
 Make changes and commits on your branch, and make sure that you
-only make changes that are relevant to this branch. If you find
-yourself making unrelated changes, make a new branch for those
+only make changes that are relevant to the branch namespace. If you find
+yourself making unrelated changes then make a new branch for those
 changes.
 
 #### Commit Message Guidelines
 
-- Commit messages should be written in the present tense; e.g. "Fix continuous
-  integration script".
+Prefix each commit like so:
+  - `[design] ...`
+    - additions like psudo-code or rough-draft-code that is not yet in use
+  - `[feat] ...`
+    - explicitly extends the functionality of the project
+  - `[fix] ...`
+    - changes that address existing problems
+  - `[refactor] ...`
+    - improvements to design patterns & general changes that don't inherently change functionality
+  - `[chore] ...`
+    - work done on testing and build tools
+  - `[doc] ...`
+    - additions & improvements to the documentation
+
+Gramatical guidelines go as follows:
+- Commit messages should be written in the *present* tense; e.g. 
+  `[fix] fixes input event callback loop`.
 - The first line of your commit message should be a brief summary of what the
-  commit changes. Aim for about 70 characters max. Remember: This is a summary,
-  not a detailed description of everything that changed.
+  commit changes. Remember: This is a summary, not a detailed description of 
+  everything that changed.
+- Aim for about 70 characters max, all lowercase, function names in single quotes; 
+  e.g. `... '.testMethod()' ...`. Independent clauses should be seperated by
 - If you want to explain the commit in more depth, following the first line should
   be a blank line and then a more detailed description of the commit. This can be
   as detailed as you want, so dig into details here and keep the first line short.
@@ -88,7 +104,7 @@ changes to the master branch into yours by running this command
 from your branch:
 
 ```
-git pull --rebase upstream master
+git pull --rebase upstream dev
 ```
 
 This will start the rebase process. You must commit all of your changes
@@ -163,17 +179,3 @@ This is just to help you organize your process
 
 If you follow all of these guidelines and make good changes, you should have
 no problem getting your changes merged in.
-
-
-<!-- Links -->
-[style guide]: https://github.com/hackreactor-labs/style-guide
-[n-queens]: https://github.com/hackreactor-labs/n-queens
-[Underbar]: https://github.com/hackreactor-labs/underbar
-[curriculum workflow diagram]: http://i.imgur.com/p0e4tQK.png
-[cons of merge]: https://f.cloud.github.com/assets/1577682/1458274/1391ac28-435e-11e3-88b6-69c85029c978.png
-[Bookstrap]: https://github.com/hackreactor/bookstrap
-[Taser]: https://github.com/hackreactor/bookstrap
-[tools workflow diagram]: http://i.imgur.com/kzlrDj7.png
-[Git Flow]: http://nvie.com/posts/a-successful-git-branching-model/
-[GitHub Flow]: http://scottchacon.com/2011/08/31/github-flow.html
-[Squash]: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
