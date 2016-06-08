@@ -1,34 +1,57 @@
 // configuration of webpack-gulp tasks, required by utils_config
-const wp = {};
+const web = {};
 
-wp.pack = require('webpack-stream'),
-wp.import = require('webpack-load-plugins')();
+web.pack = require('webpack-stream');
+web.import = require('webpack-load-plugins')();
 
-wp.loaders = [
+// web.log = {
+//   progress: new web.pack.webpack.ProgressPlugin(function(p, m) { console.log(p); }),
+//   complete: function(status) { console.log(status); }
+// }
+
+web.loaders = [
   {
-    test: /\.js$/,
+    test: /\.jsx?$/,
     exclude: /node_modules/,
     loader: 'babel-loader'
+  },{
+    test: require.resolve('snapsvg'),
+    loader: 'imports?this=>window'
   }
 ];
 
-wp.plugins = {
+web.plugins = {
   dev: [
-    new wp.pack.webpack.HotModuleReplacementPlugin(),
-    new wp.pack.webpack.ProgressPlugin(function(p,m) {})
+    new web.pack.webpack.HotModuleReplacementPlugin(),
   ],
   build: [
-    new wp.pack.webpack.optimize.DedupePlugin(),
-    new wp.pack.webpack.optimize.UglifyJsPlugin(),
-    new wp.pack.webpack.ProgressPlugin(function(p,m) {})
-  ]
+    new web.pack.webpack.optimize.DedupePlugin(),
+    new web.pack.webpack.optimize.UglifyJsPlugin()
+  ],
+  deploy: []
+};
+
+web.task = {
+  dev: {
+    watch: true,
+    devtool: 'source-map',
+    plugins: web.plugins.dev,
+    module: { loaders: web.loaders }
+  },
+  build: {
+    watch: false,
+    devtool: 'source-map',
+    plugins: web.plugins.build,
+    module: { loaders: web.loaders }
+  },
+  deploy: {}
 };
 
 
-module.exports = wp;
+module.exports = web;
 
 
-// wp.pack_plugins({
+// web.pack_plugins({
 //   pattern: ['*-webpack-plugin','@*/*-webpack-plugin'], // the glob(s) to search for 
 //   config: 'package.json', // where to find the plugins, by default searched up from process.cwd() 
 //   scope: ['dependencies', 'devDependencies', 'peerDependencies'], // which keys in the config to look within 
