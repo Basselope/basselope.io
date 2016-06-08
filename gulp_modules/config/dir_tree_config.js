@@ -43,30 +43,27 @@ const client_file_tree = {
       name: 'assets'
     },{
       name: 'scss',
-      files: ['stylesheet.scss']
+      files: ['style_index.scss']
     },{
       name: 'dist',
       files: ['build.log'],
       paths: [{name: 'js'},{name: 'css'},{name: 'src'}]
     },{
-      name: 'js',
-      files: ['public_index.js'],
+      name: 'jsx',
+      files: ['public_index.jsx'],
       paths: [
         {
+          name: 'components',
+          files: ['comp_index.jsx']
+        },{
+          name: 'containers',
+          files: ['cont_index.jsx']
+        }, {
           name: 'state',
-          files: ['state_config.js']
-        },{
-          name: 'models',
-          files: ['models_index.js']
-        },{
-          name: 'collections',
-          files: ['collections_index.js']
+          files: ['state_index.jsx']
         },{
           name: 'utils',
-          files: ['utils_index.js']
-        },{
-          name: 'views',
-          files: ['views_index.js']
+          files: ['utils_index.jsx']
         }
       ]
     }
