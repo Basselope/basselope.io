@@ -17,6 +17,9 @@ web.loaders = [
   },{
     test: require.resolve('snapsvg'),
     loader: 'imports?this=>window'
+  },{
+    test: /\.scss$/,
+    loaders: ['style', 'css', 'postcss', 'sass']
   }
 ];
 
