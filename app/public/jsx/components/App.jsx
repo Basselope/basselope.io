@@ -1,10 +1,20 @@
 import React from 'react'
-//import Search from './search'
+import SearchBar from './searchBar.jsx'
 
-const App = () => (
-  <div>
-    <Search />
-  </div>
-)
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { data: [] };
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+      </div>
+    );
+  }
+}
 
 export default App
