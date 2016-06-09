@@ -1,4 +1,4 @@
-// configuration of webpack-gulp tasks, required by utils_config
+// configuration of webpack-gulp tasks, required by utils_index
 const web = {};
 
 web.pack = require('webpack-stream');
@@ -25,18 +25,17 @@ web.loaders = [
 
 web.plugins = {
   dev: [
-    new web.pack.webpack.HotModuleReplacementPlugin(),
+    new web.pack.webpack.HotModuleReplacementPlugin()
   ],
-  build: [
+  deploy: [
     new web.pack.webpack.optimize.DedupePlugin(),
     new web.pack.webpack.optimize.UglifyJsPlugin()
-  ],
-  deploy: []
+  ]
 };
 
 web.task = {
   dev: {
-    watch: true,
+    watch: false,
     devtool: 'source-map',
     plugins: web.plugins.dev,
     module: { loaders: web.loaders }
