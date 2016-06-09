@@ -1,9 +1,9 @@
 import React from 'react'
-import search from '../containers/search'
+import Search from './search'
 
 const App = () => (
   <div>
-    <search />
+    <Search />
   </div>
 )
 
