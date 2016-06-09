@@ -1,26 +1,25 @@
+var fs = require('fs');
+var path = require('path');
 var express  = require('express');
-var bodyParser = require('body-parser');    
-
+var bodyParser = require('body-parser');   
+var APIRouter = require('../../app/server/router/router_API.js');
 var app = express();
 
-app.use(bodyParser.json());                                     
-app.use(express.static(__dirname + '/../../app/public'));
+const public_directory = path.join(__dirname , '../public');                     
+
+app.use(bodyParser.json()); 
+app.use(express.static(public_directory));
 
 var port = process.env.PORT || 8080;
 
-app.get('/', function(req, res) {
+app.use(APIRouter.routerHandler);
+
+app.get('/*', function(req, res, next) {
   console.log(__dirname);
-  res.sendFile(express.static(__dirname + '/index.html'));
+  fs.createReadStream(path.join(public_directory,"index.html")).pipe(res);
 });
 
-
 module.exports = app;
-
-
-
-// app.post('/FILE', function(req, res) {
-//   DO SOMETHING(req, res);
-// })
 
 
 

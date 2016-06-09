@@ -18,10 +18,13 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.12.0",
+    "bing.search": "^1.0.1",
     "body-parser": "^1.15.1",
     "bookshelf": "^0.9.5",
+    "btoa": "^1.1.2",
     "express": "^4.13.4",
     "knex": "^0.11.5",
+    "node-bing-api": "^2.4.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
