@@ -48,32 +48,25 @@ var twitterHandler = function() {
     };
 
     function getTweetList(req, res, next) {
-
         fullTweetPath(req.body.query);
-        console.log(req.body.query);
         callTwitter(tweetDetails.options, function(tweetObj) {
             var tweetsReturn = tweetObj.statuses.map(function(curr,index,arr){
-                return {date:curr.created_at,
-                        tweet:curr.text,
-                        user: curr.user.screen_name,
-                        userObject: curr.user,
-                        retweetCount: curr.retweet_count,
-                        favorited: curr.favorite_count
-                        }
-            })
-            res.send(tweetsReturn);
-            
-            
-            // tweetObj.statuses.forEach(function(tweet) {
-            //     console.log('\n' +" HERE IS CONTENT " + tweet.user.screen_name + ' : ' + tweet.text);
-            // });
-            //console.log(tweetsReturn);
+                return {
+                  date:curr.created_at,
+                  tweet:curr.text,
+                  user: curr.user.screen_name,
+                  userObject: curr.user,
+                  retweetCount: curr.retweet_count,
+                  favorited: curr.favorite_count
+                };
+            });
 
-        })
-    }
-    return {
-        run: getTweetList
-    }
+        res.status(200).send(tweetsReturn);
+
+        });
+    };
+
+  return { run: getTweetList }
 };
 
 var exports = module.exports = {};
