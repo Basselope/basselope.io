@@ -17,6 +17,7 @@
   "author": "lukaswelinder",
   "license": "MIT",
   "dependencies": {
+    "Sentimental": "^1.0.1",
     "axios": "^0.12.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "bing.search": "^1.0.1",

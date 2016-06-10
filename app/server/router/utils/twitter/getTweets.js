@@ -2,6 +2,8 @@ var https = require('https');
 var auth = require('./oauth.json');
 var sentimentAnalysis = require('./../../../data/utils/sentimentAnalysis.js');
 
+
+
 var twitterHandler = function() {
     var headers = {
         'User-Agent': 'Coding Defined',
@@ -63,7 +65,7 @@ var twitterHandler = function() {
             });
         let analyzedTweets = sentimentAnalysis.sentimentProps.runTwit(tweetsReturn)
         res.status(200).send(analyzedTweets);
-        });
+            });
         });
     };
 
