@@ -40,13 +40,12 @@ web.task = {
     plugins: web.plugins.dev,
     module: { loaders: web.loaders }
   },
-  build: {
+  deploy: {
     watch: false,
     devtool: 'source-map',
-    plugins: web.plugins.build,
+    plugins: web.plugins.deploy,
     module: { loaders: web.loaders }
-  },
-  deploy: {}
+  }
 };
 
 
