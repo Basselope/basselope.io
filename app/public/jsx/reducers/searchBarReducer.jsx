@@ -9,6 +9,6 @@ const searchBarReducer = (state = INITIAL_STATE, action) => {
       return state;
     }
   }
-}
+};
 
-export default searchBarReducer
+export default searchBarReducer;

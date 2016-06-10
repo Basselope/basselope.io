@@ -15,7 +15,6 @@ const ENV_DIR = (ARG_DIR && ARG_DIR in src) ? src[ARG_DIR].root : src.app.root;
 const ENV_SRC = (ARG_DIR && ENV_DIR in src) ? src[ARG_DIR].all : src.app.all;
 // pack.task set according to '--env ...' which defaults to 'dev'
 const ENV_WPT = (ARG_ENV && ARG_ENV in web.task) ? web.task[ARG_ENV] : web.task.dev;
-console.log(ENV_DIR);
 
 /* * * * * * * * * * * * * * | Uses 'dirp-tree' to build filetree structure;
  * gulp init                 | config located @ 'gulp_modules/config/dirptree.config.js'
@@ -36,7 +35,7 @@ gulp.task('launch', ['lint','pack'], function() {
     watch: ENV_DIR,
     ignore: src.app.ignore,
     ext: 'js jsx html scss',
-    tasks: ['lint','pack']
+    tasks: ['lint']
   });
 });
 
