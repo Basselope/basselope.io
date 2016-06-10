@@ -1,5 +1,6 @@
 var https = require('https');
 var auth = require('./oauth.json');
+var sentimentAnalysis = require('./../../../data/utils/sentimentAnalysis.js');
 
 var twitterHandler = function() {
     var headers = {
@@ -14,11 +15,7 @@ var twitterHandler = function() {
             console.log('Error : ' + e.message);
         })
     };
-    var trendOptions = {
-        host: 'api.twitter.com',
-        path: '/1.1/trends/place.json?id=1', // id = 1 for global trends CALL getLocationIds to get location
-        headers: headers
-    };
+  
     var tweetDetails = {
         maxresults: 100,
         resultType: 'recent', // options are mixed, popular and recent
@@ -48,21 +45,25 @@ var twitterHandler = function() {
     };
 
     function getTweetList(req, res, next) {
-        fullTweetPath(req.body.query);
-        callTwitter(tweetDetails.options, function(tweetObj) {
-            var tweetsReturn = tweetObj.statuses.map(function(curr,index,arr){
+        fullTweetPath(req.body.query.replace("#",""));
+        callTwitter(tweetDetails.options, function(nonHashTag) {
+            let noHash = nonHashTag;
+            fullTweetPath("#"+req.body.query.replace("#",""));
+             callTwitter(tweetDetails.options, function(HashTagTweets) {
+            let tweetsReturn = HashTagTweets.statuses.concat(noHash.statuses).map(function(curr,index,arr){
                 return {
+                  type:"twitter",
                   date:curr.created_at,
-                  tweet:curr.text,
+                  text:curr.text,
                   user: curr.user.screen_name,
                   userObject: curr.user,
                   retweetCount: curr.retweet_count,
                   favorited: curr.favorite_count
                 };
             });
-
-        res.status(200).send(tweetsReturn);
-
+        let analyzedTweets = sentimentAnalysis.sentimentProps.runTwit(tweetsReturn)
+        res.status(200).send(analyzedTweets);
+        });
         });
     };
 

@@ -1,4 +1,4 @@
-var twitterHandle = require('./utils/getTweets.js');
+var twitterHandle = require('./utils/twitter/getTweets.js');
 var bingHandle = require('./utils/getBing.js');
 var redditHandle = require('./utils/getReddit.js');
 

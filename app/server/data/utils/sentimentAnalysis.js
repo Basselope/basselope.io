@@ -1,89 +1,78 @@
 var sentiment = require('sentiment');
-
-// var r1 = sentiment('Cats are stupid.');
-// console.dir(r1);     
-// var r1 = sentiment('Cats are [stupid] and i hate them');
-// console.dir(r1);     
-// var r1 = sentiment('Cats are very [stupid] and i hate them');
-// console.dir(r1);     
-// var r1 = sentiment('Cats are %stupid% but i love them');
-// console.dir(r1);   
-// var r1 = sentiment('Cats are stu pid and i love them');
-// console.dir(r1);     
-// var r1 = sentiment('Cats are [lovely animals]');
-// console.dir(r1);     
-// var r1 = sentiment('fuck the world i hate murder');
-// console.dir(r1);
-// var r1 = sentiment('fuck this bitch world i hate murder very very bad');
-// console.dir(r1);        // Score: -2, Comparative: -0.666
-
-// var r2 = sentiment('Cats are totally amazing!');
-// console.dir(r2);  
-
+var stats = require("stats-lite")
 
 
 function sentimentAnalyzer(){
 
-	var analyze = function(textObject,callback){
+	let analyzeReddit = function(){}
 
-		
+	let twitter_rank = function(tweetIndividual) {
+		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
+		retweets = tweetIndividual.retweetCount, 
+		favorites = tweetIndividual.favorited,
+		score = tweetIndividual.sentiment.score,
+		comparative = tweetIndividual.sentiment.comparative;
+		//console.log(tweetText, retweets, favorites, score, comparative)
+  			let results = 0;
+			results += score;
+		    results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
+		    results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
+		    results = results / tweetText.length;
+		    tweetIndividual.sentiment.w_score = results*100;
+		    console.log("RESULTS "+results);
+		  	return tweetIndividual
+		}
+	let normal_dist_data_filter = function(content){
+		let normalized = [];
+		content.forEach(function(curr,index,arr){
+			normalized.push(curr.sentiment.w_score)
+		});
+		normalized.sort();
+		//let mean = normalized.reduce(function(a,b){return a+b;})/normalized.length;
+		//let median = (normalized[Math.floor((normalized.length - 1) / 2)] + normalized[Math.ceil((normalized.length - 1) / 2)]) / 2;
+		let mean = stats.mean(normalized);
+		let median = stats.median(normalized);
+		let standardDeviation = stats.stdev(normalized);
+		let mode = stats.mode(normalized);
+		let variance = stats.variance(normalized);
+		return {set: normalized,
+				mean: mean,
+				median:median,
+				standardDeviation:standardDeviation,
+				mode:mode,
+				variance:variance};
+	}
 
+	let analyzeTwit = function(textObject,callback){
+		let analyzedResults = {};
+		let tweet_sentiment = [];
+		textObject.forEach(function(curr,index,arr){
+			let sentimentVal = sentiment(curr.text);
+			if(sentimentVal.score!=0){
+				curr.id = index; 
+				curr.sentiment = sentiment(curr.text);
+				tweet_sentiment.push(twitter_rank(curr));
 
-
-
-		var sentimentCalc= sentiment(textObject.text);
-		for (var attrname in sentimentCalc) { textObject.sentiment[attrname] = sentimentCalc[attrname]; }
-		return textObject;
-	};
+			}
+			//return curr;
+		});
+		//let sentimentCalc= sentiment(textObject.text);
+		//for (let attrname in sentimentCalc) { textObject.sentiment[attrname] = sentimentCalc[attrname]; }
+		let tweet_with_graphical = {graph_meta: normal_dist_data_filter(tweet_sentiment),
+									tweet_sentiment:tweet_sentiment};
+		return tweet_with_graphical;
+	}
 	
 	return {runTwit: analyzeTwit,
-			runNews: analyzeNews};
+			runReddit: analyzeReddit};
 }
 
-var exports = module.exports = {};
-exports.sentimentAnalysis = sentimentAnalyzer().run;
+exports = module.exports = {};
+exports.sentimentProps = sentimentAnalyzer();
 
 
 
 
-// function performAnalysis(tweetSet) {
-//   //set a results variable
-//   var results = 0;
-//   // iterate through the tweets, pulling the text, retweet count, and favorite count
-// 		  for(var i = 0; i < tweetSet.length; i++) {
-// 		    tweet = tweetSet[i]['text'];
-// 		    retweets = tweetSet[i]['retweet_count'];
-// 		    favorites = tweetSet[i]['favorite_count'];
-// 		    // remove the hastag from the tweet text
-// 		    tweet = tweet.replace('#', '');
-// 		    // perform sentiment on the text
-// 		    var score = sentimental.analyze(tweet)['score'];
-// 		    // calculate score
-// 		    results += score;
-// 		    if(score > 0){
-// 		      if(retweets > 0) {
-// 		        results += (Math.log(retweets)/Math.log(2));
-// 		      }
-// 		      if(favorites > 0) {
-// 		        results += (Math.log(favorites)/Math.log(2));
-// 		      }
-// 		    }
-// 		    else if(score < 0){
-// 		      if(retweets > 0) {
-// 		        results -= (Math.log(retweets)/Math.log(2));
-// 		      }
-// 		      if(favorites > 0) {
-// 		        results -= (Math.log(favorites)/Math.log(2));
-// 		      }
-// 		    }
-// 		    else {
-// 		      results += 0;
-// 		    }
-// 		  }
-// 		  // return score
-// 		  results = results / tweetSet.length;
-// 		  return results
-// 		}
 
 
 
