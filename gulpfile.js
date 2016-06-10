@@ -35,7 +35,7 @@ gulp.task('launch', ['lint','pack'], function() {
     watch: ENV_DIR,
     ignore: src.app.ignore,
     ext: 'js jsx html scss',
-    tasks: ['lint','pack']
+    tasks: ['lint']
   });
 });
 

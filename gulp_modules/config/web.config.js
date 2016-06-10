@@ -35,7 +35,7 @@ web.plugins = {
 
 web.task = {
   dev: {
-    watch: false,
+    watch: true,
     devtool: 'source-map',
     plugins: web.plugins.dev,
     module: { loaders: web.loaders }
