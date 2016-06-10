@@ -4,7 +4,7 @@ COLLATIO
 
 Refer to the [AirBnB .jsx style guide](https://github.com/airbnb/javascript/tree/master/react) for contributing.
 
-For git workflow/contributions visit the CONTRIBUTING.md
+For git workflow/contributions visit the [CONTRIBUTING.md](https://github.com/Basselope/collatio/blob/dev/CONTRIBUTING.md)
 
 
 ###Team
