@@ -24,6 +24,7 @@
     "btoa": "^1.1.2",
     "co": "^4.6.0",
     "express": "^4.13.4",
+    "inspector": "^0.5.0",
     "knex": "^0.11.5",
     "lodash": "^4.13.1",
     "nlp-locale": "0.0.3",
@@ -35,6 +36,7 @@
     "react-router": "^2.4.1",
     "redux": "^3.5.2",
     "simple_english": "0.0.1",
+    "sentiment": "^1.0.6",
     "snapsvg": "^0.4.0",
     "sqlite3": "^3.1.4"
   },
