@@ -67,7 +67,7 @@ gulp.task('pack', function() {
  */
 gulp.task('serve', function() {
   return run.nodemon({
-    watch: src.app.all,
+    watch: ENV_DIR,
     ignore: src.app.ignore,
     ext: 'js jsx html scss',
     tasks: ['lint']

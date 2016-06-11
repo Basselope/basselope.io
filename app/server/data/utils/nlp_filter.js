@@ -1,9 +1,11 @@
 'use strict';
+const co = require('co');
+const _ = require('lodash');
+const struct = require('./../../router/utils/api_struct.js');
 
-const nlp = require('nlp_compromise');
-nlp.plugin(require('simple_english'));
-nlp.plugin(require('nlp-locale'));
+// const nlp = require('nlp_compromise');
+// nlp.plugin(require('simple_english'));
+// nlp.plugin(require('nlp-locale'));
 
-const _ = require('lodash')
+module.exports = struct;
 
-const struct = ('./api_struct.js');
