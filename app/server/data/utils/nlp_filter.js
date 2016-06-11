@@ -7,4 +7,3 @@ nlp.plugin(require('nlp-locale'));
 const _ = require('lodash')
 
 const struct = ('./api_struct.js');
-
