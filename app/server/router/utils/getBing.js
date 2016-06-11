@@ -4,22 +4,26 @@ var Bing = require('node-bing-api')({ accKey: "esEia2AIhxzceWcPPqFRajpP1TjNYYc4N
 
 var bingHandler = function() {
 
-    function getBingList(req,res,next){
-        //console.log(req.body);
-        //console.log(Bing);
-        //req.body.query
-        
-Bing.web("leo fender", function(error, res, body){
-    console.log(body);
-  },
-  {
-    top: 50,
-    market: 'en-US'
-  });
+    function getBingSuggestion(req,res,next){
+      let value = req.body.query.split(" ").join("%20");
+      return https.get({
+        host: 'api.bing.com',
+        path: '/osjson.aspx?query='+value
+    }, function(response) {
+        var data = '';
+        response.on('data', function(d) {
+            data += d;
+        });
+        response.on('end', function() {
+            var parsed = JSON.parse(data);
+            res.send(JSON.parse(data));
+        });
+    });
+
 
     }
     return {
-        run: getBingList
+        run: getBingSuggestion
     }
 };
 

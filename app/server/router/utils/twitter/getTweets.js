@@ -1,5 +1,6 @@
 var https = require('https');
 var auth = require('./oauth.json');
+
 var sentimentAnalysis = require('./../../../data/utils/sentimentAnalysis.js');
 
 
@@ -26,6 +27,7 @@ var twitterHandler = function() {
             headers: headers,
         }
     };
+
 
     function jsonHandler(response, callback) {
         var json = '';

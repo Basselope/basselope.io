@@ -10,10 +10,12 @@ function apihandlers(req, res, next) {
 			break;
 		case '/_api/bing/search':
 			bingHandle.getBing(req, res, next);
+		case '/_api/bing/suggestions':
+			bingHandle.getBing(req,res,next);
 			break;
-    case '/_api/reddit/search':
-      redditHandler(req, res, next);
-      break;
+    	case '/_api/reddit/search':
+      	redditHandler(req, res, next);
+      		break;
 	}
 }
 
