@@ -37,7 +37,7 @@ const getRedditComments = (redditPostURL, redditData, cb) => {
     });
 }
 
-exports.redditHandler = redditHandler;
+module.exports.redditHandler = redditHandler;
 
 // redditHandler({body: {"query": 'javascript'}}); Uncomment to make a get request to Reddit and see the redditData array
-redditHandler({body: {"query": 'javascript'}});
+//redditHandler({body: {"query": 'javascript'}});

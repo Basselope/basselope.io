@@ -5,7 +5,7 @@ var PropertyList = React.createClass({
         <ul>
           {
             this.props.list.map(function(listValue){
-            return <li onClick={()=>{this.props.commitSearchCriteria(listValue)}}>{listValue}</li>;
+            return <li key={listValue} onClick={()=>{this.props.commitSearchCriteria(listValue)}}>{listValue}</li>;
           })
           }
         </ul>
