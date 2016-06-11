@@ -1,20 +1,12 @@
 import React from 'react'
 import SearchBar from './searchBar.jsx'
+import TweetList from './tweetList.jsx'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { data: [] };
-  }
-
-  render() {
-    return (
-      <div>
-        <SearchBar />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div>
+    <SearchBar />
+    <TweetList />
+  </div>
+)
 
 export default App
