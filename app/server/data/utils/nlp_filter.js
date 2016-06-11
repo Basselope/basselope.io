@@ -9,3 +9,4 @@ const struct = require('./../../router/utils/api_struct.js');
 
 module.exports = struct;
 
+//http://api.bing.com/osjson.aspx?query=
