@@ -1,5 +1,8 @@
 let sentiment = require('sentiment'),
 stats = require("stats-lite");
+
+
+
 function sentimentAnalyzer(){
 
 	let analyzeReddit = function(){}

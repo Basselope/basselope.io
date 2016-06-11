@@ -63,6 +63,7 @@ var twitterHandler = function() {
                   favorited: curr.favorite_count
                 };
             });
+            
         let analyzedTweets = sentimentAnalysis.sentimentProps.runTwit(tweetsReturn)
         res.status(200).send(analyzedTweets);
             });
