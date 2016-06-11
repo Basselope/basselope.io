@@ -1,8 +1,6 @@
 var https = require('https');
 var auth = require('./oauth.json');
 var co = require('co');
-const apiStruct = require('./../api_struct.js');
-
 var sentimentAnalysis = require('./../../../data/utils/sentimentAnalysis.js');
 
 
@@ -28,7 +26,7 @@ var twitterHandler = function() {
     };
   
     var tweetDetails = {
-        maxresults: 100,
+        maxResult: 100,
         resultType: 'recent', // options are mixed, popular and recent
         options: {
             host: 'api.twitter.com',
@@ -57,15 +55,16 @@ var twitterHandler = function() {
     };
 
     function getTweetList(req, res, next) {
+        console.log("HHHHHHHH",req.body.query)
         fullTweetPath(req.body.query.replace("#",""));
         let promise = new Promise(function(resolve, reject){
             fullTweetPath("#"+req.body.query.replace("#",""));
             (co.wrap(function* (){
-                 let resData = yield{
-                     hashed: Promise.resolve(callTwitter(tweetDetails.options, req.body.query)),
-                     nohash: Promise.resolve(callTwitter(tweetDetails.options, "#"+req.body.query))
+                let resData = yield{
+                    hashed: Promise.resolve(callTwitter(tweetDetails.options, req.body.query)),
+                    nohash: Promise.resolve(callTwitter(tweetDetails.options, "#"+req.body.query))
                 };
-                resolve(resData);
+                resolve(resData.hashed.statuses.concat(resData.nohash.statuses));
 
             }))();//.then((returnVal)=> console.log(returnVal));
             

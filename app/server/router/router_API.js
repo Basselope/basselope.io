@@ -1,12 +1,16 @@
-var twitterHandle = require('./utils/twitter/getTweets.js');
-var bingHandle = require('./utils/getBing.js');
-var redditHandle = require('./utils/getReddit.js');
+const twitterHandle = require('./utils/twitter/getTweets.js');
+const bingHandle = require('./utils/getBing.js');
+const redditHandle = require('./utils/getReddit.js');
+const apiStruct = require('./utils/api_struct.js');
 
 function apihandlers(req, res, next) {
 	console.log(req.url);
 	switch(req.url) {
 		case '/_api/twitter/search':
-			twitterHandle.getTweets(req, res, next).then(function(){console.log(arguments)});
+			twitterHandle.getTweets(req, res, next)
+			.then(function(data){ 
+					res.status(200).send(data)
+			});
 			break;
 		case '/_api/bing/search':
 			bingHandle.getBing(req, res, next);
@@ -14,7 +18,7 @@ function apihandlers(req, res, next) {
 			bingHandle.getBing(req,res,next);
 			break;
     	case '/_api/reddit/search':
-      		redditHandler(req, res, next);
+      		redditHandle.redditHandler(req, res, next);
       		break;
 	}
 }

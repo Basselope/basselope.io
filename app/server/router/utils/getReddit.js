@@ -2,7 +2,7 @@ let axios = require('axios');
 
 const redditHandler = (req, res) => {
   let redditURL = `https://www.reddit.com/search.json?q=${req.body.query}`;
-  getRedditSearch(redditURL, redditData => console.log(redditData));
+  getRedditSearch(redditURL, redditData => res.status(200).send(redditData));
 }
 
 const getRedditSearch = (redditURL, cb) => {

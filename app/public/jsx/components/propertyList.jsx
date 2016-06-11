@@ -1,11 +1,12 @@
 import React from 'react'
 var PropertyList = React.createClass({
     render: function() {
+      var self = this;
       return (
-        <ul>
+        <ul id="suggestionList">
           {
             this.props.list.map(function(listValue){
-            return <li key={listValue} onClick={()=>{this.props.commitSearchCriteria(listValue)}}>{listValue}</li>;
+            return <li key={listValue} onClick={()=>{self.props.commitSearchCriteria(listValue)}}>{listValue}</li>;
           })
           }
         </ul>
