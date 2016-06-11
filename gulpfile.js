@@ -19,7 +19,7 @@ const ENV_WPT = (ARG_ENV && ARG_ENV in web.task) ? web.task[ARG_ENV] : web.task.
 /* * * * * * * * * * * * * * | Uses 'dirp-tree' to build filetree structure;
  * gulp init                 | config located @ 'gulp_modules/config/dirptree.config.js'
  * * * * * * * * * * * * * * |/
- * @return {[undefined]}
+ * @return {[undefined]}       WARNING: early dev phase, possible breaking changes
   */
 gulp.task('init', function() {
   return run.dirptree.generate(run.dirptree.config);
@@ -30,14 +30,7 @@ gulp.task('init', function() {
  * * * * * * * * * * * * * * |/
  * @return {[stream]}
  */
-gulp.task('launch', ['lint','pack'], function() {
-  return run.nodemon({
-    watch: ENV_DIR,
-    ignore: src.app.ignore,
-    ext: 'js jsx html scss',
-    tasks: ['lint']
-  });
-});
+gulp.task('launch', run.sequence('lint',['pack','serve']));
 
 /* * * * * * * * * * * * * * | Linting with ES-Lint using 'airbnb-react'
  * gulp lint ...             |_
@@ -46,7 +39,7 @@ gulp.task('launch', ['lint','pack'], function() {
  *           --dir server -> |# "        ...        " 'app/server'
  * * * * * * * * * * * * * * |/
  * @return {[vinyl-stream]}
-  */
+ */
 gulp.task('lint', function() {
   return gulp.src(ENV_SRC)
     .pipe(run.changed(ENV_DIR))
@@ -55,8 +48,8 @@ gulp.task('lint', function() {
 
 /* * * * * * * * * * * * * * | WebPack tasks; config @ 'gulp_modules/config/web.config.js'
  * gulp pack ...             |_
- *           --env dev    -> |# default value; source-maps & runs hot-reloading
- *           --env deploy -> |# tree-shakes & uglifies source to produce compressed
+ *           --env dev    -> |# default value; source-map, hot-reload, and watch
+ *           --env deploy -> |# tree-shakes & uglifies to compress for deployment
  * * * * * * * * * * * * * * |/
  * @return {[stream]}
   */
@@ -65,5 +58,19 @@ gulp.task('pack', function() {
     .pipe(run.named())
     .pipe(web.pack(ENV_WPT))
     .pipe(gulp.dest(src.dest.js));
+});
+
+/* * * * * * * * * * * * * * | Launches application & runs according to arguments;
+ * gulp serve ...            | refer to tasks below for optional arguments
+ * * * * * * * * * * * * * * |/
+ * @return {[stream]}
+ */
+gulp.task('serve', function() {
+  return run.nodemon({
+    watch: src.app.all,
+    ignore: src.app.ignore,
+    ext: 'js jsx html scss',
+    tasks: ['lint']
+  });
 });
  

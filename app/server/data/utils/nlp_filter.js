@@ -1,6 +1,6 @@
 'use strict';
 
-const nlp = reuquire('nlp_compromise');
+const nlp = require('nlp_compromise');
 nlp.plugin(require('simple_english'));
 nlp.plugin(require('nlp-locale'));
 
