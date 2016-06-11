@@ -1,6 +1,8 @@
 // import { combineReducers } from 'redux'
-// import searchReducer from './searchReducer'
+// import tweets from './tweets.jsx'
 
-// export default combineReducers({
-//   searchReducer,
+// const searchBarReducer = combineReducers({
+//   tweets
 // })
+
+// export default searchBarReducer
