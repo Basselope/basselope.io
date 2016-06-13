@@ -44,11 +44,11 @@ function sentimentAnalyzer(){
 				standardDeviation:standardDeviation,
 				mode:mode,
 				variance:variance};
-	}
+	};
 	let testFunction = function(stuff){
 		console.log(this);
 		console.log(stuff)
-	}
+	};
 	let analyzeTwit = function(textObject,callback){
 		let analyzedResults = {};
 		let tweet_sentiment = [];
@@ -63,12 +63,12 @@ function sentimentAnalyzer(){
 
 				//let sentimentVal = sentiment(content[j].text);
 				//if(sentimentVal.score!=0){
-					//add user info to calculation
-					//retweets+favotire/followers 
-					content[j].sentiment = sentiment(content[j].text);
-					content[j].sentiment.w_rank = twitter_rank(content[j]);
-					rankingHolder.push(twitter_rank(content[j]));
-					//console.log(twitter_rank(content[j]))
+        //add user info to calculation
+        //retweets+favotire/followers
+        content[j].sentiment = sentiment(content[j].text);
+        content[j].sentiment.w_rank = twitter_rank(content[j]);
+        rankingHolder.push(twitter_rank(content[j]));
+        //console.log(twitter_rank(content[j]))
 
 				//}
 			}
@@ -77,17 +77,21 @@ function sentimentAnalyzer(){
 		}
 		//let sentimentCalc= sentiment(textObject.text);
 		//for (let attrname in sentimentCalc) { textObject.sentiment[attrname] = sentimentCalc[attrname]; }
-		let tweet_with_graphical = {dataAnalysis: normal_dist_data_filter(rankingHolder),
-									data:textObject};
+		let tweet_with_graphical = {
+      dataAnalysis: normal_dist_data_filter(rankingHolder),
+      data: textObject
+    };
 		return tweet_with_graphical;
-	}
+	};
 	
-	return {runTwit: analyzeTwit,
-			runReddit: analyzeReddit,
-			test: testFunction};
+	return {
+		twitter: analyzeTwit,
+		reddit: analyzeReddit,
+		test: testFunction
+	};
 }
 
-exports = module.exports = {};
+exports = module.exports = sentimentAnalyzer();
 exports.sentimentProps = sentimentAnalyzer();
 
 

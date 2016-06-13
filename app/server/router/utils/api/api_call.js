@@ -2,7 +2,7 @@
 
 const axios = require('axios');
 const Struct = require('./api_struct');
-var sentimentAnalysis = require('./../../../data/utils/sentimentAnalysis.js');
+const sentiment = require('./../../../data/utils/sentimentAnalysis.js');
 
 
 
@@ -35,7 +35,7 @@ const fetch = (src, query) => {
   if(Array.isArray(query))
     return axios.all(query.map((val) => call[src].request({ params: q[src](val) })))
       .then(axios.spread((...res) => res.reduce((curr, val) => curr.concat(data[src](val)),[])))
-      .then((data) => sentimentAnalysis.sentimentProps(Struct(data, src)));
+      .then((data) => sentiment[src](Struct(data, src)));
   return call[src].request({ params: q[src](query) });
 };
 
