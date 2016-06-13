@@ -8,21 +8,23 @@ function sentimentAnalyzer(){
 	let analyzeReddit = function(){}
 
 	let twitter_rank = function(tweetIndividual) {
+		//console.log(tweetIndividual)
 		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
-		retweets = tweetIndividual.retweetCount, 
-		favorites = tweetIndividual.favorited,
-		score = tweetIndividual.sentiment.score,
-		comparative = tweetIndividual.sentiment.comparative;
-		//console.log(tweetText, retweets, favorites, score, comparative)
-  			let results = 0;
-			results += score;
-		    results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
-		    results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
-		    results = results / tweetText.length;
-		    tweetIndividual.sentiment.w_score = results*100;
-		    console.log("RESULTS "+results);
-		  	return tweetIndividual
-		}
+			retweets = tweetIndividual.share_count, 
+			favorites = tweetIndividual.vote_count,
+			score = tweetIndividual.sentiment.score,
+			mentions = tweetIndividual.mentions_to.length,
+			comparative = tweetIndividual.sentiment.comparative;
+		// console.log("======"+tweetText, retweets, favorites, score, comparative, mentions+"======")
+		let results = 0;
+		results += score;
+	    results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
+	    results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
+	    results = results / tweetText.length;
+	    //tweetIndividual.sentiment.w_score = results*100;
+	    // console.log("RESULTS "+results);
+	  	return results*100;
+	}
 	let normal_dist_data_filter = function(content){
 		let normalized = [];
 		content.forEach(function(curr,index,arr){
@@ -43,29 +45,44 @@ function sentimentAnalyzer(){
 				mode:mode,
 				variance:variance};
 	}
-
+	let testFunction = function(stuff){
+		console.log(this);
+		console.log(stuff)
+	}
 	let analyzeTwit = function(textObject,callback){
 		let analyzedResults = {};
 		let tweet_sentiment = [];
-		textObject.forEach(function(curr,index,arr){
-			let sentimentVal = sentiment(curr.text);
-			if(sentimentVal.score!=0){
-				curr.id = index; 
-				curr.sentiment = sentiment(curr.text);
-				tweet_sentiment.push(twitter_rank(curr));
+		//console.log(textObject);
+		for(var i in textObject){
+			let curr = textObject[i];
+			let content = curr.content;
+				//console.log(curr.content);
+			for(var j in content){
+				//content[j].sentiment = sentiment(content[j].text)
 
+				//let sentimentVal = sentiment(content[j].text);
+				//if(sentimentVal.score!=0){
+					//add user info to calculation
+					//retweets+favotire/followers 
+					content[j].sentiment = sentiment(content[j].text);
+					content[j].sentiment.w_rank = twitter_rank(content[j]);
+					console.log(twitter_rank(content[j]))
+
+				//}
 			}
+			
 			//return curr;
-		});
+		}
 		//let sentimentCalc= sentiment(textObject.text);
 		//for (let attrname in sentimentCalc) { textObject.sentiment[attrname] = sentimentCalc[attrname]; }
 		let tweet_with_graphical = {graph_meta: normal_dist_data_filter(tweet_sentiment),
 									tweet_sentiment:tweet_sentiment};
-		return tweet_with_graphical;
+		return textObject;
 	}
 	
 	return {runTwit: analyzeTwit,
-			runReddit: analyzeReddit};
+			runReddit: analyzeReddit,
+			test: testFunction};
 }
 
 exports = module.exports = {};

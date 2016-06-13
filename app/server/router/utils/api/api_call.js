@@ -2,6 +2,8 @@
 
 const axios = require('axios');
 const Struct = require('./api_struct');
+var sentimentAnalysis = require('./../../../data/utils/sentimentAnalysis.js');
+
 
 
 const call = {
@@ -9,7 +11,9 @@ const call = {
     method: 'get',
     url: 'https://api.twitter.com/1.1/search/tweets.json',
     transformResponse: [
-      (data) => Struct(JSON.parse(data).statuses,'twitter')
+
+      (data) => Struct(JSON.parse(data).statuses,'twitter'),
+      (data) => sentimentAnalysis.sentimentProps.runTwit(data)
     ],
     headers: {
       "User-Agent": "Coding Defined",

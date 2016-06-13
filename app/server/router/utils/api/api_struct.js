@@ -5,7 +5,7 @@ const twitter_content_struct = (tweet) => ({
   id: tweet.id_str,
   text: tweet.text,
 
-  votes_count: tweet.favorites_count || 0,
+  vote_count: tweet.favorites_count || 0,
   share_count: tweet.retweet_count || 0,
 
   links: tweet.entities.urls.map((item) => item.url),
@@ -30,7 +30,6 @@ const twitter_account_struct = (tweet) => ({
 const reddit_account_struct = (comment) => ({});
 
 const reddit_content_struct = (comment) => ({});
-
 
 const keygen = {
   twitter: (tweet) => tweet.user.id,
