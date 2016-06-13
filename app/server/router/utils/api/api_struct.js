@@ -2,20 +2,23 @@
 const _ = require('lodash');
 
 const twitter_content_struct = (tweet) => ({
-  id: tweet.id,
+  id: tweet.id_str,
   text: tweet.text,
-  tags: tweet.entities.hashtags,
-  links: tweet.entities.urls,
-  mentions_to: tweet.entities.user_mentions,
-  responds_to: tweet.in_reply_to_user_id_str,
-  votes_count: tweet.favorites_count,
-  share_count: tweet.retweet_count,
-  location: tweet.coordinates,
+
+  votes_count: tweet.favorites_count || 0,
+  share_count: tweet.retweet_count || 0,
+
+  links: tweet.entities.urls.map((item) => item.url),
+  tags: tweet.entities.hashtags.map((item) => item.text),
+  mentions_to: tweet.entities.user_mentions.map((item) => item.id_str),
+  responds_to: tweet.in_reply_to_user_id_str || null,
+
+  location: tweet.coordinates || null,
   created_at: tweet.created_at
 });
 
 const twitter_account_struct = (tweet) => ({
-  id: tweet.user.id,
+  id: tweet.user.id_str,
   img: tweet.user.profile_image_url,
   name: tweet.user.screen_name,
   handle: tweet.user.screen_name,
@@ -45,16 +48,16 @@ const Content = {
 
 const Struct = (val, src) => {
   let author = {};
-  author[src] = Author[src](val);
+  author = Author[src](val);
   let content = {};
-  content[src] = [Content[src](val)];
+  content = [Content[src](val)];
   return {author,content};
 };
 
 module.exports = function(res, src) {
   return _.reduce(res, function(curr, val) {
     if(keygen[src](val) in curr)
-      curr[keygen[src](val)].content[src].push(Content[src](val));
+      curr[keygen[src](val)].content.push(Content[src](val));
     else
       curr[keygen[src](val)] = Struct(val, src);
     return curr;

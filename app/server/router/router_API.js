@@ -1,6 +1,6 @@
-var twitterHandle = require('./utils/getTweets.js');
-var bingHandle = require('./utils/getBing.js');
-var redditHandle = require('./utils/getReddit.js');
+var twitterHandle = require('./utils/api/config/getTweets.js');
+var bingHandle = require('./utils/api/config/getBing.js');
+var redditHandle = require('./utils/api/config/getReddit.js');
 
 function apihandlers(req, res, next) {
 	console.log(req.url);
