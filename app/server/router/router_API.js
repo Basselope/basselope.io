@@ -1,7 +1,9 @@
-const twitterHandle = require('./utils/twitter/getTweets.js');
-const bingHandle = require('./utils/getBing.js');
-const redditHandle = require('./utils/getReddit.js');
-const apiStruct = require('./utils/api_struct.js');
+'use strict';
+const apiStruct = require('./utils/api/api_struct.js');
+var twitterHandle = require('./utils/api/config/getTweets.js');
+var bingHandle = require('./utils/api/config/getBing.js');
+var redditHandle = require('./utils/api/config/getReddit.js');
+
 
 function apihandlers(req, res, next) {
 	console.log(req.url);
@@ -14,6 +16,7 @@ function apihandlers(req, res, next) {
 			break;
 		case '/_api/bing/search':
 			bingHandle.getBing(req, res, next);
+      break;
 		case '/_api/bing/suggestions':
 			bingHandle.getBing(req,res,next);
 			break;
