@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import ProperyList from './propertyList.jsx'
 class SearchBar extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = { term: '', autosuggest:[] };
