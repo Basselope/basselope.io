@@ -50,7 +50,6 @@ function sentimentAnalyzer(){
 					content[j].sentiment.w_rank = twitter_rank(content[j]);
 					rankingHolder.push(twitter_rank(content[j]));
 			}
-			
 		}
 		//let sentimentCalc= sentiment(textObject.text);
 		//for (let attrname in sentimentCalc) { textObject.sentiment[attrname] = sentimentCalc[attrname]; }

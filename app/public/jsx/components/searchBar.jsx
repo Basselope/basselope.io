@@ -5,7 +5,7 @@ import ProperyList from './propertyList.jsx'
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { term: '', autosuggest:[] };
+    this.state = { term: '', autosuggest:[],  showSuggestion:{display:"none"}};
   }
 
   searchBarAction(value) {
@@ -26,6 +26,11 @@ class SearchBar extends React.Component {
   }
     searchBarSuggestion(input) {
       this.setState({ term: input})
+      if(input.length==0){
+        this.setState({autosuggest: []})
+        return;
+      }else{
+      
       var self = this;
       input = input.trim().split(" ").join("%20");
 
@@ -38,16 +43,17 @@ class SearchBar extends React.Component {
         }
         self.setState({autosuggest: content})
       });
+      }
   }
   
 
   render() {
     return (
-      <div>
+      <div class="main">
         <input id='input' type='text' value={this.state.term} onChange={event => this.searchBarSuggestion(event.target.value)} />
         <button type='submit' id='searchButton' onClick={() => this.searchBarAction(this.state.term)}>Submit</button>
         <div > 
-        <ProperyList list={this.state.autosuggest} commitSearchCriteria ={this.commitSearchCriteria.bind(this) } /></div>
+        <ProperyList style={this.state.showSuggestion} list={this.state.autosuggest} commitSearchCriteria ={this.commitSearchCriteria.bind(this) } /></div>
       </div>
     );
   }
