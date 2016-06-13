@@ -15,12 +15,15 @@ web.loaders = [
     exclude: /node_modules/,
     loader: 'babel-loader'
   },{
-    test: require.resolve('snapsvg'),
+    test: require.resolve('d3'),
     loader: 'imports?this=>window'
   },{
     test: /\.scss$/,
     loaders: ['style', 'css', 'postcss', 'sass']
-  }
+  },{
+    test: require.resolve("jquery"),
+    loader: "imports?this=>window"
+  },
 ];
 
 web.plugins = {
@@ -53,12 +56,12 @@ module.exports = web;
 
 
 // web.pack_plugins({
-//   pattern: ['*-webpack-plugin','@*/*-webpack-plugin'], // the glob(s) to search for 
-//   config: 'package.json', // where to find the plugins, by default searched up from process.cwd() 
-//   scope: ['dependencies', 'devDependencies', 'peerDependencies'], // which keys in the config to look within 
-//   replaceString: /-webpack-plugin$/, // what to remove from the name of the module when adding it to the context 
-//   camelize: true, // if true, transforms hyphenated plugins names to camel case 
-//   lazy: true, // whether the plugins should be lazy loaded on demand 
-//   rename: {}, // a mapping of plugins to rename 
-//   renameFn: function (name) { ... } // a function to handle the renaming of plugins (the default works) 
+//   pattern: ['*-webpack-plugin','@*/*-webpack-plugin'], // the glob(s) to search for
+//   config: 'package.json', // where to find the plugins, by default searched up from process.cwd()
+//   scope: ['dependencies', 'devDependencies', 'peerDependencies'], // which keys in the config to look within
+//   replaceString: /-webpack-plugin$/, // what to remove from the name of the module when adding it to the context
+//   camelize: true, // if true, transforms hyphenated plugins names to camel case
+//   lazy: true, // whether the plugins should be lazy loaded on demand
+//   rename: {}, // a mapping of plugins to rename
+//   renameFn: function (name) { ... } // a function to handle the renaming of plugins (the default works)
 // });
