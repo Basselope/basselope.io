@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import AppReducer from './reducers/tweets.jsx'
 import App from './components/app.jsx'
 
-let store = createStore(AppReducer, window.STATE_FROM_SERVER);
+let store = createStore(AppReducer);
 
 render(
   <Provider store={store}>
