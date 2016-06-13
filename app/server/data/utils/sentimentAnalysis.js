@@ -26,10 +26,10 @@ function sentimentAnalyzer(){
 	  	return results*100;
 	}
 	let normal_dist_data_filter = function(content){
-		let normalized = [];
-		content.forEach(function(curr,index,arr){
-			normalized.push(curr.sentiment.w_score)
-		});
+		let normalized = content;
+		// content.forEach(function(curr,index,arr){
+		// 	normalized.push(curr.sentiment.w_score)
+		// });
 		normalized.sort();
 		//let mean = normalized.reduce(function(a,b){return a+b;})/normalized.length;
 		//let median = (normalized[Math.floor((normalized.length - 1) / 2)] + normalized[Math.ceil((normalized.length - 1) / 2)]) / 2;
@@ -53,6 +53,7 @@ function sentimentAnalyzer(){
 		let analyzedResults = {};
 		let tweet_sentiment = [];
 		//console.log(textObject);
+		let rankingHolder = [];
 		for(var i in textObject){
 			let curr = textObject[i];
 			let content = curr.content;
@@ -66,7 +67,8 @@ function sentimentAnalyzer(){
 					//retweets+favotire/followers 
 					content[j].sentiment = sentiment(content[j].text);
 					content[j].sentiment.w_rank = twitter_rank(content[j]);
-					console.log(twitter_rank(content[j]))
+					rankingHolder.push(twitter_rank(content[j]));
+					//console.log(twitter_rank(content[j]))
 
 				//}
 			}
@@ -75,9 +77,9 @@ function sentimentAnalyzer(){
 		}
 		//let sentimentCalc= sentiment(textObject.text);
 		//for (let attrname in sentimentCalc) { textObject.sentiment[attrname] = sentimentCalc[attrname]; }
-		let tweet_with_graphical = {graph_meta: normal_dist_data_filter(tweet_sentiment),
-									tweet_sentiment:tweet_sentiment};
-		return textObject;
+		let tweet_with_graphical = {dataAnalysis: normal_dist_data_filter(rankingHolder),
+									data:textObject};
+		return tweet_with_graphical;
 	}
 	
 	return {runTwit: analyzeTwit,
