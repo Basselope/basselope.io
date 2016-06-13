@@ -21,9 +21,9 @@ function apihandlers(req, res, next) {
 		case '/_api/bing/suggestions':
 			bingHandle.getBing(req,res,next);
 			break;
-    	case '/_api/reddit/search':
-      		redditHandle.redditHandler(req, res, next);
-      		break;
+    case '/_api/reddit/search':
+        redditHandle.redditHandler(req, res, next);
+        break;
 	}
 }
 
