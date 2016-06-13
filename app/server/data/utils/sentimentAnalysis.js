@@ -1,7 +1,13 @@
 let sentiment = require('sentiment'),
 stats = require("stats-lite");
 function sentimentAnalyzer(){
-	let analyzeReddit = function(){}
+	let analyzeReddit = function(reddits){
+		for(var key in reddits){
+			let sentiment = sentiment(reddits[key].comment);
+			reddits[key].sentiment = sentiment;
+		}
+
+	}
 	let twitter_rank = function(tweetIndividual) {
 		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
 			retweets = tweetIndividual.share_count, 
@@ -25,6 +31,7 @@ function sentimentAnalyzer(){
 		let standardDeviation = stats.stdev(normalized);
 		let mode = stats.mode(normalized);
 		let variance = stats.variance(normalized);
+		console.log();
 		return {set: normalized,
 				mean: mean,
 				median:median,

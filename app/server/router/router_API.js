@@ -12,7 +12,7 @@ function apihandlers(req, res, next) {
 		case '/_api/twitter/search':
 			// twitterHandle.getTweets(req, res, next)
 			api_call("twitter", req.body.query).then(function(responce){ 
-					res.status(200).send(responce.data)
+				res.status(200).send(responce.data)
 			});
 			break;
 		case '/_api/bing/search':
@@ -26,8 +26,6 @@ function apihandlers(req, res, next) {
         break;
 	}
 }
-
-
 
 
 
