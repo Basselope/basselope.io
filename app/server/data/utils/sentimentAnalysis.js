@@ -25,6 +25,9 @@ function sentimentAnalyzer(){
 
 	};
 	let reddit_rank = function(redditComment) {
+
+
+		console.log("-----------"+JSON.stringify(redditComment))
 		let tweetText = redditComment.comment.replace(/\W+/g, " "),
 			voteResults = redditComment.score, 
 			score = redditComment.sentiment.score,
@@ -36,7 +39,7 @@ function sentimentAnalyzer(){
 	    //results = results / tweetText.length;
 	    //tweetIndividual.sentiment.w_score = results*100;
 
-	  	return [score, results];
+	  	return [score*Math.abs(comparative), Math.abs(results)];
 	}
 		let twitter_rank = function(tweetIndividual) {
 		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
@@ -51,7 +54,7 @@ function sentimentAnalyzer(){
 	    //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
 	    //results = results / tweetText.length;
 	    //tweetIndividual.sentiment.w_score = results*100;
-	  	return [score, results];
+	  	return [score*Math.abs(comparative), Math.abs(results)];
 	};
 	let normal_dist_data_filter = function(content){
 		let normalized = content.map(function(curr, index, arr){

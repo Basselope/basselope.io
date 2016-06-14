@@ -21,6 +21,9 @@ function apihandlers(req, res, next) {
 			bingHandle.getBing(req,res,next);
 			break;
     case '/_api/reddit/search':
+   //  	api_call("reddit", [req.body.query,'#'+req.body.query] ).then(function(responce){ 
+			// 	res.status(200).send(responce)
+			// });
         redditHandle.redditHandler(req, res, next);
         break;
 	}
