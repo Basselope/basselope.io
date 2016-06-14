@@ -10,42 +10,41 @@ class SearchBar extends React.Component {
 
   searchBarAction(value) {
     value = value.trim().split(" ").join("%20");
-    axios.post('/_api/reddit/search', { "query": value}).then(function(res) {
+    axios.post('/_api/reddit/search', { "query": value})
+      .then(function(res) {
         console.log("REDDITTTTTT",res);
       });
-    axios.post('/_api/twitter/search', { "query": value, count:100 })
+    axios.post('/_api/twitter/search', { "query": value })
       .then(function(res) {
         console.log(res);
       });
   }
   commitSearchCriteria(value){
-    this.setState({autosuggest: []})
-    this.setState({ term: value})
+    this.setState({autosuggest: []});
+    this.setState({ term: value});
     this.searchBarAction(value);
-
   }
-    searchBarSuggestion(input) {
-      this.setState({ term: input})
-      if(input.length==0){
-        this.setState({autosuggest: []})
-        return;
-      }else{
-      
-      var self = this;
-      input = input.trim().split(" ").join("%20");
+  searchBarSuggestion(input) {
+    this.setState({ term: input});
+    if(input.length==0){
+      this.setState({autosuggest: []});
+      return;
+    }else{
 
-      axios.post('/_api/bing/suggestions', { "query": input })
-      .then(function(res) {
-        console.log(res);
-        let content = []
-        for(var key in res.data[1]) {
-          content.push(res.data[1][key]);
-        }
-        self.setState({autosuggest: content})
-      });
+    var self = this;
+    input = input.trim().split(" ").join("%20");
+
+    axios.post('/_api/bing/suggestions', { "query": input })
+    .then(function(res) {
+      console.log(res);
+      let content = [];
+      for(var key in res.data[1]) {
+        content.push(res.data[1][key]);
       }
+      self.setState({autosuggest: content})
+    });
+    }
   }
-  
 
   render() {
     return (
@@ -58,9 +57,6 @@ class SearchBar extends React.Component {
     );
   }
 }
-
-
-
 
 // Search.propTypes = {
 //   value: PropTypes.string.isRequired
