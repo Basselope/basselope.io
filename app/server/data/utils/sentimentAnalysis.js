@@ -6,6 +6,7 @@ function sentimentAnalyzer(){
 		for(var key in reddits){
 			let sentimentObj = sentiment(reddits[key].comment);
 			reddits[key].sentiment = sentimentObj;
+		//console.log("========="+JSON.stringify(reddits[key])+"------------");
 
 			reddits[key].sentiment.w_rank = reddit_rank(reddits[key]);
 					// if(isNaN(content[j])) console.log("--------------------"+JSON.stringify(content[j]))
@@ -35,7 +36,7 @@ function sentimentAnalyzer(){
 	    //results = results / tweetText.length;
 	    //tweetIndividual.sentiment.w_score = results*100;
 
-	  	return [redditComment.score, results];
+	  	return [score, results];
 	}
 		let twitter_rank = function(tweetIndividual) {
 		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
@@ -50,18 +51,19 @@ function sentimentAnalyzer(){
 	    //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
 	    //results = results / tweetText.length;
 	    //tweetIndividual.sentiment.w_score = results*100;
-	  	return results;
+	  	return [score, results];
 	};
 	let normal_dist_data_filter = function(content){
-		//console.log("-----"+content);
-		let normalized = content;
+		let normalized = content.map(function(curr, index, arr){
+			return curr[1];
+		});
 		normalized.sort();
 		let mean = stats.mean(normalized);
 		let median = stats.median(normalized);
 		let standardDeviation = stats.stdev(normalized);
 		let mode = stats.mode(normalized);
 		let variance = stats.variance(normalized);
-		return {set: normalized,
+		return {set: content,
 				mean: mean,
 				median:median,
 				standardDeviation:standardDeviation,
