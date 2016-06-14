@@ -1,4 +1,5 @@
 let axios = require('axios');
+let sentiment = require('./../../../../data/utils/sentimentAnalysis.js');
 
 const redditHandler = (req, res) => {
   let redditURL = `https://www.reddit.com/search.json?q=${req.body.query}`;
@@ -24,13 +25,19 @@ const getRedditComments = (redditPostURL, redditData, cb) => {
     .then(post => {
       let comments = post.data[1].data.children;
       for (let i = 0; i < comments.length; i++) {
+        //console.log(comments[i]);
         redditData.push({
           id: comments[i].data.id,
+          likes: comments[i].data.likes||0,
+          parentId: comments[i].data.parent_id,
           comment: comments[i].data.body,
           score: comments[i].data.score,
         });
       }
-      cb(redditData);
+      //HERE
+      let analyzedReddits = sentiment.reddit(redditData);
+      //console.log("ANALYZED REDITS"+JSON.stringify(analyzedReddits));
+      cb(analyzedReddits);
     })
     .catch(response => {
       console.log(`${response} Get request to Reddit post URL:${redditPostURL} unsuccessful`);

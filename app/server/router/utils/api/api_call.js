@@ -40,8 +40,8 @@ const fetch = (src, query) => {
 };
 
 
-// module.exports = fetch;
+module.exports = fetch;
 // testing:
-fetch('twitter', ['nodejs','#nodejs'])
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+// fetch('twitter', ['nodejs','#nodejs'])
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
