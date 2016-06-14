@@ -1,6 +1,6 @@
 'use strict';
 
-const _ = require('lodash')
+const _ = require('lodash');
 const axios = require('axios');
 const Struct = require('./api_struct');
 const sentiment = require('./../../../data/utils/sentimentAnalysis.js');
@@ -28,7 +28,6 @@ const call = {
         .then(axios.spread((...args) => args.reduce((curr, val) =>
             curr.concat(val.data.reduce((c,v) =>
               c.concat(v.data.children),[])),[])))
-        // .then((res) => res.data.reduce((curr,val) => curr.concat(val.data.children),[]))
     }
   }
 };
@@ -62,8 +61,3 @@ const fetch = (src, query) => {
 
 
 module.exports = fetch;
-// testing:
-
-// fetch('reddit', 'google')
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
