@@ -34,8 +34,9 @@ function sentimentAnalyzer(){
 	    //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
 	    //results = results / tweetText.length;
 	    //tweetIndividual.sentiment.w_score = results*100;
-	  	return results;
-	};
+
+	  	return [redditComment.score, results];
+	}
 		let twitter_rank = function(tweetIndividual) {
 		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
 			retweets = tweetIndividual.share_count, 
