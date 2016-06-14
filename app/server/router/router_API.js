@@ -10,9 +10,9 @@ function apihandlers(req, res, next) {
 	console.log(req.url);
 	switch(req.url) {
 		case '/_api/twitter/search':
-			// twitterHandle.getTweets(req, res, next)
-			api_call("twitter", req.body.query).then(function(responce){ 
-				res.status(200).send(responce.data)
+			//// twitterHandle.getTweets(req, res, next)
+			api_call("twitter", [req.body.query,'#'+req.body.query] ).then(function(responce){ 
+				res.status(200).send(responce)
 			});
 			break;
 		case '/_api/bing/search':
