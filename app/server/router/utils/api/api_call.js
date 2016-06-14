@@ -58,7 +58,10 @@ const fetch = (src, query) => {
 };
 
 
-// fetch('reddit', 'angularjs')
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
+fetch('twitter', 'trump')
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
+  fetch('reddit', 'trump')
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
 module.exports = fetch;

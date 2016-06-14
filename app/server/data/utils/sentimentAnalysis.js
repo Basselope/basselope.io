@@ -1,52 +1,15 @@
 let sentiment = require('sentiment'),
 		stats = require("stats-lite");
 function sentimentAnalyzer(){
-	let analyzeReddit = function(reddits){
-		let rankingHolder = [];
-		for(var key in reddits){
-			let sentimentObj = sentiment(reddits[key].comment);
-			reddits[key].sentiment = sentimentObj;
-		//console.log("========="+JSON.stringify(reddits[key])+"------------");
-
-			reddits[key].sentiment.w_rank = reddit_rank(reddits[key]);
-					// if(isNaN(content[j])) console.log("--------------------"+JSON.stringify(content[j]))
-			rankingHolder.push(reddits[key].sentiment.w_rank);
 
 
-		}
-
-		let normalData = normal_dist_data_filter(rankingHolder)
-		let reddit_with_graphical = {data:reddits}
-		for(var i in normalData){
-			reddit_with_graphical[i] = normalData[i]
-		}
-		
-		return reddit_with_graphical;
-
-	};
-	let reddit_rank = function(redditComment) {
-
-
-		console.log("-----------"+JSON.stringify(redditComment))
-		let tweetText = redditComment.comment.replace(/\W+/g, " "),
-			voteResults = redditComment.score, 
-			score = redditComment.sentiment.score,
-			comparative = redditComment.sentiment.comparative;
-		let results = 0;
-		results += score+ (score*Math.abs(comparative));
-	    //results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
-	    //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
-	    //results = results / tweetText.length;
-	    //tweetIndividual.sentiment.w_score = results*100;
-
-	  	return [score*Math.abs(comparative), Math.abs(results)];
-	}
-		let twitter_rank = function(tweetIndividual) {
+	let ranking = function(tweetIndividual) {
 		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
-			retweets = tweetIndividual.share_count, 
-			favorites = tweetIndividual.vote_count,
-			score = tweetIndividual.sentiment.score,
-			mentions = tweetIndividual.mentions_to.length,
+			retweets = tweetIndividual.share_count || 0, 
+			favorites = tweetIndividual.vote_count || 0,
+			downCount = tweetIndividual.down_count || 0,
+			score = tweetIndividual.sentiment.score || 0,
+			//mentions = tweetIndividual.mentions_to.length,
 			comparative = tweetIndividual.sentiment.comparative;
 		let results = 0;
 		results += score+ (score*Math.abs(comparative));
@@ -56,6 +19,7 @@ function sentimentAnalyzer(){
 	    //tweetIndividual.sentiment.w_score = results*100;
 	  	return [score*Math.abs(comparative), Math.abs(results)];
 	};
+	
 	let normal_dist_data_filter = function(content){
 		let normalized = content.map(function(curr, index, arr){
 			return curr[1];
@@ -73,39 +37,38 @@ function sentimentAnalyzer(){
 				mode:mode,
 				variance:variance};
 	};
-	
-	let analyzeTwit = function(textObject,callback){
+	let analyze = function(textObject){
+
 		let analyzedResults = {};
-		let tweet_sentiment = [];
-		//console.log(textObject);
 		let rankingHolder = [];
 		for(var i in textObject){
 			let curr = textObject[i];
 			let content = curr.content;
 			for(var j in content){
-
-				if(sentiment(content[j].text)!=0){
+				if(content[j].text && sentiment(content[j].text)!=0){
 					content[j].sentiment = sentiment(content[j].text);
-					content[j].sentiment.w_rank = twitter_rank(content[j]);
-					//if(isNaN(content[j])) console.log("--------------------"+JSON.stringify(content[j]))
-					rankingHolder.push(twitter_rank(content[j]));}
+					content[j].sentiment.w_rank = ranking(content[j]);
+					rankingHolder.push(content[j].sentiment.w_rank);}
 			}
 		}
 		//let sentimentCalc= sentiment(textObject.text);
 		//for (let attrname in sentimentCalc) { textObject.sentiment[attrname] = sentimentCalc[attrname]; }
 
-		let normalData = normal_dist_data_filter(rankingHolder)
-		let tweet_with_graphical = {data:textObject}
+		let normalData = normal_dist_data_filter(rankingHolder);
+		let data_W_analysis = {data:textObject}
 		for(var i in normalData){
-			tweet_with_graphical[i] = normalData[i]
+			data_W_analysis[i] = normalData[i]
 		}
-		
-		return tweet_with_graphical;
+		//console.log(JSON.stringify(tweet_with_graphical));
+		return data_W_analysis;
+
+
 	};
 	
+	
 	return {
-		twitter: analyzeTwit,
-		reddit: analyzeReddit
+		twitter: analyze,
+		reddit: analyze
 	};
 }
 
