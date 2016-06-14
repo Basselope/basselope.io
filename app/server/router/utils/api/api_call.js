@@ -22,7 +22,7 @@ const call = {
     request: (params) => {
       return axios.get('https://www.reddit.com/search.json', params)
         .then((res) => axios.all(res.data.data.children
-          .slice(0,4).map((val) => axios.get(`${val.data.url}.json`))))
+          .slice(0,7).map((val) => axios.get(`https://www.reddit.com${val.data.permalink.split('?')[0]}.json`))))
         .then(axios.spread((...args) => args.reduce((curr, val) =>
             curr.concat(val.data.reduce((c,v) =>
               c.concat(v.data.children),[])),[])))
@@ -58,4 +58,7 @@ const fetch = (src, query) => {
 };
 
 
+// fetch('reddit', 'angularjs')
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
 module.exports = fetch;
