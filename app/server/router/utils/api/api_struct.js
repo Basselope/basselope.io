@@ -6,6 +6,7 @@ const twitter_content_struct = (tweet) => ({
   text: tweet.text,
 
   vote_count: tweet.favorites_count || 0,
+  down_count: null,
   share_count: tweet.retweet_count || 0,
 
   links: tweet.entities.urls.map((item) => item.url),
@@ -27,13 +28,36 @@ const twitter_account_struct = (tweet) => ({
   listed_count: tweet.user.listed_count
 });
 
-const reddit_account_struct = (comment) => ({});
+const reddit_account_struct = (post) => ({
+  id: post.data.id,
+  img: null,
+  name: null,
+  handle: post.data.author,
+  status_count: null,
+  friend_count: null,
+  listed_count: null
+});
 
-const reddit_content_struct = (comment) => ({});
+const reddit_content_struct = (post) => ({
+  id: post.data.name,
+  text: post.data.selfText || post.data.body,
+
+  vote_count: post.data.ups,
+  down_count: post.data.downs,
+  share_count: null,
+
+  links: [`https://www.reddit.com${post.data.permalink}`],
+  tags: [post.data.subreddit],
+  mentions_to: null,
+  responds_to: post.data.parent_id || null,
+
+  location: null,
+  created_at: post.data.created
+});
 
 const keygen = {
   twitter: (tweet) => tweet.user.id,
-  reddit: (post) => post
+  reddit: (post) => post.data.id
 };
 
 const Author = {

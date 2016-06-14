@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const axios = require('axios');
 const Struct = require('./api_struct');
 const sentiment = require('./../../../data/utils/sentimentAnalysis.js');
@@ -18,30 +19,45 @@ const call = {
       count: 100,
       include_entities: true
     }
-  })
+  }),
+  reddit: {
+    request: (params) => {
+      return axios.get('https://www.reddit.com/search.json', params)
+        .then((res) => axios.all(res.data.data.children
+          .slice(0,4).map((val) => axios.get(`${val.data.url}.json`))))
+        .then(axios.spread((...args) => args.reduce((curr, val) =>
+            curr.concat(val.data.reduce((c,v) =>
+              c.concat(v.data.children),[])),[])))
+    }
+  }
 };
 
 const data = {
-  twitter: (res) => res.data.statuses
+  twitter: (res) => res.data.statuses,
+  reddit: (res) => res
 };
 
 const q = {
   twitter: (query) => ({
-    q: query
+    params: {
+      q: query
+    }
+  }),
+  reddit: (query, path) => ({
+    params: {
+      q: query
+    }
   })
 };
 
 const fetch = (src, query) => {
   if(Array.isArray(query))
-    return axios.all(query.map((val) => call[src].request({ params: q[src](val) })))
+    return axios.all(query.map((val) => call[src].request(q[src](val))))
       .then(axios.spread((...res) => res.reduce((curr, val) => curr.concat(data[src](val)),[])))
       .then((data) => sentiment[src](Struct(data, src)));
-  return call[src].request({ params: q[src](query) });
+  return call[src].request(q[src](query))
+    .then((res) => sentiment[src](Struct(data[src](res), src)));
 };
 
 
 module.exports = fetch;
-// testing:
-// fetch('twitter', ['nodejs','#nodejs'])
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
