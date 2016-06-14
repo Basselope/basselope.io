@@ -4,7 +4,7 @@ let sentiment = require('./../../../../data/utils/sentimentAnalysis.js');
 const redditHandler = (req, res) => {
   let redditURL = `https://www.reddit.com/search.json?q=${req.body.query}`;
   getRedditSearch(redditURL, redditData => res.status(200).send(redditData));
-}
+};
 
 const getRedditSearch = (redditURL, cb) => {
   let redditData = [];
@@ -18,7 +18,7 @@ const getRedditSearch = (redditURL, cb) => {
     .catch(response => {
       console.log(`${response} Get request to Reddit search URL:${redditURL} unsuccessful`);
     });
-}
+};
 
 const getRedditComments = (redditPostURL, redditData, cb) => {
   axios.get(redditPostURL)
@@ -42,7 +42,7 @@ const getRedditComments = (redditPostURL, redditData, cb) => {
     .catch(response => {
       console.log(`${response} Get request to Reddit post URL:${redditPostURL} unsuccessful`);
     });
-}
+};
 
 module.exports.redditHandler = redditHandler;
 

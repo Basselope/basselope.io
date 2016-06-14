@@ -22,7 +22,7 @@ function sentimentAnalyzer(){
 		
 		return reddit_with_graphical;
 
-	}
+	};
 	let reddit_rank = function(redditComment) {
 		let tweetText = redditComment.comment.replace(/\W+/g, " "),
 			voteResults = redditComment.score, 
@@ -35,7 +35,7 @@ function sentimentAnalyzer(){
 	    //results = results / tweetText.length;
 	    //tweetIndividual.sentiment.w_score = results*100;
 	  	return results;
-	}
+	};
 		let twitter_rank = function(tweetIndividual) {
 		let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
 			retweets = tweetIndividual.share_count, 
@@ -50,7 +50,7 @@ function sentimentAnalyzer(){
 	    //results = results / tweetText.length;
 	    //tweetIndividual.sentiment.w_score = results*100;
 	  	return results;
-	}
+	};
 	let normal_dist_data_filter = function(content){
 		//console.log("-----"+content);
 		let normalized = content;
