@@ -81,7 +81,7 @@ function sentimentAnalyzer(){
 				if(sentiment(content[j].text)!=0){
 					content[j].sentiment = sentiment(content[j].text);
 					content[j].sentiment.w_rank = twitter_rank(content[j]);
-					if(isNaN(content[j])) console.log("--------------------"+JSON.stringify(content[j]))
+					//if(isNaN(content[j])) console.log("--------------------"+JSON.stringify(content[j]))
 					rankingHolder.push(twitter_rank(content[j]));}
 			}
 		}
