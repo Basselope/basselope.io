@@ -4,6 +4,8 @@ const web = {};
 web.pack = require('webpack-stream');
 web.import = require('webpack-load-plugins')();
 
+
+
 // web.log = {
 //   progress: new web.pack.webpack.ProgressPlugin(function(p, m) { console.log(p); }),
 //   complete: function(status) { console.log(status); }
@@ -18,12 +20,21 @@ web.loaders = [
     test: require.resolve('d3'),
     loader: 'imports?this=>window'
   },{
+    test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    loader:"url?limit=10000&mimetype=application/font-woff"
+  },{ 
+    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+    loader: "file"
+  },{
     test: /\.scss$/,
     loaders: ['style', 'css', 'postcss', 'sass']
   },{
     test: require.resolve("jquery"),
     loader: "imports?this=>window"
-  },
+  },{
+    test: require.resolve('materialize'),
+    loader: "imports?this=>window"
+  }
 ];
 
 web.plugins = {
