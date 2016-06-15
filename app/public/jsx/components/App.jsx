@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from './searchBar.jsx'
+import SearchBar from '../containers/searchBar.jsx'
 import TweetList from './tweetList.jsx'
 
 const App = () => (

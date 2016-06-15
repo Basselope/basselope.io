@@ -3,8 +3,8 @@ import axios from 'axios'
 const twitter = (text) => {
 
   return {
-    type: 'GET_TWEETS',
-    url: axios.post('/_api/twitter/search', { "query": text })
+    type: 'POST_TWEETS',
+    payload: axios.post('/_api/twitter/search', { "query": text })
   };
 }
 

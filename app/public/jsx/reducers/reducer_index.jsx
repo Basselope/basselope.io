@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import tweets from './tweets.jsx'
+import redditReducer from './redditReducer.jsx'
+import twitterReducer from './twitterReducer.jsx'
 
-const searchBarReducer = combineReducers({
-  tweets
-})
+const rootReducer = combineReducers({
+  reddit: redditReducer,
+  tweets: twitterReducer
+});
 
-export default searchBarReducer
+export default rootReducer

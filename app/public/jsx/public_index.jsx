@@ -2,11 +2,11 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-// import AppReducer from './reducers/reducers_index.jsx'
-import AppReducer from './reducers/tweets.jsx'
-import App from './components/app.jsx'
+import rootReducer from './reducers/reducer_index.jsx'
+import App from './components/App.jsx'
+import promise 'redux-promise'
 
-let store = createStore(AppReducer);
+let store = createStore(rootReducer);
 
 render(
   <Provider store={store}>
