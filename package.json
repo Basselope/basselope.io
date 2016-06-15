@@ -38,6 +38,7 @@
     "nlp_compromise": "^6.1.2",
     "node-bing-api": "^2.4.1",
     "react": "^15.1.0",
+    "react-d3-library": "^1.1.4",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
