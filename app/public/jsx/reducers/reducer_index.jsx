@@ -4,7 +4,7 @@ import twitterReducer from './twitterReducer.jsx'
 
 const rootReducer = combineReducers({
   reddit: redditReducer,
-  tweets: twitterReducer
+  twitter: twitterReducer
 });
 
 export default rootReducer
