@@ -9,6 +9,10 @@ import rootReducer from './reducers/reducer_index.jsx'
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
+// const stateStore = createStore(rootReducer, initialState,
+//   compose(applyMiddleware(ReduxPromise),
+//   window.devToolsExtension ? window.devToolsExtension() : f => f));
+
 render(
   <Provider store={createStoreWithMiddleware(rootReducer)}>
     <App />
