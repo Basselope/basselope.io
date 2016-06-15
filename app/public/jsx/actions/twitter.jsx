@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-const twitter = (text) => {
+export const FETCH_TWITTER = 'FETCH_TWITTER'
+
+export const fetchTwitter = (text) => {
+  const request = axios.post('/_api/twitter/search', { "query": text });
 
   return {
-    type: 'GET_TWEETS',
-    url: axios.post('/_api/twitter/search', { "query": text })
+    type: FETCH_TWITTER,
+    payload: request
   };
 }
-
-export default twitter

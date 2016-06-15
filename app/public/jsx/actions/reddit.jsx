@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-const reddit = (text) => {
+export const FETCH_REDDIT = 'FETCH_REDDIT'
+
+export const fetchReddit = (text) => {
+  const request = axios.post('/_api/reddit/search', { "query": text });
 
   return {
-    type: 'GET_REDDIT',
-    url: axios.post('/_api/reddit/search', { "query": text })
+    type: FETCH_REDDIT,
+    payload: request
   };
 }
-
-export default reddit
