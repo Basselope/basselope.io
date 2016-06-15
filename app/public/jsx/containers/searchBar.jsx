@@ -1,89 +1,48 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-// import ProperyList from './propertyList.jsx'
-import { reddit } from '../actions/reddit.jsx'
-import { twitter } from '../actions/twitter.jsx'
+import { fetchReddit } from '../actions/reddit.jsx'
+import { fetchTwitter } from '../actions/twitter.jsx'
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { term: '', autosuggest:[] };
+
+    this.state = { term: '' };
+
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  searchBarSubmit(term) {
-    console.log(this.props);
-    this.props.reddit(term);
-    this.props.twitter(term);
+  onInputChange(event) {
+    this.setState({term: event.target.value});
   }
 
-  renderData() {
-    return this.props.tweets.map(tweet {
+  onFormSubmit(event) {
+    event.preventDefault();
 
-    }
+    this.props.fetchReddit(this.state.term);
+    this.props.fetchTwitter(this.state.term);
+    this.setState({term: ''})
   }
-
-  // searchBarAction(value) {
-  //   value = value.trim().split(" ").join("%20");
-  //   axios.post('/_api/reddit/search', { "query": value}).then(function(res) {
-  //       console.log("REDDITTTTTT",res);
-  //     });
-  //   axios.post('/_api/twitter/search', { "query": value, count:100 })
-  //     .then(function(res) {
-  //       console.log(res);
-  //     });
-  // }
-  // commitSearchCriteria(value){
-  //   this.setState({autosuggest: []})
-  //   this.setState({ term: value})
-  //   this.searchBarAction(value);
-
-  // }
-  //   searchBarSuggestion(input) {
-  //     this.setState({ term: input})
-  //     var self = this;
-  //     input = input.trim().split(" ").join("%20");
-
-  //     axios.post('/_api/bing/suggestions', { "query": input })
-  //     .then(function(res) {
-  //       console.log(res);
-  //       let content = []
-  //       for(var key in res.data[1]) {
-  //         content.push(res.data[1][key]);
-  //       }
-  //       self.setState({autosuggest: content})
-  //     });
-  // }
-
 
   render() {
     return (
-      <div>
-        <input id='input' type='text' value={this.state.term} onChange={event => this.setState({term: event.target.value})} />
-        <button type='submit' id='searchButton' onClick={() => this.searchBarSubmit(this.state.term)}>Submit</button>
-        {/*<div >
-          <ProperyList list={this.state.autosuggest} commitSearchCriteria ={this.commitSearchCriteria.bind(this) } />
-        </div>*/}
-      </div>
+      <form onSubmit={this.onFormSubmit}>
+        <input
+          value={this.state.term}
+          onChange={this.onInputChange}
+        />
+        <span>
+          <button type='submit'>Submit</button>
+        </span>
+      </form>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    reddit: state.data,
-    tweets: state.data
-  };
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ fetchReddit, fetchTwitter }, dispatch);
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ reddit, twitter }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
-
-
-
-// Search.propTypes = {
-//   value: PropTypes.string.isRequired
-// }
+export default connect(null, mapDispatchToProps)(SearchBar)
