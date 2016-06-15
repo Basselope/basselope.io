@@ -42,7 +42,7 @@ class SearchBar extends React.Component {
       for(var key in res.data[1]) {
         content.push(res.data[1][key]);
       }
-      self.setState({autosuggest: content})
+      self.setState({autosuggest: content.slice(0,7)})
     });
     }
   }
@@ -50,13 +50,15 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className="v-align-wrapper container" style={{paddingTop: '45vh', height: '100vh'}}>
+      <div className="v-align-wrapper container" style={{height: '100vh'}}>
         <div className="input-field v-align">
           <div className="row">
-          <div className="col s8 justify-s2 m6 justify-m3">
-            <input type='text' value={this.state.term} onChange={event => this.searchBarSuggestion(event.target.value)} />
-            <List hideOnSelect={true} list={this.state.autosuggest} selectEvent={this.commitSearchCriteria.bind(this) } />
-          </div>
+            <div className="col s8 offset-s2 m6 offset-m3">
+            <input style={{marginTop: '33vh'}} type='text' value={this.state.term}
+                   onChange={event => this.searchBarSuggestion(event.target.value)} />
+            <List hideOnSelect={true} list={this.state.autosuggest}
+                  selectEvent={this.commitSearchCriteria.bind(this) } />
+            </div>
           </div>
         </div>
       </div>
