@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from '../containers/searchBar.jsx'
+import SearchBar from '../containers/SearchBar.jsx'
 import TwitterGraph from '../containers/TwitterGraph.jsx'
 import RedditGraph from '../containers/RedditGraph.jsx'
 
