@@ -4,12 +4,10 @@ const INITIAL_STATE = { data: {} }
 
 const fetchTwitter = (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case FETCH_TWITTER: {
+    case FETCH_TWITTER:
       return { ...state, data: action.payload.data };
-    }
-    default: {
+    default:
       return state;
-    }
   }
 }
 
