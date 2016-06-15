@@ -1,9 +1,11 @@
-const initialState = { data: [] };
+import { FETCH_TWITTER } from '../actions/twitter.jsx'
 
-const postTwitter = (state = initialState, action) => {
+const INITIAL_STATE = { data: {} }
+
+const fetchTwitter = (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case 'POST_TWEETS': {
-      return { ...state, data: action.payload };
+    case FETCH_TWITTER: {
+      return { ...state, data: action.payload.data };
     }
     default: {
       return state;
@@ -11,4 +13,4 @@ const postTwitter = (state = initialState, action) => {
   }
 }
 
-export default postTwitter
+export default fetchTwitter

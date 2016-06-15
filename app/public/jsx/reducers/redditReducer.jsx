@@ -1,9 +1,9 @@
-const initialState = { data: [] };
+import { FETCH_REDDIT } from '../actions/reddit.jsx'
 
-const postReddit = (state = initialState, action) => {
+const fetchReddit = (state = [], action) => {
   switch(action.type) {
-    case 'POST_REDDIT': {
-      return { ...state, data: action.payload };
+    case FETCH_REDDIT: {
+      return [action.payload, ...state ];
     }
     default: {
       return state;
@@ -11,4 +11,4 @@ const postReddit = (state = initialState, action) => {
   }
 }
 
-export default postReddit
+export default fetchReddit
