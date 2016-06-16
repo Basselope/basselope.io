@@ -15,12 +15,12 @@ class BingList extends React.Component {
   }
 
   render() {
-    if (this.props.bing.data.length === 0 || !this.props.showBingList) {
+    if (!this.props.term) {
       return <div></div>;
     }
 
     return (
-      <div className="collection">{this.renderBingList()}</div>
+      <div className="collection card">{this.renderBingList()}</div>
     );
   }
 }

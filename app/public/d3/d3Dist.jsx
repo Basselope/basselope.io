@@ -71,4 +71,11 @@ function bumpLayer(n) {
 
 console.log(bumpLayer(200));
 
-export default node
+const createNode = function(data) {
+  console.log(data);
+  if(data)
+    return node;
+  return document.createElement('div');
+};
+
+export default createNode

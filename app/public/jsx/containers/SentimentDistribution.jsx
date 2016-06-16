@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux'
 // import { fetchReddit } from '../actions/reddit.jsx'
 import { fetchTwitter } from '../actions/twitter.jsx'
 
-// import node from '../../d3/sentimentDistribution.js'
+
+import node from '../../d3/d3Plot.jsx'
 import rd3 from 'react-d3-library'
 
 const RD3Component = rd3.Component;
@@ -14,7 +15,6 @@ class SentimentDistribution extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.fetchTwitter('nodejs');
   }
 
   // componentDidMount() {
@@ -24,8 +24,18 @@ class SentimentDistribution extends React.Component {
   render() {
     // console.log(node)
     return (
-      <div className="container">
-        <div className="center-align" style={{left: 0, right: 0, overflow: 'hidden', zIndex: -1}}>
+      <div className="valign-wrapper" style={{
+        height: '100vh',
+        position: 'fixed',
+        zIndex: -1,
+        left: 0,
+        right: 0
+        }}>
+        <div className="valign container center-align" style={{
+          left: 0,
+          right: 0,
+          overflow: 'hidden',
+          zIndex: -1}}>
           <RD3Component data={this.props.d3} />
         </div>
       </div>
@@ -35,8 +45,7 @@ class SentimentDistribution extends React.Component {
 
 const mapStateToProps = (state,props) => {
   return {
-    data: state.twitter.data,
-    d3: state.twitter.d3
+    d3: node(state.twitter.data, state.reddit.data)
     // sd: state.twitter.data.standard_deviation
   }
 };
