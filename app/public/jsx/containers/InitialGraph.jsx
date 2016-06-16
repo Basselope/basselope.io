@@ -15,7 +15,7 @@ class InitialGraph extends React.Component {
   }
 
   render() {
-    console.log(node)
+    // console.log(node)
     return (
       <div>InitialGraph:
         <RD3Component data={this.state.d3} />
