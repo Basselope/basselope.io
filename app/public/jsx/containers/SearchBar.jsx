@@ -40,7 +40,6 @@ class SearchBar extends React.Component {
     return (
       <div className="v-align-wrapper container" style={{height: '100vh'}}>
         <form onSubmit={this.onFormSubmit}>
-
           <div className="input-field v-align">
             <div className="row">
               <div className="col s8 offset-s2 m6 offset-m3">
