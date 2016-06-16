@@ -32,7 +32,7 @@ class HoverInfo extends React.Component {
         var self = this;
         return(
                 <div>
-                  <span onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} > <img src='http://webhelp.wimba.com/WP/v3_1/en/User_Guide/Content/Resources/Images/small_11_preferences_plus.jpg'/> </span>
+                  <span onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} > <img style={{width:"20px"}} src='https://openclipart.org/image/2400px/svg_to_png/234546/Info-Button.png'/> </span>
                   <div style = {display} className="row">
                     <div className="col s12 m6" >
                       <div className="card blue-grey darken-1">
