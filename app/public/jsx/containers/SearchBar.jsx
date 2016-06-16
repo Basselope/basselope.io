@@ -12,7 +12,7 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { term: '', showBingList: false };
+    this.state = { term: '' };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -20,8 +20,10 @@ class SearchBar extends React.Component {
   }
 
   onInputChange(event) {
-    this.setState({ term: event.target.value, showBingList: true });
+    this.setState({ term: event.target.value });
     this.props.fetchBing(event.target.value);
+    // if(event.target.value.length ===0)
+    //   this.setState({showBingList: false});
   }
 
   onFormSubmit(event) {
@@ -29,7 +31,7 @@ class SearchBar extends React.Component {
 
     this.props.fetchReddit(this.state.term);
     this.props.fetchTwitter(this.state.term);
-    this.setState({ term: '', showBingList: false });
+    this.setState({ term: '' });
   }
 
   bingListClick(suggestion) {
@@ -38,14 +40,13 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className="v-align-wrapper container" style={{height: '100vh'}}>
-        <form onSubmit={this.onFormSubmit}>
-
+      <div style={{position: 'fixed', marginTop: '90px', left: 0, right: 0}} className="v-align-wrapper">
+        <form onSubmit={this.onFormSubmit} className="container">
           <div className="input-field v-align">
             <div className="row">
               <div className="col s8 offset-s2 m6 offset-m3">
-                <input style={{marginTop: '33vh'}} type='text' value={this.state.term} onChange={this.onInputChange} />
-                <BingList showBingList={this.state.showBingList} bingListClick={this.bingListClick} />
+                <input type='text' value={this.state.term} onChange={this.onInputChange} />
+                <BingList term={this.state.term} bingListClick={this.bingListClick} />
               </div>
             </div>
           </div>
