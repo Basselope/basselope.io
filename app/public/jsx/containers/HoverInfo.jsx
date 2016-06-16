@@ -20,8 +20,7 @@ class HoverInfo extends React.Component {
   }
 
   render() {
-        var position = {position:"absolute"};
-
+    var position = {position:"absolute"};
     var label = "";
     var content = ""
     var display = {display:"none", position:"absolute"}
