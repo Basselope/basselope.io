@@ -1,32 +1,32 @@
 import d3 from 'd3'
 
-var node = document.createElement('div');
+const node = document.createElement('div');
 
-var sets = 4, // number of layers
+const sets = 4, // number of layers
     samples = 300, // number of samples per layer
     stack = d3.layout.stack().offset("zero"),
     layers = stack(d3.range(sets).map(function() { return bumpLayer(samples); }))
 
-var width = 500,
+const width = 500,
   height = 300;
 
-var x = d3.scale.linear()
+const x = d3.scale.linear()
   .domain([0, samples - 1])
   .range([0, width]);
 
-var y = d3.scale.linear()
+const y = d3.scale.linear()
   .domain([0, d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); })])
   .range([height, 0]);
 
-var color = d3.scale.linear()
+const color = d3.scale.linear()
   .range(['#aad', '#556']);
 
-var area = d3.svg.area()
+const area = d3.svg.area()
   .x(function(d) { return x(d.x); })
   .y0(function(d) { return y(d.y0); })
   .y1(function(d) { return y(d.y0 + d.y); });
 
-var svg = d3.select(node).append('svg')
+const svg = d3.select(node).append('svg')
   .attr('width', width)
   .attr('height', height);
 
@@ -54,16 +54,16 @@ function transition() {
 function bumpLayer(n) {
 
   function bump(a) {
-    var x = 1 / (.1 + Math.random()),
+    let x = 1 / (.1 + Math.random()),
       y = 2 * Math.random() - .5,
       z = 10 / (.1 + Math.random());
-    for (var i = 0; i < n; i++) {
-      var w = (i / n - y) * z;
+    for (let i = 0; i < n; i++) {
+      let w = (i / n - y) * z;
       a[i] += x * Math.exp(-w * w);
     }
   }
 
-  var a = [], i;
+  let a = [], i;
   for (i = 0; i < n; ++i) a[i] = 0;
   for (i = 0; i < 5; ++i) bump(a);
   return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });

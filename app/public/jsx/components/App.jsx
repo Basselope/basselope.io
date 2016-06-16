@@ -5,7 +5,7 @@ import HoverInfo from '../containers/HoverInfo.jsx'
 import SearchBar from '../containers/SearchBar.jsx'
 import TwitterGraph from '../containers/TwitterGraph.jsx'
 import RedditGraph from '../containers/RedditGraph.jsx'
-import InitialGraph from '../containers/SentimentDistribuiton.jsx'
+import InitialGraph from '../containers/SentimentDistribution.jsx'
 
 const App = () => (
   <div>
