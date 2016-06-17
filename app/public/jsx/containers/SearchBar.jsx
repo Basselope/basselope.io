@@ -3,6 +3,8 @@ require('materialize-loader');
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { browserHistory } from 'react-router'
+
 import { fetchBing } from '../actions/bing.jsx'
 import { fetchReddit } from '../actions/reddit.jsx'
 import { fetchTwitter } from '../actions/twitter.jsx'
@@ -22,8 +24,6 @@ class SearchBar extends React.Component {
   onInputChange(event) {
     this.setState({ term: event.target.value });
     this.props.fetchBing(event.target.value);
-    // if(event.target.value.length ===0)
-    //   this.setState({showBingList: false});
   }
 
   onFormSubmit(event) {
@@ -32,6 +32,9 @@ class SearchBar extends React.Component {
     this.props.fetchReddit(this.state.term);
     this.props.fetchTwitter(this.state.term);
     this.setState({ term: '' });
+
+    const path = `/${this.state.term}`;
+    browserHistory.push(path);
   }
 
   bingListClick(suggestion) {
@@ -50,7 +53,6 @@ class SearchBar extends React.Component {
               </div>
             </div>
           </div>
-
         </form>
       </div>
     );

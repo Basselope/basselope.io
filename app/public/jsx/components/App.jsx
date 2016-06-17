@@ -1,22 +1,11 @@
 require('materialize-loader');
 
 import React from 'react'
-import HoverInfo from '../containers/HoverInfo.jsx'
-import SearchBar from '../containers/SearchBar.jsx'
-import TwitterGraph from '../containers/TwitterGraph.jsx'
-import RedditGraph from '../containers/RedditGraph.jsx'
-import InitialGraph from '../containers/SentimentDistribution.jsx'
 
-const App = () => (
+const App = (props) => (
   <div>
-    <HoverInfo />
-    <SearchBar />
-    <InitialGraph />
+    {props.children}
   </div>
-);
-
-// <SearchBar />
-// <TwitterGraph />
-// <RedditGraph />
+)
 
 export default App
