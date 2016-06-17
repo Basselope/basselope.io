@@ -6,7 +6,7 @@ const width = 700,
       height = 300;
 
 const color = d3.scale.linear()
-  .range(['#ffc', '#aad']);
+  .range(['#fc1', '#9cc', '#aad']);
   // .range(['#aad', '#556']);
 
 const svg = d3.select(node).append('svg')
@@ -18,6 +18,10 @@ const attr = {
   x: (d) => (d.x),
   y: (d) => (d.y),
   r: (d) => (d.r)
+};
+
+const style = {
+  c: (d) => (d.c)
 }
 
 function plot(d) {
@@ -30,8 +34,15 @@ function plot(d) {
   let y = (y) => height - ySpread * y;
 
   let r = (r) => Math.min((r * 1.3) + 5, 22);
-  console.log(xRange,yRange);
-  return d.map((val) => ({ x: x(val[0]), y: y(val[1]), r: r(val[1]) }))
+
+  let c = (c) => color(x(c) / width);
+
+  return d.map((val) => ({
+    x: x(val[0]),
+    y: y(val[1]),
+    r: r(val[1]),
+    c: c(val[0])
+  }));
 }
 
 // This function will be triggered on load
@@ -45,6 +56,8 @@ function transition() {
 svg.on('mount', function() {
   transition();
 });
+
+
 
 const createNode = function(...data) {
   let resolved = false;
@@ -60,9 +73,8 @@ const createNode = function(...data) {
     .attr('cx', attr.x)
     .attr('cy', attr.y)
     .attr('r', attr.r)
-    .style('fill', function() { return color(Math.random()); })
+    .style('fill', style.c)
     .style('opacity', .7);
-  console.log(svg);
   return svg[0][0];
 };
 
