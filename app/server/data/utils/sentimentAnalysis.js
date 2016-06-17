@@ -66,16 +66,15 @@ function sentimentAnalyzer() {
                 if (currentSentiment.positive.length != 0 || currentSentiment.negative.length != 0) {
                     content[contentKey].sentiment = currentSentiment;
                     
-                    if(currentSentiment<0)
+                    if(currentSentiment.score<0)
                     	negativeSentiments++
-                    if(currentSentiment>0)
+                    if(currentSentiment.score>0)
                     	positiveSentiments++
 
 
                     content[contentKey].sentiment.w_rank = ranking(content[contentKey], textObject[postKey].author);
                     let rankProp = content[contentKey].sentiment.w_rank[1];
                      if(maxSentimentImpact.sentimentStrength <rankProp){
-                    	console.log("----------",content[contentKey].sentiment.w_rank, content[contentKey].text, content[contentKey].vote_count, content[contentKey].sentiment)
                     	maxSentimentImpact.sentimentStrength = content[contentKey].sentiment.w_rank[0]; 
                     	maxSentimentImpact.actualTweet = content[contentKey].text;
                     	maxSentimentImpact.votes = content[contentKey].vote_count;
@@ -90,7 +89,6 @@ function sentimentAnalyzer() {
         }
 
         let normalData = normal_dist_data_filter(rankingHolder);
-        console.log("RANKING HOLDER",rankingHolder, rankingHolder.length)
 		negativeSentiments	 = negativeSentiments/rankingHolder.length
 		positiveSentiments	 = positiveSentiments/rankingHolder.length
 		normalData.percentPositive = positiveSentiments;
