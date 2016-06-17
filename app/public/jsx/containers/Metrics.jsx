@@ -6,26 +6,67 @@ class Metrics extends React.Component {
     super(props);
     //this.state = {data: {twitter: null, reddit:null}}
   }
+  cardBuilder(content, title){
+    if(this.checkTruthCondition(this) ){
+    return (<div>
+            <div>
+              <div className="col s12 m3" >
+                <div className="card z-depth-2 blue-grey darken-1">
+                  <div className="card-content">
+                    <span className="card-title ">{content()}</span>
+                    <p>{title}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>);
+    }
+
+  }
+
+  checkTruthCondition(passedThis){
+    return passedThis.props.data.twitter && passedThis.props.data.twitter.hasOwnProperty('mean') && passedThis.props.data.reddit && passedThis.props.data.reddit.hasOwnProperty('mean') 
+  }
 
   renderMean(){
     console.log(this.props);
-    if(this.props.data.twitter && this.props.data.twitter.hasOwnProperty('mean'))
-      return (<span className="card-title ">{this.props.data.twitter.mean}</span>)
+    if(this.checkTruthCondition(this) ){
+      let twitterMean = this.props.data.twitter.mean;
+      let redditMean = this.props.data.reddit.mean;
+      let twitterSum = this.props.data.twitter.setSize;
+      let redditSum = this.props.data.reddit.setSize;
+      let totalMean = (((twitterMean*twitterSum)+(redditMean*redditSum))/(redditSum+twitterSum)).toFixed(1) + "%";
+      return (<span className="card-title ">{totalMean}</span>)
+    }
   }
-    renderPosPercent(){
+  
+  renderPosPercent(){
     console.log(this.props);
-    if(this.props.data.twitter && this.props.data.twitter.hasOwnProperty('mean'))
-      return (<span className="card-title ">{this.props.data.twitter.mean}</span>)
+    if(this.checkTruthCondition(this) ){
+      let twitterPercentPos = this.props.data.twitter.percentPositive;
+      let redditPercentPos = this.props.data.reddit.percentPositive;
+      let twitterSum = this.props.data.twitter.setSize;
+      let redditSum = this.props.data.reddit.setSize;
+      let totalPercent = ((twitterPercentPos*twitterSum)+(redditPercentPos*redditSum))/(redditSum+twitterSum);
+      let percentFixed = ((totalPercent) * 100).toFixed(1) + "%"
+      return (<span className="card-title ">{percentFixed}</span>)
+    }
   }
-    renderNegPercent(){
+  
+  renderNegPercent(){
     console.log(this.props);
-    if(this.props.data.twitter && this.props.data.twitter.hasOwnProperty('mean'))
-      return (<span className="card-title ">{this.props.data.twitter.mean}</span>)
+    if(this.checkTruthCondition(this) ){
+      let percentFixed = Math.floor((this.props.data.twitter.percentNegative) * 100).toFixed(1) + "%"
+      return (<span className="card-title ">{percentFixed}</span>)
+    }
   }
-    renderTotal(){
+  
+  renderTotal(){
     console.log(this.props);
-    if(this.props.data.twitter && this.props.data.twitter.hasOwnProperty('mean'))
-      return (<span className="card-title ">{this.props.data.twitter.mean}</span>)
+    if(this.checkTruthCondition(this) ){
+      let totalSize = this.props.data.twitter.setSize+this.props.data.reddit.setSize
+      return (<span className="card-title ">{this.props.data.twitter.setSize}</span>)
+    }
   }
 
   render() {
@@ -34,54 +75,11 @@ class Metrics extends React.Component {
     return (
       
       <div className = "row center-align blue-grey-text text-lighten-4">
-          <div>
-            <div>
-              <div className="col s12 m3" >
-                <div className="card z-depth-2 blue-grey darken-1">
-                  <div className="card-content">
-                    <span className="card-title ">{this.renderMean.call(this)}</span>
-                    <p>Average Sentiment</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div>
-              <div className="col s12 m3" >
-                <div className="card z-depth-2 blue-grey darken-1">
-                  <div className="card-content">
-                    <span className="card-title">{this.props.percentNegative}</span>
-                    <p>Negative %</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>          
-          <div>
-            <div >
-              <div className="col s12 m3" >
-                <div className="card z-depth-2 blue-grey darken-1">
-                  <div className="card-content">
-                    <span className="card-title">{this.props.percentPositive}</span>
-                    <p>Positive %</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div >
-              <div className="col s12 m3" >
-                <div className="card z-depth-2 blue-grey darken-1">
-                  <div className="card-content">
-                    <span className="card-title">{this.props.sentimentCount}</span>
-                    <p>Total Processed</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {this.cardBuilder(this.renderMean.bind(this), "Average Sentiment")}
+          {this.cardBuilder(this.renderPosPercent.bind(this), "Postive %")}
+          {this.cardBuilder(this.renderNegPercent.bind(this), "Negative %")}
+          {this.cardBuilder(this.renderTotal.bind(this), "Total")}
+          
       </div>
 
     );
