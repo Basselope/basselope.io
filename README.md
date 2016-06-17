@@ -15,3 +15,6 @@ Development team consists of three full-stack engineers:
 * [Rico Chen](https://github.com/ricochen)
 * [Lukas Welinder](https://github.com/lukaswelinder)
 
+
+
+[![Stories in Ready](https://badge.waffle.io/Basselope/collatio.png?label=ready&title=Ready)](http://waffle.io/Basselope/collatio)
