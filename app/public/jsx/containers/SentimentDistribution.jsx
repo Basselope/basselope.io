@@ -27,30 +27,25 @@ class SentimentDistribution extends React.Component {
       return (<Metrics data={this.props.data} />)
   }
   render() {
-    // console.log(node)
     return (
       <div>
-      <HoverInfo />
-      <Metrics data={this.props.data} />
-
-      <div className="valign-wrapper" style={{
-        height: '100vh',
-        position: 'fixed',
-        zIndex: -1,
-        left: 0,
-        right: 0
-        }}>
-      <div className="valign container center-align" style={{
-        left: 0,
-        right: 0,
-        overflow: 'hidden',
-        zIndex: -1}}>
-          
-          <RD3Component data={this.props.d3} />
-          
-
+        <HoverInfo />
+        {this.showMetrics()}
+        <div className="valign-wrapper" style={{
+          height: '100vh',
+          position: 'fixed',
+          zIndex: -1,
+          left: 0,
+          right: 0
+          }}>
+          <div className="valign container center-align" style={{
+            left: 0,
+            right: 0,
+            overflow: 'visible',
+            zIndex: -1}}>
+            <RD3Component data={this.props.d3} />
+          </div>
         </div>
-      </div>
       </div>
     );
   }
