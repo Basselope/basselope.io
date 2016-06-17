@@ -22,15 +22,12 @@ class SentimentDistribution extends React.Component {
   // componentDidMount() {
   //
   // }
-  showMetrics(){
-    if(this.props.twitter)
-      return (<Metrics data={this.props.data} />)
-  }
+ 
   render() {
     return (
       <div>
         <HoverInfo />
-        {this.showMetrics()}
+        <Metrics data={this.props.data} />
         <div className="valign-wrapper" style={{
           height: '100vh',
           position: 'fixed',
