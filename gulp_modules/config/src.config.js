@@ -11,8 +11,8 @@ const server = {
 };
 
 const public = {
-  root: 'app/client',
-  index: ['app/public/jsx/public_index.jsx'],
+  root: 'app/public',
+  index: ['app/public/index.html'],
   jsx: {
     index: ['app/public/jsx/public_index.jsx'],
     all: ['app/public/jsx/**/*.jsx']
@@ -34,7 +34,7 @@ const app = {
 const dest = {
   root: 'app/public/dist',
   js: 'app/public/dist/js',
-  css: 'app/public/build/css'
+  css: 'app/public/dist/css'
 };
 
 module.exports = {

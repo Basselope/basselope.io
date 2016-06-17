@@ -54,10 +54,12 @@ gulp.task('lint', function() {
  * @return {[stream]}
   */
 gulp.task('pack', function() {
-  return gulp.src(src.public.index)
+  gulp.src(src.public.index)
+    .pipe(gulp.dest(src.dest.root));
+  return gulp.src(src.public.jsx.index)
     .pipe(run.named())
     .pipe(web.pack(ENV_WPT))
-    .pipe(gulp.dest(src.dest.js));
+    .pipe(gulp.dest(src.dest.root));
 });
 
 /* * * * * * * * * * * * * * | Launches application & runs according to arguments;
