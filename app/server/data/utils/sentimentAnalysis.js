@@ -2,21 +2,31 @@ let sentiment = require('sentiment'),
     stats = require("stats-lite");
 
 function sentimentAnalyzer() {
-    const ranking = (tweetIndividual) => {
-        let tweetText = tweetIndividual.text.replace(/\W+/g, " "),
-            retweets = tweetIndividual.share_count || 0,
-            favorites = tweetIndividual.vote_count || 0,
-            downCount = tweetIndividual.down_count || 0,
-            score = tweetIndividual.sentiment.score || 0,
-            //mentions = tweetIndividual.mentions_to.length,
-            comparative = tweetIndividual.sentiment.comparative;
+
+    const ranking = (content, author) => {
+        let tweetText = content.text.replace(/\W+/g, " "),
+            retweets = content.share_count || 0,
+            favorites = content.vote_count || 0,
+            downCount = content.down_count || 0,
+            score = content.sentiment.score || 0,
+            friends = content.friend_count || 0,
+            listed = content.listed_count || 0, //list of members to
+            status = content.status_count || 0,
+            //mentions = content.mentions_to.length,
+            comparative = content.sentiment.comparative;
+            //console.log(JSON.stringify(author))
+
+
+
         let results = 0;
-        results += score + (score * Math.abs(comparative));
+        results += score + Math.abs((score * comparative));
         //results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
         //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
         //results = results / tweetText.length;
         //tweetIndividual.sentiment.w_score = results*100;
-        return [score * Math.abs(comparative), Math.abs(results)];
+        let returnScore = score * Math.abs(comparative);
+
+        return [returnScore, Math.abs(results)];
     };
 
     const normal_dist_data_filter = (content) => {
@@ -44,13 +54,14 @@ function sentimentAnalyzer() {
             	let currentSentiment = sentiment(content[contentKey].text);
                 if (currentSentiment.positive.length != 0 || currentSentiment.negative.length != 0) {
                     content[contentKey].sentiment = currentSentiment;
-                    content[contentKey].sentiment.w_rank = ranking(content[contentKey]);
+                    content[contentKey].sentiment.w_rank = ranking(content[contentKey], textObject[postKey].author);
                     rankingHolder.push(content[contentKey].sentiment.w_rank);
                 }else{
                 	delete textObject[postKey].content;
                 }
             }
         }
+
         let normalData = normal_dist_data_filter(rankingHolder);
         let data_W_analysis = {
             data: textObject
