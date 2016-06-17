@@ -14,7 +14,7 @@ class HoverInfo extends React.Component {
     var ben = val;
         this.setState({hover: true});
     }
-    
+
   mouseOut (val) {
         this.setState({hover: false});
   }
@@ -45,7 +45,7 @@ class HoverInfo extends React.Component {
                     </div>
                   </div>
                 </div>
-              ) 
+              )
   }
 }
 
