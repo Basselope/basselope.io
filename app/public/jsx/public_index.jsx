@@ -1,21 +1,18 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux';
+import { Router, browserHistory } from 'react-router'
+import { createStore, applyMiddleware } from 'redux'
 import ReduxPromise from 'redux-promise'
 
-import App from './components/App.jsx'
+import routes from './routes.jsx'
 import rootReducer from './reducers/reducer_index.jsx'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-
-// const stateStore = createStore(rootReducer, initialState,
-//   compose(applyMiddleware(ReduxPromise),
-//   window.devToolsExtension ? window.devToolsExtension() : f => f));
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
 
 render(
   <Provider store={createStoreWithMiddleware(rootReducer)}>
-    <App />
+    <Router routes={routes} history={browserHistory} />
   </Provider>,
   document.getElementById('app')
 )
