@@ -22,7 +22,7 @@ class SentimentDistribution extends React.Component {
   // componentDidMount() {
   //
   // }
- 
+
   render() {
     return (
       <div>
@@ -30,7 +30,7 @@ class SentimentDistribution extends React.Component {
         <Metrics data={this.props.data} />
         <div className="valign-wrapper" style={{
           position: 'fixed',
-          zIndex: -1,
+          zIndex: 0,
           top: 0,
           bottom: 0,
           left: 0,
