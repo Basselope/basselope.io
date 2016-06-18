@@ -31,8 +31,8 @@ class Metrics extends React.Component {
   renderMean(){
     console.log(this.props);
     if(this.checkTruthCondition(this) ){
-      let twitterMean = this.props.data.twitter.mean;
-      let redditMean = this.props.data.reddit.mean;
+      let twitterMean = this.props.data.twitter.metricMean;
+      let redditMean = this.props.data.reddit.metricMean;
       let twitterSum = this.props.data.twitter.setSize;
       let redditSum = this.props.data.reddit.setSize;
       let totalMean = (((twitterMean*twitterSum)+(redditMean*redditSum))/(redditSum+twitterSum)).toFixed(1) + "%";
