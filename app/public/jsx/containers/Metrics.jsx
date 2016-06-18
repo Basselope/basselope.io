@@ -14,7 +14,7 @@ class Metrics extends React.Component {
                 <div className="card z-depth-2 blue-grey darken-1">
                   <div className="card-content">
                     <span className="card-title ">{content()}</span>
-                    <p>{title}</p>
+                    <p style={{"textTransform": "uppercase"}}>{title}</p>
                   </div>
                 </div>
               </div>
@@ -56,7 +56,12 @@ class Metrics extends React.Component {
   renderNegPercent(){
     console.log(this.props);
     if(this.checkTruthCondition(this) ){
-      let percentFixed = Math.floor((this.props.data.twitter.percentNegative) * 100).toFixed(1) + "%"
+      let twitterPercentNeg = this.props.data.twitter.percentNegative;
+      let redditPercentNeg = this.props.data.reddit.percentNegative;
+      let twitterSum = this.props.data.twitter.setSize;
+      let redditSum = this.props.data.reddit.setSize;
+      let totalPercent = ((twitterPercentNeg*twitterSum)+(redditPercentNeg*redditSum))/(redditSum+twitterSum);
+      let percentFixed = ((totalPercent) * 100).toFixed(1) + "%"
       return (<span className="card-title ">{percentFixed}</span>)
     }
   }

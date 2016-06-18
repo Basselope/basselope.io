@@ -93,6 +93,16 @@ function sentimentAnalyzer() {
 		positiveSentiments	 = positiveSentiments/rankingHolder.length
 		normalData.percentPositive = positiveSentiments;
 		normalData.percentNegative = negativeSentiments;
+        
+        let greater = normalData.mean + (2*normalData.standardDeviation);
+        let less = normalData.mean - (2*normalData.standardDeviation);
+        console.log("BEFORE",normalData.set.length)
+        normalData.set = normalData.set.filter(function(curr){
+        	return curr[0]<greater && curr[0]>less;
+        });
+                console.log("AFTER",normalData.set.length)
+
+
         let data_W_analysis = {
             data: textObject
         }
