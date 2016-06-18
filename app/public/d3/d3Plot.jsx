@@ -9,9 +9,9 @@ const color = d3.scale.linear()
   .range(['#f80', '#08f']); // '#f80', '#58b', '#08f', '#0f9'
 
 const map = {
-  x: (d, x) => (width / 2) + (x * (width / 2 / Math.max(Math.abs(...d3.extent(d,(val) => val[0]))))),
+  x: (d, x) => (width / 2) + (x * (width / 2 / Math.max(...d3.extent(d,(val) => val[0]).map((v) => Math.abs(v))))),
   y: (d, y) => height - ((height / d3.extent(d,(val) => val[1])[1]) * y),
-  r: (r) => Math.min((r * .9) + 5, 22),
+  r: (r) => Math.min((r * .9) + 3, 22),
   c: (d, x) => color(map.x(d,x) / width)
 };
 
@@ -37,17 +37,17 @@ function label(d) {
 }
 
 function plot(d) {
-  let xRange = d3.extent(d,(val) => val[0]);
-  let xSpread = width / 2 / Math.max(Math.abs(...xRange));
-  let x = (x) => (width / 2) + (x * xSpread);
-
-  let yRange = d3.extent(d,(val) => val[1]);
-  let ySpread = height / yRange[1];
-  let y = (y) => height - ySpread * y;
-
-  let r = (r) => Math.min((r * .9) + 5, 22);
-
-  let c = (c) => color(x(c) / width);
+  // let xRange = d3.extent(d,(val) => val[0]);
+  // let xSpread = width / 2 / Math.max(...Math.abs.apply(xRange));
+  // let x = (x) => (width / 2) + (x * xSpread);
+  //
+  // let yRange = d3.extent(d,(val) => val[1]);
+  // let ySpread = height / yRange[1];
+  // let y = (y) => height - ySpread * y;
+  //
+  // let r = (r) => Math.min((r * .9) + 5, 22);
+  //
+  // let c = (c) => color(x(c) / width);
 
   return d.map((val) => ({
     c: map.c(d,val[0]),
