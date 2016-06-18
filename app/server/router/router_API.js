@@ -3,9 +3,9 @@ const apiStruct = require('./utils/api/api_struct.js');
 const api_fetch = require('./utils/api/api_fetch.js');
 var bingHandle = require('./utils/api/config/getBing.js');
 
-
 module.exports = function(req, res, next) {
-	console.log(req.url);
+	if(req.method === 'GET')
+		next();
 	switch(req.url) {
 		case '/_api/twitter/search':
 			api_fetch('twitter', [req.body.query,'#'+req.body.query])
