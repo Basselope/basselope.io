@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
     this.props.fetchTwitter(this.state.term);
     this.setState({ term: '' });
 
-    const path = `/${this.state.term}`.replace(/\W/g, '-');
+    const path = `${this.state.term}`.replace(/\W/g, '-');
     browserHistory.push(path);
   }
 
