@@ -6,22 +6,22 @@ class Metrics extends React.Component {
     super(props);
     //this.state = {data: {twitter: null, reddit:null}}
   }
+
   cardBuilder(content, title){
     if(this.checkTruthCondition(this) ){
     return (<div>
-            <div>
-              <div className="col s12 m3" >
-                <div className="card hoverable blue-grey darken-1">
-                  <div className="card-content">
-                    <span className="card-title ">{content()}</span>
-                    <p style={{"textTransform": "uppercase"}}>{title}</p>
+              <div>
+                <div className="col s12 m3" >
+                  <div className="card z-depth-2 blue-grey darken-1">
+                    <div className="card-content">
+                      <span className="card-title ">{content()}</span>
+                      <p style={{"textTransform": "uppercase"}}>{title}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>);
+            </div>);
     }
-
   }
 
   checkTruthCondition(passedThis){
@@ -41,7 +41,6 @@ class Metrics extends React.Component {
   }
   
   renderPosPercent(){
-    console.log(this.props);
     if(this.checkTruthCondition(this) ){
       let twitterPercentPos = this.props.data.twitter.percentPositive;
       let redditPercentPos = this.props.data.reddit.percentPositive;
@@ -54,7 +53,6 @@ class Metrics extends React.Component {
   }
   
   renderNegPercent(){
-    console.log(this.props);
     if(this.checkTruthCondition(this) ){
       let twitterPercentNeg = this.props.data.twitter.percentNegative;
       let redditPercentNeg = this.props.data.reddit.percentNegative;
@@ -67,7 +65,6 @@ class Metrics extends React.Component {
   }
   
   renderTotal(){
-    console.log(this.props);
     if(this.checkTruthCondition(this) ){
       let totalSize = this.props.data.twitter.setSize+this.props.data.reddit.setSize
       return (<span className="card-title ">{totalSize}</span>)
@@ -75,10 +72,7 @@ class Metrics extends React.Component {
   }
 
   render() {
-    // console.log(node)
-    
     return (
-      
       <div className = "row center-align blue-grey-text text-lighten-4">
         {this.cardBuilder(this.renderMean.bind(this), "Average Sentiment")}
         {this.cardBuilder(this.renderNegPercent.bind(this), "Negative %")}
@@ -89,9 +83,5 @@ class Metrics extends React.Component {
     );
   }
 }
-// const mapStateToProps = (state) => {
-//   return { twitter: state.bing };
-// }
-
 
 export default Metrics
