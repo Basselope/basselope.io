@@ -4,7 +4,7 @@ const api_fetch = require('./utils/api/api_fetch.js');
 var bingHandle = require('./utils/api/config/getBing.js');
 
 
-function apihandlers(req, res, next) {
+module.exports = function(req, res, next) {
 	console.log(req.url);
 	switch(req.url) {
 		case '/_api/twitter/search':
@@ -25,6 +25,3 @@ function apihandlers(req, res, next) {
 			break;
 	}
 }
-
-var exports = module.exports = {};
-exports.routerHandler = apihandlers;
