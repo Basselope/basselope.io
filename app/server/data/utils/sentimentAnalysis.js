@@ -17,8 +17,12 @@ function sentimentAnalyzer() {
 
         let results = 0;
         results += score + Math.abs(score * comparative);
-        //results += (favorites/friends);
-        //results += (retweets/friends);
+        if(!friends<1){
+        	results += (favorites/friends);
+        	results += (retweets/friends);
+        }else{
+        	results+= (favorites/(downCount+favorites))
+        }
         console.log("WSCORE: ",results, friends)
         //console.log("favorites: ",favorites,friends, (favorites/friends))
         //console.log("RETWEETS: ",retweets, friends, (retweets/friends))
@@ -26,23 +30,56 @@ function sentimentAnalyzer() {
         //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
         //results = results / tweetText.length;
         //tweetIndividual.sentiment.w_score = results*100;
-        let returnScore = score ;//* Math.abs(comparative);
+        let returnScore = score* Math.abs(comparative);
 
-        return [returnScore, Math.abs(results)];
+        return [comparative /*returnScore*/, (Math.abs(Math.log(Math.abs(results))))];
     };
 
     const normal_dist_data_filter = (content) => {
+    	let PositiveSentiments = [];
+    	let NegativeSentiments = [];
 
         let normalized = content.map(function(curr, index, arr) {
+        	if(curr[0]<0) NegativeSentiments.push(curr[0])
+        	else PositiveSentiments.push(curr[0])
             return curr[1];
         });
+        let sentimentsOnly = content.map(function(curr, index, arr) {
+            return curr[0];
+        });
+        normalized.sort(
+        	function(a, b) {
+  				return a - b;
+			});
+        let weakMean = stats.mean(normalized);
+        let percentile = 0;
+        if(stats.mean(normalized)<0){
+        	NegativeSentiments.sort(
+        	function(a, b) {
+  				return a - b;
+			});
+			percentile = NegativeSentiments.indexOf(weakMean)/NegativeSentiments.length
+        }
+        else{
 
-        normalized.sort();
+
+        PositiveSentiments.sort(
+        	function(a, b) {
+  				return a - b;
+			});
+        percentile = NegativeSentiments.indexOf(weakMean)/NegativeSentiments.length
+		}
+        let maxVal = normalized[normalized.length-1];
+        let minVal = normalized[0];
+        let weightedSentiment = stats.mean(normalized)<0?stats.mean(normalized)/(minVal):stats.mean(normalized)/(maxVal);
+        
         var count = normalized.length;
         return {
             set: content,
             setSize: normalized.length,
             mean: stats.mean(normalized),
+            metricMean: weightedSentiment*100,
+            weakMean: percentile,
             median: stats.median(normalized),
             standardDeviation: stats.stdev(normalized),
             mode: stats.mode(normalized),
@@ -112,14 +149,14 @@ function sentimentAnalyzer() {
         let data_W_analysis = {
             data: textObject
         }
-        extendOn(data_W_analysis, normalData);
-        extendOn(data_W_analysis, maxSentimentImpact);
-        // for (let dataKey in normalData) {
-        //     data_W_analysis[dataKey] = normalData[dataKey]
-        // }
-        // for (let dataKey in maxSentimentImpact) {
-        //     data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
-        // }
+        // extendOn(data_W_analysis, normalData);
+        // extendOn(data_W_analysis, maxSentimentImpact);
+        for (let dataKey in normalData) {
+            data_W_analysis[dataKey] = normalData[dataKey]
+        }
+        for (let dataKey in maxSentimentImpact) {
+            data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
+        }
         return data_W_analysis;
     };
     return {
