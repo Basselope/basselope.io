@@ -16,7 +16,7 @@ app.use(router_API);
 
 app.get('/*', function(req, res, next) {
   console.log(__dirname);
-  fs.createReadStream(path.join(public_directory,"/index.html")).pipe(res);
+  fs.createReadStream(path.join(public_directory,"index.html")).pipe(res);
 });
 
 module.exports = app;

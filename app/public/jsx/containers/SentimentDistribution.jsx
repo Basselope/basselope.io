@@ -29,9 +29,10 @@ class SentimentDistribution extends React.Component {
         <HoverInfo />
         <Metrics data={this.props.data} />
         <div className="valign-wrapper" style={{
-          height: '100vh',
           position: 'fixed',
           zIndex: -1,
+          top: 0,
+          bottom: 0,
           left: 0,
           right: 0
           }}>
@@ -39,7 +40,7 @@ class SentimentDistribution extends React.Component {
             left: 0,
             right: 0,
             overflow: 'visible',
-            zIndex: -1}}>
+            }}>
             <RD3Component data={this.props.d3} />
           </div>
         </div>
