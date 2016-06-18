@@ -9,9 +9,9 @@ const color = d3.scale.linear()
   .range(['#f80', '#08f']); // '#f80', '#58b', '#08f', '#0f9'
 
 const map = {
-  x: (d, x) => (width / 2) + (x * (width / 2 / Math.max(...d3.extent(d,(val) => val[0]).map((v) => Math.abs(v))))),
+  x: (d, x) => (width / 2) + (x * (width / 2 / Math.min(...d3.extent(d,(val) => val[0]).map((v) => Math.abs(v))))),
   y: (d, y) => height - ((height / d3.extent(d,(val) => val[1])[1]) * y),
-  r: (r) => Math.min((r * .9) + 3, 22),
+  r: (r) => 3 * Math.min((r * .9) + 3, 22),
   c: (d, x) => color(map.x(d,x) / width)
 };
 
