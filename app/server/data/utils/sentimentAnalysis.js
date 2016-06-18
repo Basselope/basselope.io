@@ -9,22 +9,24 @@ function sentimentAnalyzer() {
             favorites = content.vote_count || 0,
             downCount = content.down_count || 0,
             score = content.sentiment.score || 0,
-            friends = content.friend_count || 0,
+            friends = author.follow_count || 1,
             listed = content.listed_count || 0, //list of members to
             status = content.status_count || 0,
             //mentions = content.mentions_to.length,
             comparative = content.sentiment.comparative;
-            //console.log(JSON.stringify(author))
-
-
 
         let results = 0;
-        results += score + Math.abs((score * comparative));
+        results += score + Math.abs(score * comparative);
+        results += (favorites/friends);
+        results += (retweets/friends);
+        console.log("WSCORE: ",results, friends)
+        //console.log("favorites: ",favorites,friends, (favorites/friends))
+        //console.log("RETWEETS: ",retweets, friends, (retweets/friends))
         //results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
         //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
         //results = results / tweetText.length;
         //tweetIndividual.sentiment.w_score = results*100;
-        let returnScore = score * Math.abs(comparative);
+        let returnScore = score ;//* Math.abs(comparative);
 
         return [returnScore, Math.abs(results)];
     };
@@ -51,7 +53,11 @@ function sentimentAnalyzer() {
     const additionalCalc = (content, rankings) =>{
 
     };
-
+    const extendOn = (on, from) =>{
+    	for (let dataKey in from) {
+            on[dataKey] = from[dataKey]
+        }
+    }
     const analyze = (textObject) => {
         let analyzedResults = {};
         let rankingHolder = [];
@@ -106,12 +112,14 @@ function sentimentAnalyzer() {
         let data_W_analysis = {
             data: textObject
         }
-        for (let dataKey in normalData) {
-            data_W_analysis[dataKey] = normalData[dataKey]
-        }
-        for (let dataKey in maxSentimentImpact) {
-            data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
-        }
+        extendOn(data_W_analysis, normalData);
+        extendOn(data_W_analysis, maxSentimentImpact);
+        // for (let dataKey in normalData) {
+        //     data_W_analysis[dataKey] = normalData[dataKey]
+        // }
+        // for (let dataKey in maxSentimentImpact) {
+        //     data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
+        // }
         return data_W_analysis;
     };
     return {

@@ -24,7 +24,7 @@ const twitter_account_struct = (tweet) => ({
   name: tweet.user.screen_name,
   handle: tweet.user.screen_name,
   status_count: tweet.user.statuses_count,
-  friend_count: tweet.user.friends_count,
+  follow_count: tweet.user.followers_count,
   listed_count: tweet.user.listed_count
 });
 
@@ -34,7 +34,7 @@ const reddit_account_struct = (post) => ({
   name: null,
   handle: post.data.author,
   status_count: null,
-  friend_count: null,
+  follow_count: null,
   listed_count: null
 });
 
