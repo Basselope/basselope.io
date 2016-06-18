@@ -8,10 +8,10 @@ import ReduxPromise from 'redux-promise'
 import routes from './routes.jsx'
 import rootReducer from './reducers/reducer_index.jsx'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
+const store = createStore(rootReducer, applyMiddleware(ReduxPromise))
 
 render(
-  <Provider store={createStoreWithMiddleware(rootReducer)}>
+  <Provider store={store}>
     <Router routes={routes} history={browserHistory} />
   </Provider>,
   document.getElementById('app')
