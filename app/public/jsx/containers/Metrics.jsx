@@ -1,4 +1,5 @@
-import React from 'react'
+
+ import React from 'react'
 require('materialize-loader');
 class Metrics extends React.Component {
 
@@ -33,8 +34,8 @@ class Metrics extends React.Component {
     if(this.checkTruthCondition(this) ){
       let twitterMean = this.props.data.twitter.metricMean;
       let redditMean = this.props.data.reddit.metricMean;
-      let twitterSum = this.props.data.twitter.setSize;
-      let redditSum = this.props.data.reddit.setSize;
+      let twitterSum = this.props.data.twitter.set.length;
+      let redditSum = this.props.data.reddit.set.length;
       let totalMean = (((twitterMean*twitterSum)+(redditMean*redditSum))/(redditSum+twitterSum)).toFixed(1) + "%";
       return (<span className="card-title ">{totalMean}</span>)
     }
@@ -44,8 +45,8 @@ class Metrics extends React.Component {
     if(this.checkTruthCondition(this) ){
       let twitterPercentPos = this.props.data.twitter.percentPositive;
       let redditPercentPos = this.props.data.reddit.percentPositive;
-      let twitterSum = this.props.data.twitter.setSize;
-      let redditSum = this.props.data.reddit.setSize;
+      let twitterSum = this.props.data.twitter.set.length;
+      let redditSum = this.props.data.reddit.set.length;
       let totalPercent = ((twitterPercentPos*twitterSum)+(redditPercentPos*redditSum))/(redditSum+twitterSum);
       let percentFixed = ((totalPercent) * 100).toFixed(1) + "%"
       return (<span className="card-title ">{percentFixed}</span>)
@@ -56,8 +57,8 @@ class Metrics extends React.Component {
     if(this.checkTruthCondition(this) ){
       let twitterPercentNeg = this.props.data.twitter.percentNegative;
       let redditPercentNeg = this.props.data.reddit.percentNegative;
-      let twitterSum = this.props.data.twitter.setSize;
-      let redditSum = this.props.data.reddit.setSize;
+      let twitterSum = this.props.data.twitter.set.length;
+      let redditSum = this.props.data.reddit.set.length;
       let totalPercent = ((twitterPercentNeg*twitterSum)+(redditPercentNeg*redditSum))/(redditSum+twitterSum);
       let percentFixed = ((totalPercent) * 100).toFixed(1) + "%"
       return (<span className="card-title ">{percentFixed}</span>)
@@ -66,7 +67,7 @@ class Metrics extends React.Component {
   
   renderTotal(){
     if(this.checkTruthCondition(this) ){
-      let totalSize = this.props.data.twitter.setSize+this.props.data.reddit.setSize
+      let totalSize = this.props.data.twitter.set.length+this.props.data.reddit.set.length
       return (<span className="card-title ">{totalSize}</span>)
     }
   }
