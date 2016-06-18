@@ -11,7 +11,7 @@ class Metrics extends React.Component {
     return (<div>
             <div>
               <div className="col s12 m3" >
-                <div className="card z-depth-2 blue-grey darken-1">
+                <div className="card hoverable blue-grey darken-1">
                   <div className="card-content">
                     <span className="card-title ">{content()}</span>
                     <p style={{"textTransform": "uppercase"}}>{title}</p>
@@ -70,7 +70,7 @@ class Metrics extends React.Component {
     console.log(this.props);
     if(this.checkTruthCondition(this) ){
       let totalSize = this.props.data.twitter.setSize+this.props.data.reddit.setSize
-      return (<span className="card-title ">{this.props.data.twitter.setSize}</span>)
+      return (<span className="card-title ">{totalSize}</span>)
     }
   }
 
@@ -80,11 +80,10 @@ class Metrics extends React.Component {
     return (
       
       <div className = "row center-align blue-grey-text text-lighten-4">
-          {this.cardBuilder(this.renderMean.bind(this), "Average Sentiment")}
-          {this.cardBuilder(this.renderPosPercent.bind(this), "Postive %")}
-          {this.cardBuilder(this.renderNegPercent.bind(this), "Negative %")}
-          {this.cardBuilder(this.renderTotal.bind(this), "Total")}
-          
+        {this.cardBuilder(this.renderMean.bind(this), "Average Sentiment")}
+        {this.cardBuilder(this.renderNegPercent.bind(this), "Negative %")}
+        {this.cardBuilder(this.renderPosPercent.bind(this), "Postive %")}
+        {this.cardBuilder(this.renderTotal.bind(this), "Total")}
       </div>
 
     );

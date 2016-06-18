@@ -17,7 +17,6 @@ class SentimentDistribution extends React.Component {
 
   constructor(props) {
     super(props);
-    this.showMetrics.bind(this);
   }
 
   // componentDidMount() {
