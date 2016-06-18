@@ -76,7 +76,7 @@ function sentimentAnalyzer() {
         var count = normalized.length;
         return {
             set: content,
-            setSize: normalized.length,
+            // setSize: normalized.length,
             mean: stats.mean(normalized),
             metricMean: weightedSentiment*100,
             weakMean: percentile,
