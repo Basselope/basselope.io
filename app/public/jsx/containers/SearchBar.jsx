@@ -63,6 +63,6 @@ class SearchBar extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter }, dispatch);
-}
+};
 
 export default connect(null, mapDispatchToProps)(SearchBar)

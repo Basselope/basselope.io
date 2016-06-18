@@ -43,7 +43,7 @@ const client_file_tree = {
       name: 'assets'
     },{
       name: 'scss',
-      files: ['style_index.scss']
+      files: ['stylesheet.scss']
     },{
       name: 'dist',
       files: ['build.log'],
