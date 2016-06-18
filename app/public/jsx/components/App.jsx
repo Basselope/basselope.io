@@ -1,4 +1,5 @@
 require('materialize-loader');
+require('../../scss/style_index.scss');
 
 import React from 'react'
 

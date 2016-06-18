@@ -9,7 +9,7 @@ class BingList extends React.Component {
   renderBingList() {
     return this.props.bing.data.map(suggestion => {
       return (
-        <a key={suggestion} className="collection-item" onClick={() => this.props.bingListClick(suggestion)}>{suggestion}</a>
+        <a key={suggestion} className="collection-item" onMouseOver={() => this.props.bingListClick(suggestion)}>{suggestion}</a>
       );
     });
   }

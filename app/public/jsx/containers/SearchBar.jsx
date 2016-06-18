@@ -43,7 +43,9 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div style={{position: 'fixed', marginTop: '90px', left: 0, right: 0}} className="v-align-wrapper">
+      <div style={{position: 'fixed', marginTop: '180px', left: 0, right: 0}} className="v-align-wrapper">
+        <h1 style={{textAlign: 'center', marginTop: '-150px', textShadow: '5px, 3px, 5px, #fff'}}>Basselope</h1>
+        <h4 style={{textAlign: 'center'}}>Data visualization for social media</h4>
         <form onSubmit={this.onFormSubmit} className="container">
           <div className="input-field v-align">
             <div className="row">
