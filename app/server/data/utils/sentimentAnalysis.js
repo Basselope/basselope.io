@@ -17,8 +17,8 @@ function sentimentAnalyzer() {
 
         let results = 0;
         results += score + Math.abs(score * comparative);
-        results += (favorites/friends);
-        results += (retweets/friends);
+        //results += (favorites/friends);
+        //results += (retweets/friends);
         console.log("WSCORE: ",results, friends)
         //console.log("favorites: ",favorites,friends, (favorites/friends))
         //console.log("RETWEETS: ",retweets, friends, (retweets/friends))
