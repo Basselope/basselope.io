@@ -26,8 +26,11 @@ class SentimentDistribution extends React.Component {
   render() {
     return (
       <div>
-        <HoverInfo />
-        <Metrics data={this.props.data} />
+        <Metrics style={{
+          position: 'fixed',
+          top: 0,
+          zIndex: 1000
+          }} data={this.props.data} />
         <div className="valign-wrapper" style={{
           position: 'fixed',
           zIndex: 0,

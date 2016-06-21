@@ -4,11 +4,11 @@ import { Route, IndexRoute } from 'react-router'
 import App from './components/App.jsx'
 import SearchBar from './containers/SearchBar.jsx'
 // import HoverInfo from './containers/HoverInfo.jsx'
-import InitialGraph from './containers/SentimentDistribution.jsx'
+import SentimentPlot from './containers/SentimentPlot.jsx'
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={SearchBar} />
-    <Route path="/:term" component={InitialGraph} />
+    <Route path="/:term" component={SentimentPlot} />
   </Route>
 )
