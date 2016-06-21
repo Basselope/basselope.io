@@ -13,7 +13,7 @@ app.use(express.static(public_directory));
 var port = process.env.PORT || 8080;
 
 app.use(router_API);
-
+//app.post('/login', route.utils.login);
 app.get('/*', function(req, res, next) {
   console.log(__dirname);
   fs.createReadStream(path.join(public_directory,"index.html")).pipe(res);
