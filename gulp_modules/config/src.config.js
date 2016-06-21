@@ -18,7 +18,7 @@ const public = {
     all: ['app/public/jsx/**/*.jsx']
   },
   scss: {
-    index: ['app/public/scss/style_index.scss'],
+    index: ['app/public/scss/stylesheet.scss'],
     all: ['app/public/scss/**/*.scss']
   },
   ignore: ['app/public/dist']

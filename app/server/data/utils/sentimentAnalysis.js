@@ -42,7 +42,7 @@ function sentimentAnalyzer() {
         let normalized = content.map(function(curr, index, arr) {
         	if(curr[0]<0) NegativeSentiments.push(curr[0])
         	else PositiveSentiments.push(curr[0])
-            return curr[1];
+            return curr[0];
         });
         let sentimentsOnly = content.map(function(curr, index, arr) {
             return curr[0];
@@ -71,7 +71,9 @@ function sentimentAnalyzer() {
 		}
         let maxVal = normalized[normalized.length-1];
         let minVal = normalized[0];
-        let weightedSentiment = stats.mean(normalized)<0?stats.mean(normalized)/(minVal):stats.mean(normalized)/(maxVal);
+        let spread = Math.max(Math.abs(minVal),Math.abs(maxVal));
+        let weightedSentiment = stats.mean(normalized) / spread;
+          //stats.mean(normalized)<0?stats.mean(normalized)/(minVal):stats.mean(normalized)/(maxVal);
         
         var count = normalized.length;
         return {
