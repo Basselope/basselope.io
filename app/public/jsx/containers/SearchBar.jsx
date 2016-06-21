@@ -44,22 +44,17 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <HoverInfo />
-        <div style={{position: 'fixed', marginTop: '180px', left: 0, right: 0}}>
-          <h3 style={{textAlign: 'center', textShadow: '5px, 3px, 5px, #fff'}}>BASSELOPE.io</h3>
-          <h5 style={{textAlign: 'center'}}>sentiment analysis</h5>
-          <form onSubmit={this.onFormSubmit} className="container">
-            <div className="input-field">
-              <div className="row">
-                <div className="col s8 offset-s2 m4 offset-m4">
-                  <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
-                  <BingList term={this.state.term} bingListClick={this.bingListClick} />
-                </div>
+      <div style={{position: 'fixed', marginTop: '180px', left: 0, right: 0}}>
+        <form onSubmit={this.onFormSubmit} className="container">
+          <div className="input-field">
+            <div className="row">
+              <div className="col s8 offset-s2 m4 offset-m4">
+                <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
+                <BingList term={this.state.term} bingListClick={this.bingListClick} />
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     );
   }
