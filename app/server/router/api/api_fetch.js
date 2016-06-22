@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const axios = require('axios');
 const Struct = require('./api_struct');
-const sentiment = require('./../../../data/utils/sentimentAnalysis.js');
+const sentiment = require('./../../data/utils/sentimentAnalysis.js');
 
 const call = {
   twitter: axios.create({

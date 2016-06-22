@@ -7,6 +7,7 @@ import { fetchTwitter } from '../actions/twitter.jsx'
 import HoverInfo from './HoverInfo.jsx'
 
 import node from '../../d3/d3Plot.jsx'
+import time from '../../d3/d3Time.jsx'
 import rd3 from 'react-d3-library'
 
 
@@ -49,6 +50,7 @@ class SentimentDistribution extends React.Component {
 const mapStateToProps = (state,props) => {
   return {
     d3: node(state.twitter.data, state.reddit.data),
+    d3Time:time(state.twitter.data, state.reddit.data),
     data: {twitter:state.twitter.data, reddit:state.reddit.data}
 
     // sd: state.twitter.data.standard_deviation

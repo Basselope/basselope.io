@@ -148,14 +148,14 @@ function sentimentAnalyzer() {
         let data_W_analysis = {
             data: textObject
         }
-        // extendOn(data_W_analysis, normalData);
-        // extendOn(data_W_analysis, maxSentimentImpact);
-        for (let dataKey in normalData) {
-            data_W_analysis[dataKey] = normalData[dataKey]
-        }
-        for (let dataKey in maxSentimentImpact) {
-            data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
-        }
+        extendOn(data_W_analysis, normalData);
+        extendOn(data_W_analysis, maxSentimentImpact);
+        // for (let dataKey in normalData) {
+        //     data_W_analysis[dataKey] = normalData[dataKey]
+        // }
+        // for (let dataKey in maxSentimentImpact) {
+        //     data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
+        // }
         return data_W_analysis;
     };
     return {
