@@ -1,7 +1,7 @@
 'use strict';
-const apiStruct = require('./utils/api/api_struct.js');
-const api_fetch = require('./utils/api/api_fetch.js');
-var bingHandle = require('./utils/api/config/getBing.js');
+const apiStruct = require('./api/api_struct.js');
+const api_fetch = require('./api/api_fetch.js');
+var bingHandle = require('./api/config/getBing.js');
 const loginHandler = require('../data/utils/signup_in.js');
 
 module.exports = function(req, res, next) {
