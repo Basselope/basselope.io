@@ -1,5 +1,3 @@
-require('materialize-loader');
-
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -44,7 +42,7 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div style={{position: 'fixed', marginTop: '180px', left: 0, right: 0}}>
+      <div>
         <form onSubmit={this.onFormSubmit} className="container">
           <div className="input-field">
             <div className="row">

@@ -1,4 +1,6 @@
 body, html {
+  padding: 0,0,0,0;
+  margin: 0,0,0,0;
   height: 100vh;
   background: #8e9eab; /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #8e9eab , #eef2f3); /* Chrome 10-25, Safari 5.1-6 */
@@ -25,19 +27,43 @@ input {
 }
 
 input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #8e9eab;
-  box-shadow: 0 1px 0 0 #8e9eab;
+  border-bottom: 1px solid #ff9100;
+  box-shadow: 0 1px 0 0 #ff9100;
   font-size: 19px;
 }
 
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #8e9eab;
-  box-shadow: 0 1px 0 0 #8e9eab;
+  border-bottom: 1px solid #ff9100;
+  box-shadow: 0 1px 0 0 #ff9100;
   font-size: 19px;
 }
 
-textarea.materialize-textarea:focus:not([readonly]).valid {
-  border-bottom: 1px solid #8e9eab;
-  box-shadow: 0 1px 0 0 #8e9eab;
-  font-size: 19px;
+.button {
+  z-index: 2000
 }
+
+.show {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

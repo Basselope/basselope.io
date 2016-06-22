@@ -11,6 +11,9 @@ import time from '../../d3/d3Time.jsx'
 
 import rd3 from 'react-d3-library'
 
+import Metrics from './Metrics.jsx'
+import NavBar from '../components/NavBar.jsx'
+
 
 const RD3Component = rd3.Component;
 
@@ -23,9 +26,10 @@ class SentimentPlot extends React.Component {
   render() {
     return (
       <div>
+        <NavBar />
         <div className="valign-wrapper" style={{
           position: 'fixed',
-          zIndex: 0,
+          zIndex: -1,
           top: 0,
           bottom: 0,
           left: 0,
