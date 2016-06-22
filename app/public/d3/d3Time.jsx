@@ -23,7 +23,7 @@ const node = document.createElement('div');
 
 function formatDate(unformated){
   let theDate = new Date(unformated);
-  return theDate.getYear()+""+(theDate.getMonth()+1)+""+(theDate.getDay()+1)
+  return theDate.getYear()+""+(theDate.getMonth()+1)+""+(theDate.getDay()+1)+""+theDate.getTime()
 }
 var svg = d3.select(node).append("svg")
             .attr("width", 600  )
@@ -66,7 +66,7 @@ var m = [80, 80, 80, 80]; // margins
                                       //X WIDTH RANGE    //TIGHENTS THE SPREAD
 
                                       console.log("RANGES", ranges)
-      var x = d3.scale.linear().domain([-20, 20]).range([0, 300]);
+      var x = d3.scale.linear().domain([0, data.length]).range([0, w]);
     // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
     var y = d3.scale.linear().domain([ranges.yMin, ranges.yMax]).range([h, 0]); //function return
       // automatically determining max range can work something like this
@@ -79,7 +79,8 @@ var m = [80, 80, 80, 80]; // margins
         // verbose logging to show what's actually being done
         //console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(Number(d[2])) + ' using our xScale.');
         // return the X coordinate where we want to plot this datapoint
-
+        console.log(formatDate(d[0]));
+        //return x(formatDate(d[0])); 
         return x(i); 
       })
       .y(function(d) { 
