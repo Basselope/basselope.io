@@ -8,7 +8,7 @@ import SentimentPlot from '../containers/SentimentPlot.jsx'
 
 const Dashboard = (props) => (
   <div>
-    {/*<Metrics />*/}
+    <Metrics />
     {props.children}
     {/*<NavBar />*/}
   </div>

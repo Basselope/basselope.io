@@ -6,6 +6,7 @@ class Table extends React.Component {
     super(props);
 
     this.state = { redditData: {}, twitterData: {} };
+
     this.renderTable = this.renderTable.bind(this);
   }
 

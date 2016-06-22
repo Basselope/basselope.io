@@ -12,9 +12,10 @@ import Table from './containers/Table.jsx'
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={SearchBar} />
-    <Route component={Dashboard} />
+    <Route component={Dashboard}>
       <Route path="/:term/sentimentplot" component={SentimentPlot} />
       {/*<Route path="/:term/timeplot" component={TimePlot} />*/}
-    <Route path="/:term/table" component={Table} />
+      <Route path="/:term/table" component={Table} />
+    </Route>
   </Route>
 )
