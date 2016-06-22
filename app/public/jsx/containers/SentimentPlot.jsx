@@ -38,7 +38,7 @@ class SentimentPlot extends React.Component {
             right: 0,
             overflow: 'visible',
             }}>
-            <RD3Component data={this.props.d3} />
+            <RD3Component data={this.props.d3Time} />
           </div>
         </div>
       </div>
