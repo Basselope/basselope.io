@@ -23,7 +23,6 @@ function sentimentAnalyzer() {
         }else{
         	results+= (favorites/(downCount+favorites))
         }
-        console.log("WSCORE: ",results, friends)
         //console.log("favorites: ",favorites,friends, (favorites/friends))
         //console.log("RETWEETS: ",retweets, friends, (retweets/friends))
         //results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
@@ -74,7 +73,7 @@ function sentimentAnalyzer() {
         let spread = Math.max(Math.abs(minVal),Math.abs(maxVal));
         let weightedSentiment = stats.mean(normalized) / spread;
           //stats.mean(normalized)<0?stats.mean(normalized)/(minVal):stats.mean(normalized)/(maxVal);
-        
+
         var count = normalized.length;
         return {
             set: content,
@@ -110,7 +109,7 @@ function sentimentAnalyzer() {
             	let currentSentiment = sentiment(content[contentKey].text);
                 if (currentSentiment.positive.length != 0 || currentSentiment.negative.length != 0) {
                     content[contentKey].sentiment = currentSentiment;
-                    
+
                     if(currentSentiment.score<0)
                     	negativeSentiments++
                     if(currentSentiment.score>0)
@@ -120,7 +119,7 @@ function sentimentAnalyzer() {
                     content[contentKey].sentiment.w_rank = ranking(content[contentKey], textObject[postKey].author);
                     let rankProp = content[contentKey].sentiment.w_rank[1];
                      if(maxSentimentImpact.sentimentStrength <rankProp){
-                    	maxSentimentImpact.sentimentStrength = content[contentKey].sentiment.w_rank[0]; 
+                    	maxSentimentImpact.sentimentStrength = content[contentKey].sentiment.w_rank[0];
                     	maxSentimentImpact.actualTweet = content[contentKey].text;
                     	maxSentimentImpact.votes = content[contentKey].vote_count;
                     	maxSentimentImpact.posNeg = content[contentKey].sentiment<0?"Negative":"Positive"
@@ -138,14 +137,12 @@ function sentimentAnalyzer() {
 		positiveSentiments	 = positiveSentiments/rankingHolder.length
 		normalData.percentPositive = positiveSentiments;
 		normalData.percentNegative = negativeSentiments;
-        
+
         let greater = normalData.mean + (2*normalData.standardDeviation);
         let less = normalData.mean - (2*normalData.standardDeviation);
-        console.log("BEFORE",normalData.set.length)
         normalData.set = normalData.set.filter(function(curr){
         	return curr[0]<greater && curr[0]>less;
         });
-                console.log("AFTER",normalData.set.length)
 
 
         let data_W_analysis = {

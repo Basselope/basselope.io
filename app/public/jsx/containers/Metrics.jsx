@@ -26,7 +26,7 @@ class Metrics extends React.Component {
   }
 
   checkTruthCondition(passedThis){
-    return passedThis.props.data.twitter && passedThis.props.data.twitter.hasOwnProperty('mean') && passedThis.props.data.reddit && passedThis.props.data.reddit.hasOwnProperty('mean') 
+    return passedThis.props.data.twitter && passedThis.props.data.twitter.hasOwnProperty('mean') && passedThis.props.data.reddit && passedThis.props.data.reddit.hasOwnProperty('mean')
   }
 
   renderMean(){
@@ -40,7 +40,7 @@ class Metrics extends React.Component {
       return (<span className="card-title ">{totalMean}</span>)
     }
   }
-  
+
   renderPosPercent(){
     if(this.checkTruthCondition(this) ){
       let twitterPercentPos = this.props.data.twitter.percentPositive;
@@ -52,7 +52,7 @@ class Metrics extends React.Component {
       return (<span className="card-title ">{percentFixed}</span>)
     }
   }
-  
+
   renderNegPercent(){
     if(this.checkTruthCondition(this) ){
       let twitterPercentNeg = this.props.data.twitter.percentNegative;
@@ -64,7 +64,7 @@ class Metrics extends React.Component {
       return (<span className="card-title ">{percentFixed}</span>)
     }
   }
-  
+
   renderTotal(){
     if(this.checkTruthCondition(this) ){
       let totalSize = this.props.data.twitter.set.length+this.props.data.reddit.set.length
@@ -79,6 +79,7 @@ class Metrics extends React.Component {
         {this.cardBuilder(this.renderNegPercent.bind(this), "Negative %")}
         {this.cardBuilder(this.renderPosPercent.bind(this), "Postive %")}
         {this.cardBuilder(this.renderTotal.bind(this), "Total")}
+        lolasdf
       </div>
 
     );

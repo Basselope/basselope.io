@@ -8,7 +8,6 @@ import HoverInfo from './HoverInfo.jsx'
 
 import node from '../../d3/d3Plot.jsx'
 import rd3 from 'react-d3-library'
-import Metrics from './Metrics.jsx'
 
 
 const RD3Component = rd3.Component;
@@ -26,11 +25,6 @@ class SentimentDistribution extends React.Component {
   render() {
     return (
       <div>
-        <Metrics style={{
-          position: 'fixed',
-          top: 0,
-          zIndex: 1000
-          }} data={this.props.data} />
         <div className="valign-wrapper" style={{
           position: 'fixed',
           zIndex: 0,

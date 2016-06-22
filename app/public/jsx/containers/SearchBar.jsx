@@ -9,6 +9,7 @@ import { fetchBing } from '../actions/bing.jsx'
 import { fetchReddit } from '../actions/reddit.jsx'
 import { fetchTwitter } from '../actions/twitter.jsx'
 import BingList from './BingList.jsx'
+import HoverInfo from './HoverInfo.jsx'
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -43,6 +44,8 @@ class SearchBar extends React.Component {
 
   render() {
     return (
+      <div>
+      <HoverInfo />
       <div style={{position: 'fixed', marginTop: '180px', left: 0, right: 0}}>
         <h3 style={{textAlign: 'center', textShadow: '5px, 3px, 5px, #fff'}}>BASSELOPE.io</h3>
         <h5 style={{textAlign: 'center'}}>sentiment analysis</h5>
@@ -56,6 +59,7 @@ class SearchBar extends React.Component {
             </div>
           </div>
         </form>
+      </div>
       </div>
     );
   }
