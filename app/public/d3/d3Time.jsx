@@ -22,8 +22,8 @@ const node = document.createElement('div');
 // }
 
 function formatDate(unformated) {
-    let theDate = new Date(unformated);
-    return theDate.getYear() + "" + (theDate.getMonth() + 1) + "" + (theDate.getDay() + 1) + "" + theDate.getHours()
+    let theDate = unformated.year+unformated.month+unformated.date;
+    return theDate;//theDate.getYear() + "" + (theDate.getMonth() + 1) + "" + (theDate.getDay() + 1) + "" + theDate.getHours()
 }
 var svg = d3.select(node).append("svg")
     .attr("width", 600)
