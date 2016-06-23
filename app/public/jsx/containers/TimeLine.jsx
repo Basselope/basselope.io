@@ -38,7 +38,7 @@ class TimeLine extends React.Component {
             right: 0,
             overflow: 'visible',
             }}>
-            <RD3Component data={this.props.d3Time} />
+            <RD3Component data={this.props.d3} />
           </div>
         </div>
       </div>
