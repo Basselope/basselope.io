@@ -16,7 +16,7 @@ const twitter_content_struct = (tweet) => ({
   responds_to: tweet.in_reply_to_user_id_str || null,
 
   location: tweet.coordinates || null,
-  created_at: moment.utc(tweet.created_at).toObject()
+  created_at: moment.utc(new Date(tweet.created_at)).toObject()
 });
 
 const twitter_account_struct = (tweet) => ({
@@ -53,7 +53,7 @@ const reddit_content_struct = (post) => ({
   responds_to: post.data.parent_id || null,
 
   location: null,
-  created_at: moment.unix(post.data.created).toObject()
+  created_at: moment.unix(new Date(post.data.created)).toObject()
 });
 
 const keygen = {
