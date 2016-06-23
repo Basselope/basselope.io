@@ -10,22 +10,6 @@ class Metrics extends React.Component {
   checkTruthCondition() {
     return this.props.twitter.data.hasOwnProperty('mean') && this.props.reddit.data.hasOwnProperty('mean');
   }
-  cardBuilder(content, title) {
-    if (this.checkTruthCondition(this)) {
-      return (<div>
-        <div>
-          <div className="col s12 m3">
-            <div className="card z-depth-2 blue-grey darken-1">
-              <div className="card-content">
-                <span className="card-title">{content}</span>
-                <p style={{"textTransform": "uppercase"}}>{title}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>);
-    }
-  }
 
   renderPosPercent() {
     if (this.checkTruthCondition()) {
@@ -41,7 +25,7 @@ class Metrics extends React.Component {
 
   renderMean(){
     console.log(this.props);
-    if(this.checkTruthCondition(this) ){
+    if(this.checkTruthCondition() ){
       let twitterMean = this.props.twitter.data.metricMean;
       let redditMean = this.props.reddit.data.metricMean;
       let twitterSum = this.props.twitter.data.set.length;
