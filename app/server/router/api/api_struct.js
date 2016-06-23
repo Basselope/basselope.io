@@ -1,5 +1,6 @@
 // API data parsing structures
 const _ = require('lodash');
+const moment = require('moment');
 
 const twitter_content_struct = (tweet) => ({
   id: tweet.id_str,
@@ -15,7 +16,7 @@ const twitter_content_struct = (tweet) => ({
   responds_to: tweet.in_reply_to_user_id_str || null,
 
   location: tweet.coordinates || null,
-  created_at: tweet.created_at
+  created_at: moment.utc(tweet.created_at)
 });
 
 const twitter_account_struct = (tweet) => ({
@@ -52,7 +53,7 @@ const reddit_content_struct = (post) => ({
   responds_to: post.data.parent_id || null,
 
   location: null,
-  created_at: post.data.created
+  created_at: moment.unix(post.data.created)
 });
 
 const keygen = {
