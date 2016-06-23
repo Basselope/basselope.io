@@ -9,7 +9,7 @@ import Dashboard from './components/Dashboard.jsx'
 
 
 import SentimentPlot from './containers/SentimentPlot.jsx'
-// import TimePlot from './containers/TimePlot.jsx'
+import TimeLine from './containers/TimeLine.jsx'
 import Table from './containers/Table.jsx'
 
 export default (
@@ -17,7 +17,7 @@ export default (
     <IndexRoute component={SearchBar} />
     <Route path=":term" component={Dashboard}>
       <Route path="tone-plot" component={SentimentPlot} />
-      {/*<Route path="timeline" component={TimePlot} />*/}
+      <Route path="timeline" component={TimeLine} />
       <Route path="table" component={Table} />
     </Route>
   </Route>
