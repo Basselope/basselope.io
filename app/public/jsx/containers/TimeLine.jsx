@@ -17,7 +17,7 @@ import NavBar from '../components/NavBar.jsx'
 
 const RD3Component = rd3.Component;
 
-class SentimentPlot extends React.Component {
+class TimeLine extends React.Component {
 
   constructor(props) {
     super(props);
@@ -38,7 +38,7 @@ class SentimentPlot extends React.Component {
             right: 0,
             overflow: 'visible',
             }}>
-            <RD3Component data={this.props.d3} />
+            <RD3Component data={this.props.d3Time} />
           </div>
         </div>
       </div>
@@ -47,12 +47,12 @@ class SentimentPlot extends React.Component {
 }
 
 const mapStateToProps = (state,props) => ({
-    d3: node(state.twitter.data, state.reddit.data),
-    data: {twitter:state.twitter.data, reddit:state.reddit.data}
-  });
+  d3: time(state.twitter.data, state.reddit.data),
+  data: {twitter:state.twitter.data, reddit:state.reddit.data}
+});
 
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators({ fetchTwitter, fetchReddit }, dispatch);
 // };
 
-export default connect(mapStateToProps)(SentimentPlot)
+export default connect(mapStateToProps)(TimeLine)
