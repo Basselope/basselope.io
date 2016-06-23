@@ -22,9 +22,9 @@ class Table extends React.Component {
     let score = this.props.data[key].content[0].vote_count || 0;
 
     return (
-        <Collection key={key} header={username}>
-          {content.map((val) => (<CollectionItem key={`${key}1`}>{val.text}<Badge>{val.score}</Badge></CollectionItem>))}
-        </Collection>
+      <Collection key={key} header={username}>
+        {content.map((val) => (<CollectionItem key={`${key}1`}>{val.text}<Badge>{val.score}</Badge></CollectionItem>))}
+      </Collection>
     );
   }
 
@@ -32,7 +32,7 @@ class Table extends React.Component {
     return (
       <div>
         <div className="container">
-            {Object.keys(this.props.data).map(this.renderTable)}
+          {Object.keys(this.props.data).map(this.renderTable)}
         </div>
       </div>
     );
