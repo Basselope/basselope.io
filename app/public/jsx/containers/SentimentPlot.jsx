@@ -26,10 +26,8 @@ class SentimentPlot extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <div className="valign-wrapper" style={{
           position: 'fixed',
-          zIndex: -1,
           top: 0,
           bottom: 0,
           left: 0,

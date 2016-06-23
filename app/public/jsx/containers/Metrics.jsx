@@ -17,7 +17,7 @@ class Metrics extends React.Component {
           <div className="col s12 m3">
             <div className="card z-depth-2 blue-grey darken-1">
               <div className="card-content">
-                <span className="card-title">{content()}</span>
+                <span className="card-title">{content}</span>
                 <p style={{"textTransform": "uppercase"}}>{title}</p>
               </div>
             </div>
@@ -42,10 +42,10 @@ class Metrics extends React.Component {
   renderMean(){
     console.log(this.props);
     if(this.checkTruthCondition(this) ){
-      let twitterMean = this.props.data.twitter.metricMean;
-      let redditMean = this.props.data.reddit.metricMean;
-      let twitterSum = this.props.data.twitter.set.length;
-      let redditSum = this.props.data.reddit.set.length;
+      let twitterMean = this.props.twitter.data.metricMean;
+      let redditMean = this.props.reddit.data.metricMean;
+      let twitterSum = this.props.twitter.data.set.length;
+      let redditSum = this.props.reddit.data.set.length;
       let totalMean = (((twitterMean*twitterSum)+(redditMean*redditSum))/
         (redditSum+twitterSum)).toFixed(1);
       let displayMean = `${totalMean > 0 ? '+' : ''}${totalMean}%`;
@@ -90,10 +90,10 @@ class Metrics extends React.Component {
   render() {
     return (
       <div className = "row center-align blue-grey-text text-lighten-4">
-        {this.cardBuilder(this.renderMean.bind(this), "average")}
-        {this.cardBuilder(this.renderNegPercent.bind(this), "negative")}
-        {this.cardBuilder(this.renderPosPercent.bind(this), "positive")}
-        {this.cardBuilder(this.renderTotal.bind(this), "samples")}
+        {this.cardBuilder(this.renderMean(), "average")}
+        {this.cardBuilder(this.renderNegPercent(), "negative")}
+        {this.cardBuilder(this.renderPosPercent(), "positive")}
+        {this.cardBuilder(this.renderTotal(), "samples")}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 // import { connect } from 'react-redux'
 // import { bindActionCreators } from 'redux'
-// import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 import SearchBar from '../containers/SearchBar.jsx'
 import { Navbar, NavItem, Dropdown, Button, Icon } from 'react-materialize'
 
@@ -10,17 +10,36 @@ class Nav extends React.Component {
     super(props);
   }
 
+  toOverview() {
+
+    browserHistory.push(path);
+  }
+
+  toTimeline() {
+
+  }
+
+  toPlot() {
+
+  }
+
   render() {
     return (
       <Button floating fab='vertical' icon='settings' large
-          className='deep-orange lighten-2'
+          className='blue-grey darken-1'
           style={{bottom: '45px', right: '24px'}}>
-        <Button floating icon='trending_up' tooltip='timeline'
-          className='deep-orange lighten-3'/>
-        <Button floating icon='settings_ethernet' tooltip='tone-plot'
-          className='deep-orange lighten-3'/>
-        <Button floating icon='view_list' tooltip='overview'
-          className='deep-orange lighten-3'/>
+        <Link to={`/${this.props.baseURL}/table`}>
+          <Button floating icon='view_list' tooltip='table'
+            className='blue-grey lighten-1'/>
+        </Link>
+        <Link to="/timeline">
+          <Button floating icon='trending_up' tooltip='timeline'
+            className='blue-grey lighten-1'/>
+        </Link>
+        <Link to={`/${this.props.baseURL}/tone-plot`}>
+          <Button floating icon='settings_ethernet' tooltip='tone-plot'
+            className='blue-grey lighten-1'/>
+        </Link>
       </Button>
     );
   }
@@ -28,7 +47,7 @@ class Nav extends React.Component {
 
 export default Nav
 
-
+// ${this.props.baseURL}/
 
 // style={{position: 'fixed', left: 0, right: 0}}
 
