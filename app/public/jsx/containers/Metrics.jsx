@@ -1,6 +1,8 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
+import { Navbar, Row, Col, Chip } from 'react-materialize'
+
+import SearchBar from './SearchBar.jsx'
 
 class Metrics extends React.Component {
   constructor(props) {
@@ -11,6 +13,35 @@ class Metrics extends React.Component {
     return this.props.twitter.data.hasOwnProperty('mean') && this.props.reddit.data.hasOwnProperty('mean');
   }
 
+  renderMean(){
+    console.log(this.props);
+    if (this.checkTruthCondition()) {
+      let twitterMean = this.props.twitter.data.metricMean;
+      let redditMean = this.props.reddit.data.metricMean;
+      let twitterSum = this.props.twitter.data.set.length;
+      let redditSum = this.props.reddit.data.set.length;
+      let totalMean = (((twitterMean*twitterSum)+(redditMean*redditSum))/(redditSum+twitterSum)).toFixed(1);
+      let displayMean = `${totalMean > 0 ? '+' : ''}${totalMean}%`;
+      return displayMean;
+    }
+  }
+
+   renderNegPercent() {
+    if (this.checkTruthCondition()) {
+      const twitterPercentNeg = this.props.twitter.data.percentNegative;
+      const redditPercentNeg = this.props.reddit.data.percentNegative;
+      const twitterSum = this.props.twitter.data.set.length;
+      const redditSum = this.props.reddit.data.set.length;
+      const totalPercent = ((twitterPercentNeg*twitterSum)+(redditPercentNeg*redditSum))/(redditSum+twitterSum);
+      const percentFixed = ((totalPercent) * 100).toFixed(1);
+      return percentFixed;
+    }
+  }
+
+  renderNeutralPercent() {
+    return (100 - this.renderPosPercent() - this.renderNegPercent()).toFixed(1);
+  }
+
   renderPosPercent() {
     if (this.checkTruthCondition()) {
       const twitterPercentPos = this.props.twitter.data.percentPositive;
@@ -18,67 +49,41 @@ class Metrics extends React.Component {
       const twitterSum = this.props.twitter.data.set.length;
       const redditSum = this.props.reddit.data.set.length;
       const totalPercent = ((twitterPercentPos * twitterSum) + (redditPercentPos * redditSum)) / (redditSum + twitterSum);
-      const percentFixed = ((totalPercent) * 100).toFixed(1) + "%";
-      return <span className="card-title">{percentFixed}</span>;
-    }
-  }
-
-  renderMean(){
-    console.log(this.props);
-    if(this.checkTruthCondition() ){
-      let twitterMean = this.props.twitter.data.metricMean;
-      let redditMean = this.props.reddit.data.metricMean;
-      let twitterSum = this.props.twitter.data.set.length;
-      let redditSum = this.props.reddit.data.set.length;
-      let totalMean = (((twitterMean*twitterSum)+(redditMean*redditSum))/
-        (redditSum+twitterSum)).toFixed(1);
-      let displayMean = `${totalMean > 0 ? '+' : ''}${totalMean}%`;
-      return (<span className="card-title ">{displayMean}</span>)
-    }
-  }
-
-  renderNegPercent() {
-    if(this.checkTruthCondition()) {
-      const twitterPercentNeg = this.props.twitter.data.percentNegative;
-      const redditPercentNeg = this.props.reddit.data.percentNegative;
-      const twitterSum = this.props.twitter.data.set.length;
-      const redditSum = this.props.reddit.data.set.length;
-      const totalPercent = ((twitterPercentNeg*twitterSum)+(redditPercentNeg*redditSum))/(redditSum+twitterSum);
-      const percentFixed = ((totalPercent) * 100).toFixed(1) + "%";
-      return <span className="card-title">{percentFixed}</span>;
+      const percentFixed = ((totalPercent) * 100).toFixed(1);
+      return percentFixed;
     }
   }
 
   renderTotal() {
-    if(this.checkTruthCondition()) {
+    if (this.checkTruthCondition()) {
       const totalSize = this.props.twitter.data.set.length + this.props.reddit.data.set.length;
-      return <span className="card-title">{totalSize}</span>;
+      return totalSize;
     }
   }
 
-  cardBuilder(content, title) {
-    if(this.checkTruthCondition()) {
+  chipBuilder(title, stats) {
+    if (this.checkTruthCondition()) {
       return (
-        <div className="col s12 m3" >
-          <div className="card z-depth-2 blue-grey darken-1">
-            <div className="card-content">
-              <span className="card-title ">{content}</span>
-              <p style={{"textTransform": "uppercase"}}>{title}</p>
-            </div>
-          </div>
-        </div>
+        <Col>
+          <Chip>
+            {title}{stats}
+          </Chip>
+        </Col>
       );
     }
   }
 
   render() {
     return (
-      <div className = "row center-align blue-grey-text text-lighten-4">
-        {this.cardBuilder(this.renderMean(), "average")}
-        {this.cardBuilder(this.renderNegPercent(), "negative")}
-        {this.cardBuilder(this.renderPosPercent(), "positive")}
-        {this.cardBuilder(this.renderTotal(), "samples")}
-      </div>
+      <Navbar className='blue-grey lighten-2'>
+        <Row>
+          {this.chipBuilder("Weighted Sentiment: ", this.renderMean())}
+          {this.chipBuilder("Negative: ", `${this.renderNegPercent()}%`)}
+          {this.chipBuilder("Neutral: ", `${this.renderNeutralPercent()}%`)}
+          {this.chipBuilder("Positive: ", `${this.renderPosPercent()}%`)}
+          {this.chipBuilder("Sample Size: ", this.renderTotal())}
+        </Row>
+      </Navbar>
     );
   }
 }
