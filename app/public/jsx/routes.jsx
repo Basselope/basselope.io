@@ -16,7 +16,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={SearchBar} />
     <Route path=":term" component={Dashboard}>
-      <Route path="tone-plot" component={SentimentPlot} />
+      <Route path="toneplot" component={SentimentPlot} />
       <Route path="timeline" component={TimeLine} />
       <Route path="table" component={Table} />
     </Route>

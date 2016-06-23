@@ -14,24 +14,26 @@ class Table extends React.Component {
 
   renderTable(key) {
 
-    if(!this.props.data[key].hasOwnProperty('content') || Array.isArray(this.props.data[key].author.handle))
+    if(!this.props.data[key].hasOwnProperty('content') || this.props.data[key].author.handle.includes('['))
       return;
 
-    let username = this.props.data[key].author.handle || 'N/A';
-    let comments = this.props.data[key].content;
+    let username = this.props.data[key].author.handle;
+    let content = this.props.data[key].content;
     let score = this.props.data[key].content[0].vote_count || 0;
 
     return (
-        <Collection header={username}>
-          { comments.map((val) => (<CollectionItem>{val.text}<Badge>{val.score}</Badge></CollectionItem>))}
-        </Collection>
+      <Collection key={key} header={username}>
+        {content.map((val) => (<CollectionItem key={`${key}1`}>{val.text}<Badge>{val.score}</Badge></CollectionItem>))}
+      </Collection>
     );
   }
 
   render() {
     return (
-      <div className="container">
+      <div>
+        <div className="container">
           {Object.keys(this.props.data).map(this.renderTable)}
+        </div>
       </div>
     );
   }
