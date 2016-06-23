@@ -23,7 +23,7 @@ const node = document.createElement('div');
 
 function formatDate(unformated) {
     let theDate = new Date(unformated);
-    return   (theDate.getMonth() + 1) + "" + (theDate.getDay() + 1) + "" + theDate.getHours()
+    return theDate.getYear() + "" + (theDate.getMonth() + 1) + "" + (theDate.getDay() + 1) + "" + theDate.getHours()
 }
 var svg = d3.select(node).append("svg")
     .attr("width", 600)
@@ -105,8 +105,16 @@ const createNode = function(...passedData) {
 
     // })
     //data = newObject; //newObject.sort(function(a,b){return a.dateFormat < b.dateFormat})
+    let positiveData = data.filter(function(curr){
+      return curr.avgScore>0;
+    });
+    
+    let negativeData = data.filter(function(curr){
+      return curr.avgScore<0;
+    });
 
-    console.log("DATA", data);
+    console.log("POSITIVE", positiveData);
+    console.log("NEGATIVE", negativeData);
     var m = [80, 80, 80, 80]; // margins
     var w = 600; // width
     var h = 300; // height
@@ -120,6 +128,7 @@ const createNode = function(...passedData) {
     // automatically determining max range can work something like this
     // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
     // create a line function that can convert data[] into x and y points
+
     var line = d3.svg.line()
         // assign the X function to plot our line as we wish
         .x(function(d, i) {
