@@ -5,55 +5,44 @@ class Table extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { redditData: {}, twitterData: {} };
+    // this.state = { redditData: {}, twitterData: {} };
 
     this.renderTable = this.renderTable.bind(this);
   }
 
   renderTable(key) {
-    if (!this.state.redditData[key].content || Array.isArray(this.state.redditData[key].author.handle)
-    || !this.state.twitterData[key].content || Array.isArray(this.state.twitterData[key].author.handle)) {
-      return;
-    }
+    console.log(key);
 
-    const redditUsername = this.state.redditData[key].author.handle || 'N/A';
-    const redditComment = this.state.redditData[key].content[0].text || 'N/A';
-    const redditScore = this.state.redditData[key].content[0].vote_count | 'N/A';
-    const twitterUsername = this.state.twitterData[key].author.handle || 'N/A';
-    const tweet = this.state.twitterData[key].content[0].text || 'N/A';
+
+    if(!this.props.data[key].hasOwnProperty('content') || Array.isArray(this.props.data[key].author.handle))
+      return;
+
+    let username = this.props.data[key].author.handle || 'N/A';
+    let comment = this.props.data[key].content[0].text || 'N/A';
+    let score = this.props.data[key].content[0].vote_count || 0;
 
     return (
       <tr>
-        <td>{redditUsername}</td>
-        <td>{redditComment}</td>
-        <td>{redditScore}</td>
-        <td>{twitterUsername}</td>
-        <td>{tweet}</td>
+        <td>{username}</td>
+        <td>{comment}</td>
+        <td>{score}</td>
       </tr>
     );
   }
 
   render() {
-    if (this.props.reddit.data.data) {
-      this.state.redditData = this.props.reddit.data.data;
-    }
-    if (this.props.twitter.data.data) {
-      this.state.twitterData = this.props.twitter.data.data;
-    }
-
+    console.log('TABLE:',this.props);
     return (
       <table className="bordered highlight">
         <thead>
           <tr>
-            <th>Reddit Username</th>
-            <th>Reddit Comment</th>
-            <th>Upvotes</th>
-            <th>Twitter Username</th>
-            <th>Tweet</th>
+            <th>User-Name</th>
+            <th>Content-Body</th>
+            <th>Vote-Count</th>
           </tr>
         </thead>
         <tbody>
-          {Object.keys({...this.state.redditData, ...this.state.twitterData}).map(this.renderTable)}
+          {Object.keys(this.props.data).map(this.renderTable)}
         </tbody>
       </table>
     );
@@ -61,7 +50,7 @@ class Table extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { reddit: state.reddit, twitter: state.twitter };
+  return { data: { ...state.reddit.data.data, ...state.twitter.data.data } };
 }
 
 export default connect(mapStateToProps)(Table)

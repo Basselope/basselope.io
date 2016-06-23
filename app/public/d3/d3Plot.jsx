@@ -5,16 +5,6 @@ const node = document.createElement('div');
 const width = 600,
       height = 300;
 
-const attr = {
-  x: (d) => (d.x),
-  y: (d) => (d.y),
-  r: (d) => (d.r)
-};
-
-const style = {
-  c: (d) => (d.c)
-};
-
 const color = d3.scale.linear()
   .range(['#f80', '#08f']); // '#f80', '#58b', '#08f', '#0f9'
 
