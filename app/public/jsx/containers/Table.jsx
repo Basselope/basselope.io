@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { Collection, CollectionItem, Card, Badge } from 'react-materialize'
+
 class Table extends React.Component {
   constructor(props) {
     super(props);
@@ -11,40 +13,26 @@ class Table extends React.Component {
   }
 
   renderTable(key) {
-    console.log(key);
-
 
     if(!this.props.data[key].hasOwnProperty('content') || Array.isArray(this.props.data[key].author.handle))
       return;
 
     let username = this.props.data[key].author.handle || 'N/A';
-    let comment = this.props.data[key].content[0].text || 'N/A';
+    let comments = this.props.data[key].content;
     let score = this.props.data[key].content[0].vote_count || 0;
 
     return (
-      <tr>
-        <td>{username}</td>
-        <td>{comment}</td>
-        <td>{score}</td>
-      </tr>
+        <Collection header={username}>
+          { comments.map((val) => (<CollectionItem>{val.text}<Badge>{val.score}</Badge></CollectionItem>))}
+        </Collection>
     );
   }
 
   render() {
-    console.log('TABLE:',this.props);
     return (
-      <table className="bordered highlight">
-        <thead>
-          <tr>
-            <th>User-Name</th>
-            <th>Content-Body</th>
-            <th>Vote-Count</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="container">
           {Object.keys(this.props.data).map(this.renderTable)}
-        </tbody>
-      </table>
+      </div>
     );
   }
 }
