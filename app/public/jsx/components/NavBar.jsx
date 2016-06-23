@@ -5,7 +5,7 @@ import { browserHistory, Link } from 'react-router'
 import SearchBar from '../containers/SearchBar.jsx'
 import { Navbar, NavItem, Dropdown, Button, Icon } from 'react-materialize'
 
-class Nav extends React.Component {
+class NavBar extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -24,6 +24,7 @@ class Nav extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Button floating fab='vertical' icon='settings' large
           className='blue-grey darken-1'
@@ -32,12 +33,12 @@ class Nav extends React.Component {
           <Button floating icon='view_list' tooltip='table'
             className='blue-grey lighten-1'/>
         </Link>
-        <Link to="/timeline">
+        <Link to={`/${this.props.baseURL}/timeline`}>
           <Button floating icon='trending_up' tooltip='timeline'
             className='blue-grey lighten-1'/>
         </Link>
-        <Link to={`/${this.props.baseURL}/tone-plot`}>
-          <Button floating icon='settings_ethernet' tooltip='tone-plot'
+        <Link to={`/${this.props.baseURL}/toneplot`}>
+          <Button floating icon='insert_chart' tooltip='toneplot'
             className='blue-grey lighten-1'/>
         </Link>
       </Button>
@@ -45,7 +46,7 @@ class Nav extends React.Component {
   }
 }
 
-export default Nav
+export default NavBar
 
 // ${this.props.baseURL}/
 
