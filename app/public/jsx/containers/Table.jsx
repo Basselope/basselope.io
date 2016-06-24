@@ -50,6 +50,6 @@ class Table extends React.Component {
 
 const mapStateToProps = (state) => {
   return { data: { ...state.reddit.data.data, ...state.twitter.data.data } };
-}
+};
 
 export default connect(mapStateToProps)(Table)

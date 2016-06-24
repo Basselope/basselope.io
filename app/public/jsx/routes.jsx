@@ -17,10 +17,12 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={SearchBar} />
     <Route path=":term" component={Dashboard}>
+
       <Route path="toneplot" component={SentimentPlot} />
       <Route path="timeline" component={TimeLine} />
       <Route path="piechart" component={Piechart} />
       <Route path="table" component={Table} />
+      
     </Route>
   </Route>
 )

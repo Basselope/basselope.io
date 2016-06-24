@@ -38,7 +38,7 @@ class SentimentPlot extends React.Component {
             right: 0,
             overflow: 'visible',
             }}>
-            <RD3Component data={this.props.d3} />
+            <RD3Component data={this.props.d3.plot} />
           </div>
         </div>
       </div>
@@ -47,9 +47,8 @@ class SentimentPlot extends React.Component {
 }
 
 const mapStateToProps = (state,props) => ({
-  d3: node(state.twitter.data, state.reddit.data),
-  data: {twitter:state.twitter.data, reddit:state.reddit.data}
-})
+    data: {twitter:state.twitter.data, reddit:state.reddit.data}
+  });
 
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators({ fetchTwitter, fetchReddit }, dispatch);
