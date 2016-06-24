@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Navbar, Row, Col, Chip } from 'react-materialize'
 
+
 import SearchBar from './SearchBar.jsx'
 
 class Metrics extends React.Component {

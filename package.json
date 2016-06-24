@@ -42,7 +42,7 @@
     "moment": "^2.13.0",
     "mz": "^2.4.0",
     "nlp-locale": "0.0.3",
-    "nlp_compromise": "^6.1.2",
+    "nlp_compromise": "^6.3.1",
     "node-bing-api": "^2.4.1",
     "path": "^0.12.7",
     "pg": "^5.2.0",
