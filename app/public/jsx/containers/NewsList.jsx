@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Router, Route, Link } from 'react-router'
+import { Link } from 'react-router'
 
 class NewsList extends React.Component {
   constructor(props) {
@@ -8,10 +8,15 @@ class NewsList extends React.Component {
   }
 
   render() {
+    console.log(this.props.alchemy)
     return (
-      <Link></Link>
+      <Link to="/">NewsList</Link>
     );
   }
 }
 
-export default NewsList
+const mapStateToProps = (state) => {
+  return { alchemy: state.alchemy };
+}
+
+export default connect(mapStateToProps)(NewsList)
