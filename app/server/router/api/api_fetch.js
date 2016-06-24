@@ -4,6 +4,7 @@ const _ = require('lodash');
 const axios = require('axios');
 const Struct = require('./api_struct');
 const sentiment = require('./../../data/utils/sentimentAnalysis.js');
+const api = require('./config/api.js');
 
 const call = {
   twitter: axios.create({
@@ -27,12 +28,29 @@ const call = {
             curr.concat(val.data.reduce((c,v) =>
               c.concat(v.data.children),[])),[])))
     }
-  }
+  },
+  alchemy: {
+    request: (req) => {
+      return axios.get(`https://gateway-a.watsonplatform.net/calls/data/GetNews?apikey=${api.alchemy}&outputMode=json&start=now-7d&end=now&count=3&return=enriched.url.title,enriched.url.url,enriched.url.text,enriched.url.image&q.enriched.url.title=${req.body.query}`)
+      .then(response => {
+        let alchemyData = [];
+        response.data.result.docs.forEach(doc =>
+          alchemyData.push({
+            title: doc.source.enriched.url.title,
+            url: doc.source.enriched.url.url,
+            text: doc.source.enriched.url.text})
+          );
+      })
+      .then(response => alchemyData)
+      .catch(response => console.log(response));
+      }
+    }
 };
 
 const data = {
   twitter: (res) => res.data.statuses,
-  reddit: (res) => res
+  reddit: (res) => res,
+  alchemy: (res) => res
 };
 
 const q = {
@@ -42,6 +60,11 @@ const q = {
     }
   }),
   reddit: (query, path) => ({
+    params: {
+      q: query
+    }
+  }),
+  alchemy: (query, path) => ({
     params: {
       q: query
     }
