@@ -12,6 +12,6 @@ const Dashboard = (props) => (
     {props.children}
     <NavBar baseURL={props.params.term} />
   </div>
-);
+)
 
 export default Dashboard
