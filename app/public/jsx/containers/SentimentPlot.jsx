@@ -21,9 +21,18 @@ class SentimentPlot extends React.Component {
 
   constructor(props) {
     super(props);
+    this.d3Render.bind(this);
+  }
+
+  d3Render() {
+    console.log(this.props.d3.graph.plot);
+    if(!this.props.d3.graph.plot)
+      return '<div></div>';
+    return this.props.d3.graph.plot;
   }
 
   render() {
+    console.log('SENTIMENT props:',this.props);
     return (
       <div>
         <div className="valign-wrapper" style={{
@@ -38,7 +47,7 @@ class SentimentPlot extends React.Component {
             right: 0,
             overflow: 'visible',
             }}>
-            <RD3Component data={this.props.d3.plot} />
+            <RD3Component data={this.d3Render()} />
           </div>
         </div>
       </div>
@@ -47,6 +56,7 @@ class SentimentPlot extends React.Component {
 }
 
 const mapStateToProps = (state,props) => ({
+    d3: state.d3,
     data: {twitter:state.twitter.data, reddit:state.reddit.data}
   });
 

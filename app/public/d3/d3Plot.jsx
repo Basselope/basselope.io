@@ -77,9 +77,10 @@ function transition(count) {
 }
 
 const createNode = function(...data) {
+  console.log('PLOT:', data);
   let resolved = false;
   if(data)
-    resolved = data.reduce((curr,val) => curr ? val.hasOwnProperty('set') : false, true);
+    resolved = data.reduce((curr,val) => val || curr ? val.hasOwnProperty('set') : false, true);
   if(!resolved)
     return null; //document.createElement('div');
 

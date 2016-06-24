@@ -1,27 +1,40 @@
 import { FETCH_REDDIT } from '../actions/reddit.jsx'
 import { FETCH_TWITTER } from '../actions/twitter.jsx'
-const ACTIONS = { FETCH_REDDIT, FETCH_TWITTER };
 
 import d3Plot from '../../d3/d3Plot.jsx'
 import d3Time from '../../d3/d3Time.jsx'
 
-const INITIAL_STATE = {
-  d3: { plot: null, time: null },
-  reddit: { data: {} },
-  twitter: { data: {} }
+const INITIAL_STATE = { data: {twitter: null, reddit: null }, graph: { plot: null, time: null } };
+
+
+
+const d3Reducer = (state = INITIAL_STATE, action) => {
+
+  switch(action.type) {
+    case FETCH_REDDIT:
+      return { ...state,
+        data: { ...state.data,
+          reddit: action.payload.data
+        },
+        graph: !state.data.twitter ? {...state.graph} : {
+          plot: state.graph.plot || d3Plot(state.data.twitter, action.payload.data),
+          time: state.graph.plot || d3Time(state.data.twitter, action.payload.data)
+        }
+      };
+    case FETCH_TWITTER:
+      return { ...state,
+        data: { ...state.data,
+          twitter: action.payload.data
+        },
+        graph: !state.data.reddit ? {...state.graph} : {
+          plot: state.graph.plot || d3Plot(action.payload.data, state.data.reddit),
+          time: state.graph.plot || d3Time(action.payload.data, state.data.reddit)
+        }
+      };
+    default:
+      return state;
+  }
+
 };
 
-
-
-const d3Render = (state = INITIAL_STATE, action) => {
-  if(!ACTIONS.hasOwnProperty(action.type))
-    return state;
-  return { ...state,
-    d3: {
-      plot: d3Plot(state.twitter.data, state.reddit.data),
-      time: d3Time(state.twitter.data, state.reddit.data)
-    }
-  };
-};
-
-export default d3Render
+export default d3Reducer
