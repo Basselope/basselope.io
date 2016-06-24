@@ -47,7 +47,7 @@ class SentimentPlot extends React.Component {
 }
 
 const mapStateToProps = (state,props) => ({
-    d3: time(state.twitter.data, state.reddit.data),
+    d3: node(state.twitter.data, state.reddit.data),
     data: {twitter:state.twitter.data, reddit:state.reddit.data}
   });
 
