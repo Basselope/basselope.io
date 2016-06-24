@@ -1,8 +1,20 @@
 let sentiment = require('sentiment'),
-    stats = require("stats-lite");
+    stats = require("stats-lite"),
+    nlp = require("nlp_compromise")
+
+
 
 function sentimentAnalyzer() {
+    const topics = {};
+    const nlpAnalysis = (textContent)=>{
+        //console.log(nlp.text(textContent).topics());
+        let topicAnalysis = nlp.text(textContent).topics();
+        for(var index in topicAnalysis){
+             topics[topicAnalysis[index].text] = topics[topicAnalysis[index].text] ? topics[topicAnalysis[index].text] +topicAnalysis[index].count : topicAnalysis[index].count 
+        }
+        
 
+    }
     const ranking = (content, author) => {
         let tweetText = content.text.replace(/\W+/g, " "),
             retweets = content.share_count || 0,
@@ -106,6 +118,7 @@ function sentimentAnalyzer() {
             let curr = textObject[postKey];
             let content = curr.content;
             for (var contentKey in content) {
+                nlpAnalysis(content[contentKey].text);
             	let currentSentiment = sentiment(content[contentKey].text);
                 if (currentSentiment.positive.length != 0 || currentSentiment.negative.length != 0) {
                     content[contentKey].sentiment = currentSentiment;
@@ -150,12 +163,26 @@ function sentimentAnalyzer() {
         }
         extendOn(data_W_analysis, normalData);
         extendOn(data_W_analysis, maxSentimentImpact);
+        var sortable = [];
+        for (var key in topics){
+                if(key.trim().indexOf(" ")==-1&&key.trim().indexOf("'")==-1&&key.trim().indexOf(".")==-1&&key.trim().indexOf("@")==-1)
+                    sortable.push([key, topics[key]])
+                }
+        sortable.sort(
+            function(a, b) {
+                return b[1] - a[1]
+            }
+        )
+
+
+        //console.log("HERE",sortable.slice(0,20));
         // for (let dataKey in normalData) {
         //     data_W_analysis[dataKey] = normalData[dataKey]
         // }
         // for (let dataKey in maxSentimentImpact) {
         //     data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
         // }
+        data_W_analysis.trendingTopics = sortable;
         return data_W_analysis;
     };
     return {
