@@ -60,7 +60,8 @@ class Metrics extends React.Component {
   }
 
   render() {
-    if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean')) {
+    console.log(this.props);
+    if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.pathname.includes('table')) {
       return <div></div>;
     }
 

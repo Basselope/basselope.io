@@ -8,7 +8,7 @@ import NavBar from './NavBar.jsx'
 
 const Dashboard = (props) => (
   <div>
-    <Metrics />
+    <Metrics pathname={props.location.pathname} />
     {props.children}
     <NavBar baseURL={props.params.term} />
   </div>
