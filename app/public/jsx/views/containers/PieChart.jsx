@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import rd3 from 'react-d3-library'
-import node from '../../d3/d3Pie.jsx'
+import node from '../d3/d3Pie.jsx'
 
 const RD3Component = rd3.Component
 

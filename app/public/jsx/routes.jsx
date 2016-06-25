@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard.jsx'
 
 import SentimentPlot from './containers/SentimentPlot.jsx'
 import TimeLine from './containers/TimeLine.jsx'
-import Piechart from './containers/Piechart.jsx'
+import Piechart from './views/containers/PieChart.jsx'
 import Table from './containers/Table.jsx'
 
 export default (

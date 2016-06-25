@@ -1,4 +1,4 @@
-import { FETCH_ALCHEMY } from '../actions/alchemy.jsx'
+import { FETCH_ALCHEMY } from '../dispatch/alchemy.jsx'
 
 const INITIAL_STATE = { data: [] }
 
