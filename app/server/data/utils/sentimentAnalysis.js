@@ -10,9 +10,9 @@ function sentimentAnalyzer() {
         //console.log(nlp.text(textContent).topics());
         let topicAnalysis = nlp.text(textContent).topics();
         for(var index in topicAnalysis){
-             topics[topicAnalysis[index].text] = topics[topicAnalysis[index].text] ? topics[topicAnalysis[index].text] +topicAnalysis[index].count : topicAnalysis[index].count 
+             topics[topicAnalysis[index].text] = topics[topicAnalysis[index].text] ? topics[topicAnalysis[index].text] +topicAnalysis[index].count : topicAnalysis[index].count
         }
-        
+
 
     }
     const ranking = (content, author) => {
@@ -172,7 +172,7 @@ function sentimentAnalyzer() {
             function(a, b) {
                 return b[1] - a[1]
             }
-        )
+        ).slice(0,7)
 
 
         //console.log("HERE",sortable.slice(0,20));
