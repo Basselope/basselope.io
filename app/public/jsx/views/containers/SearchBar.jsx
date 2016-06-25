@@ -46,6 +46,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
+        <HoverInfo />
         <form onSubmit={this.onFormSubmit} className="container">
           <div className="input-field">
             <div className="row">
