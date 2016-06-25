@@ -53,6 +53,7 @@
     "react-materialize": "^0.14.4",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
+    "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-promise": "^0.5.3",
     "request": "^2.72.0",

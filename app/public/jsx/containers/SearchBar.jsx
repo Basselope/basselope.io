@@ -34,7 +34,7 @@ class SearchBar extends React.Component {
     // this.props.fetchAlchemy(this.state.term);
     this.setState({ term: '' });
 
-    const path = `${this.state.term}/toneplot`.replace(/\W^[/]/g, '-');
+    const path = `${this.state.term}/plot`.replace(/\W^[/]/g, '-');
     browserHistory.push(path);
   }
 

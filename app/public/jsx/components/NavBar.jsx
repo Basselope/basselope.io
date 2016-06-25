@@ -8,42 +8,28 @@ import { Navbar, NavItem, Dropdown, Button, Icon } from 'react-materialize'
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  toOverview() {
-
-    browserHistory.push(path);
-  }
-
-  toTimeline() {
-
-  }
-
-  toPlot() {
-
+    this.toPlot.bind(this);
   }
 
   render() {
     return (
       <Button floating fab='vertical' icon='settings' large
-          className='blue-grey darken-1'
-          style={{bottom: '45px', right: '24px'}}>
+              className='blue-grey darken-1'
+              style={{bottom: '45px', right: '24px'}}>
+
         <Link to={`/${this.props.baseURL}/table`}>
           <Button floating icon='view_list' tooltip='table'
-            className='blue-grey lighten-1'/>
+                  className='blue-grey lighten-1'/>
         </Link>
-        <Link to={`/${this.props.baseURL}/piechart`}>
-          <Button floating icon='schedule' tooltip='piechart'
-            className='blue-grey lighten-1'/>
-        </Link>
-        <Link to={`/${this.props.baseURL}/timeline`}>
+        <Link to={`/${this.props.baseURL}/time`}>
           <Button floating icon='trending_up' tooltip='timeline'
-            className='blue-grey lighten-1'/>
+                  className='blue-grey lighten-1'/>
         </Link>
-        <Link to={`/${this.props.baseURL}/toneplot`}>
-          <Button floating icon='insert_chart' tooltip='toneplot'
-            className='blue-grey lighten-1'/>
+        <Link to={`/${this.props.baseURL}/plot`}>
+          <Button floating icon='insert_chart' tooltip='tone-plot'
+                  className='blue-grey lighten-1'/>
         </Link>
+
       </Button>
     );
   }
