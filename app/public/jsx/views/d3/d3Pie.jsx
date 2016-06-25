@@ -27,39 +27,40 @@ function createNode(data) {
   let resolved = false;
   let numbersData = [];
   let i = -1;
-  if(data) {
-    resolved = true;
-    data.forEach(num => numbersData.push(num[1]));
-  }
-  if(!resolved) {
-    return document.createElement('div');
-  }
+  // if(data) {
+  //   resolved = true;
+  //   data.forEach(num => numbersData.push(num[1]));
+  // }
+  // if(!resolved) {
+  //   return document.createElement('div');
+  // }
   console.log(numbersData, data)
   //Set up groups
-  var arcs = svg.selectAll("g.arc")
-    .data(pie(numbersData))
-    .enter()
-    .append("g")
-    .attr("class", "arc")
-    .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
+  // var arcs = svg.selectAll("g.arc")
+  //   .data(pie(numbersData))
+  //   .enter()
+  //   .append("g")
+  //   .attr("class", "arc")
+  //   .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
 
-  //Draw arc paths
-  arcs.append("path")
-    .attr("fill", function(d, i) {
-      return color(i);
-    })
-    .attr("d", arc);
+  // //Draw arc paths
+  // arcs.append("path")
+  //   .attr("fill", function(d, i) {
+  //     return color(i);
+  //   })
+  //   .attr("d", arc);
 
-  //Labels
-  arcs.append("text")
-    .attr("transform", function(d) {
-      return "translate(" + arc.centroid(d) + ")";
-    })
-    .attr("text-anchor", "middle")
-    .text(function(d) {
-      i++;
-      return data[i][0];
-    });
+  // //Labels
+  // arcs.append("text")
+  //   .attr("transform", function(d) {
+  //     return "translate(" + arc.centroid(d) + ")";
+  //   })
+  //   .attr("text-anchor", "middle")
+  //   .text(function(d) {
+  //     i++;
+  //     return data[i][0];
+  //   });
+
   return node;
 }
 
