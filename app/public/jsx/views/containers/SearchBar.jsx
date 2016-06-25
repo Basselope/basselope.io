@@ -52,7 +52,7 @@ class SearchBar extends React.Component {
             <div className="row">
               <div className="col s8 offset-s2 m4 offset-m4">
                 <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
-                <SList term={this.state.term} bingListClick={this.bingListClick} />
+                <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
               </div>
             </div>
           </div>
