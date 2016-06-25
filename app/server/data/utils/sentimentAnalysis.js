@@ -176,7 +176,7 @@ function sentimentAnalyzer() {
         //     data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
         // }
         data_W_analysis.trendingTopics = sortable;
-        console.log("DONE",data_W_analysis)
+        //console.log("DONE",data_W_analysis)
         return data_W_analysis;
     };
     return {
