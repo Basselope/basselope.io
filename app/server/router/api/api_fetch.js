@@ -44,13 +44,29 @@ const call = {
       .then(response => alchemyData)
       .catch(response => console.log(response));
       }
+    },
+ 
+  wiki: {
+    request: (params) => { //FIX ME
+      console.log(params.q)
+       return axios.get("https://en.wikinews.org/w/api.php?action=query&list=search&srlimit=50&srsearch="+params.q+"&format=json&srwhat=text&srprop=timestamp%7Csnippet%7Cwordcount%7Credirectsnippet&continue=")
+        .then(function(response){
+          //res.send(response.data)
+           console.log(response.data); // ex.: { user: 'Your User'}
+          console.log(response.status); 
+          return response;
+         // ex.: 200
+        });  
+      }
     }
-};
+  };
+
 
 const data = {
   twitter: (res) => res.data.statuses,
   reddit: (res) => res,
-  alchemy: (res) => res
+  alchemy: (res) => res,
+  wiki: (res) => res
 };
 
 const q = {
@@ -64,7 +80,12 @@ const q = {
       q: query
     }
   }),
-  alchemy: (query, path) => ({
+  wiki: (query) => ({
+    params: {
+      q: query
+    }
+  }),
+  alchemy: (query,path) => ({
     params: {
       q: query
     }
@@ -72,8 +93,9 @@ const q = {
 };
 
 const fetch = (src, query) => {
+  console.log(src)
   if(Array.isArray(query))
-    return axios.all(query.map((val) => call[src].request(q[src](val))))
+    return axios.all(query.map((val) => call[src].request(q[src](val)))) //TODO REVIEW SPREAD
       .then(axios.spread((...res) => res.reduce((curr, val) => curr.concat(data[src](val)),[])))
       .then((data) => sentiment[src](Struct(data, src)));
   return call[src].request(q[src](query))

@@ -35,12 +35,6 @@ function sentimentAnalyzer() {
         }else{
         	results+= (favorites/(downCount+favorites))
         }
-        //console.log("favorites: ",favorites,friends, (favorites/friends))
-        //console.log("RETWEETS: ",retweets, friends, (retweets/friends))
-        //results += (retweets!=0?score/Math.abs(score)*(Math.log(retweets)/Math.log(2)):0);
-        //results += (favorites!=0?score/Math.abs(score)*(Math.log(favorites)/Math.log(2)):0);
-        //results = results / tweetText.length;
-        //tweetIndividual.sentiment.w_score = results*100;
         let returnScore = score* Math.abs(comparative);
 
         return [comparative /*returnScore*/, (Math.abs(Math.log(Math.abs(results))))];
@@ -85,11 +79,8 @@ function sentimentAnalyzer() {
         let spread = Math.max(Math.abs(minVal),Math.abs(maxVal));
         let weightedSentiment = stats.mean(normalized) / spread;
           //stats.mean(normalized)<0?stats.mean(normalized)/(minVal):stats.mean(normalized)/(maxVal);
-
-        var count = normalized.length;
         return {
-            set: content,
-            // setSize: normalized.length,
+            set: normalized,
             mean: stats.mean(normalized),
             metricMean: weightedSentiment*100,
             weakMean: percentile,
@@ -103,13 +94,15 @@ function sentimentAnalyzer() {
     const additionalCalc = (content, rankings) =>{
 
     };
-    const extendOn = (on, from) =>{
-    	for (let dataKey in from) {
-            on[dataKey] = from[dataKey]
+    const extendOn = (on, fromArray) =>{
+    	for (let from in fromArray) {
+            for (let dataKey in from) {
+                on[dataKey] = from[dataKey]
+            }
         }
     }
     const analyze = (textObject) => {
-        let analyzedResults = {};
+
         let rankingHolder = [];
         let negativeSentiments = 0;
         let positiveSentiments = 0;
@@ -144,25 +137,24 @@ function sentimentAnalyzer() {
                 }
             }
         }
-
         let normalData = normal_dist_data_filter(rankingHolder);
 		negativeSentiments	 = negativeSentiments/rankingHolder.length
 		positiveSentiments	 = positiveSentiments/rankingHolder.length
 		normalData.percentPositive = positiveSentiments;
 		normalData.percentNegative = negativeSentiments;
-
         let greater = normalData.mean + (2*normalData.standardDeviation);
+        //console.log(normalData)
         let less = normalData.mean - (2*normalData.standardDeviation);
         normalData.set = normalData.set.filter(function(curr){
         	return curr[0]<greater && curr[0]>less;
         });
 
-
         let data_W_analysis = {
             data: textObject
         }
-        extendOn(data_W_analysis, normalData);
-        extendOn(data_W_analysis, maxSentimentImpact);
+
+        extendOn(data_W_analysis, [normalData,maxSentimentImpact]);
+
         var sortable = [];
         for (var key in topics){
                 if(key.trim().indexOf(" ")==-1&&key.trim().indexOf("'")==-1&&key.trim().indexOf(".")==-1&&key.trim().indexOf("@")==-1)

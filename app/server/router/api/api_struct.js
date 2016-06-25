@@ -2,6 +2,36 @@
 const _ = require('lodash');
 const moment = require('moment');
 
+
+const wiki_content_struct = (newsSource) => ({
+  id: newsSource.id_str,
+  text: newsSource.title,
+
+  vote_count: newsSource.favorites_count || 0,
+  down_count: null,
+  share_count: newsSource.retweet_count || 0,
+
+  links: newsSource.entities.urls.map((item) => item.url),
+  tags: newsSource.entities.hashtags.map((item) => item.text),
+  mentions_to: newsSource.entities.user_mentions.map((item) => item.id_str),
+  responds_to: newsSource.in_reply_to_user_id_str || null,
+
+  location: newsSource.coordinates || null,
+  created_at: moment.utc(new Date(newsSource.timestamp)).toObject()
+
+})
+const wiki_account_struct = (newsSource) => ({
+  id: "wiki",
+  img: newsSource.user || null,
+  name: newsSource.name || null,
+  handle:  null,
+  status_count: null,
+  follow_count:  null,
+  listed_count:  null
+});
+
+
+
 const twitter_content_struct = (tweet) => ({
   id: tweet.id_str,
   text: tweet.text,
@@ -63,11 +93,14 @@ const keygen = {
 
 const Author = {
   twitter: twitter_account_struct,
-  reddit: reddit_account_struct
+  reddit: reddit_account_struct,
+  wiki: wiki_author_struct
 };
 const Content = {
   twitter: twitter_content_struct,
-  reddit: reddit_content_struct
+  reddit: reddit_content_struct,
+  wiki: wiki_content_struct
+
 };
 
 const Struct = (val, src) => {
