@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { browserHistory } from 'react-router'
 
-import { fetchBing } from '../../dispatch/bing.jsx'
-import { fetchReddit } from '../../dispatch/reddit.jsx'
-import { fetchTwitter } from '../../dispatch/twitter.jsx'
-import { fetchAlchemy } from '../../dispatch/alchemy.jsx'
+import { fetchBing } from '../../actions/bing.jsx'
+import { fetchReddit } from '../../actions/reddit.jsx'
+import { fetchTwitter } from '../../actions/twitter.jsx'
+import { fetchAlchemy } from '../../actions/alchemy.jsx'
 import SList from '../components/searchbar/SList.jsx'
 
 

@@ -14,7 +14,7 @@ export default (
     <Route path=":term" component={Dashboard}>
       <Route path="plot" component={SentimentPlot} />
       <Route path="time" component={SentimentPlot} />
-      <Route path="table" component={Table} />
+      <Route path="pie" component={SentimentPlot} />
     </Route>
   </Route>
 )
