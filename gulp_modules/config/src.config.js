@@ -14,7 +14,7 @@ const public = {
   root: 'app/public',
   index: ['app/public/index.html'],
   jsx: {
-    index: ['app/public/jsx/public_index.jsx'],
+    index: ['app/public/jsx/index.jsx'],
     all: ['app/public/jsx/**/*.jsx']
   },
   scss: {

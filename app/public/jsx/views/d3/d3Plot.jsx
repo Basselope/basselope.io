@@ -77,11 +77,12 @@ function transition(count) {
 }
 
 const createNode = function(...data) {
+  console.log('PLOT:', data);
   let resolved = false;
   if(data)
-    resolved = data.reduce((curr,val) => curr ? val.hasOwnProperty('set') : false, true);
+    resolved = data.reduce((curr,val) => val || curr ? val.hasOwnProperty('set') : false, true);
   if(!resolved)
-    return document.createElement('div');
+    return null; //document.createElement('div');
 
   let d = data.reduce((curr,val) => [].concat(curr,val.set), []);
   let mean = map.x(d,metric.mean(d));

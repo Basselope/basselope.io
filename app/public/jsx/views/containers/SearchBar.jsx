@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { browserHistory } from 'react-router'
 
-import { fetchBing } from '../actions/bing.jsx'
-import { fetchReddit } from '../actions/reddit.jsx'
-import { fetchTwitter } from '../actions/twitter.jsx'
-import { fetchAlchemy } from '../actions/alchemy.jsx'
-import BingList from './BingList.jsx'
-import HoverInfo from './HoverInfo.jsx'
+import { fetchBing } from '../../dispatch/bing.jsx'
+import { fetchReddit } from '../../dispatch/reddit.jsx'
+import { fetchTwitter } from '../../dispatch/twitter.jsx'
+import { fetchAlchemy } from '../../dispatch/alchemy.jsx'
+import SList from '../components/searchbar/SList.jsx'
+
+
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class SearchBar extends React.Component {
     // this.props.fetchAlchemy(this.state.term);
     this.setState({ term: '' });
 
-    const path = `${this.state.term}/toneplot`.replace(/\W^[/]/g, '-');
+    const path = `${this.state.term}/plot`.replace(/\W^[/]/g, '-');
     browserHistory.push(path);
   }
 
@@ -50,7 +51,7 @@ class SearchBar extends React.Component {
             <div className="row">
               <div className="col s8 offset-s2 m4 offset-m4">
                 <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
-                <BingList term={this.state.term} bingListClick={this.bingListClick} />
+                <SList term={this.state.term} bingListClick={this.bingListClick} />
               </div>
             </div>
           </div>
@@ -62,6 +63,6 @@ class SearchBar extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter, fetchAlchemy }, dispatch);
-}
+};
 
 export default connect(null, mapDispatchToProps)(SearchBar)
