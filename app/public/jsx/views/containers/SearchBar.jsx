@@ -8,7 +8,7 @@ import { fetchReddit } from '../../actions/reddit.jsx'
 import { fetchTwitter } from '../../actions/twitter.jsx'
 import { fetchAlchemy } from '../../actions/alchemy.jsx'
 import SList from '../components/searchbar/SList.jsx'
-
+import HoverInfo from '../components/searchbar/HoverInfo.jsx'
 
 
 class SearchBar extends React.Component {
