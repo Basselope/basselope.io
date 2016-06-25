@@ -1,4 +1,4 @@
-import { FETCH_BING } from '../actions/bing.jsx'
+import { FETCH_BING } from '../dispatch/bing.jsx'
 
 const INITIAL_STATE = { data: [] }
 

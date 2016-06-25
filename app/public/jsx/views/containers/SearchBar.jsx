@@ -3,12 +3,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { browserHistory } from 'react-router'
 
+<<<<<<< 66cbf114e8c83759f9a53eb2478e06d5e4bbbc78:app/public/jsx/containers/SearchBar.jsx
 import { fetchBing } from '../actions/bing.jsx'
 import { fetchReddit } from '../actions/reddit.jsx'
 import { fetchTwitter } from '../actions/twitter.jsx'
 import { fetchAlchemy } from '../actions/alchemy.jsx'
 import BingList from './BingList.jsx'
 import HoverInfo from './HoverInfo.jsx'
+=======
+import { fetchBing } from '../../dispatch/bing.jsx'
+import { fetchReddit } from '../../dispatch/reddit.jsx'
+import { fetchTwitter } from '../../dispatch/twitter.jsx'
+
+import BingList from '../components/searchbar/SList.jsx'
+>>>>>>> [refactor/chore] code-cleanup and major restructuring to filesystem:app/public/jsx/views/containers/SearchBar.jsx
 
 class SearchBar extends React.Component {
   constructor(props) {

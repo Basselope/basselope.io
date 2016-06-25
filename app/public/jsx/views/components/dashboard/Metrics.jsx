@@ -2,8 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Navbar, Row, Col, Chip } from 'react-materialize'
 
+<<<<<<< 66cbf114e8c83759f9a53eb2478e06d5e4bbbc78:app/public/jsx/containers/Metrics.jsx
 
 import SearchBar from './SearchBar.jsx'
+=======
+import SearchBar from '../../containers/SearchBar.jsx'
+>>>>>>> [refactor/chore] code-cleanup and major restructuring to filesystem:app/public/jsx/views/components/dashboard/Metrics.jsx
 
 class Metrics extends React.Component {
   constructor(props) {

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 
 import ReduxPromise from 'redux-promise'
 
-import routes from './routes.jsx'
+import routes from './routes/routes.jsx'
 import reducers from './reducers/reducer_index.jsx'
 
 const rootReducer = combineReducers({...reducers, routing: routerReducer});

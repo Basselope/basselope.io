@@ -50,7 +50,7 @@ const client_file_tree = {
       paths: [{name: 'js'},{name: 'css'},{name: 'src'}]
     },{
       name: 'jsx',
-      files: ['public_index.jsx'],
+      files: ['index.jsx'],
       paths: [
         {
           name: 'components',

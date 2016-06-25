@@ -1,9 +1,9 @@
-import { FETCH_REDDIT } from '../actions/reddit.jsx'
-import { FETCH_TWITTER } from '../actions/twitter.jsx'
+import { FETCH_REDDIT } from '../dispatch/reddit.jsx'
+import { FETCH_TWITTER } from '../dispatch/twitter.jsx'
 
 
-import d3Plot from '../../d3/d3Plot.jsx'
-import d3Time from '../../d3/d3Time.jsx'
+import d3Plot from '../views/d3/d3Plot.jsx'
+import d3Time from '../views/d3/d3Time.jsx'
 
 const INITIAL_STATE = { data: {twitter: null, reddit: null }, graph: { plot: null, time: null } };
 
