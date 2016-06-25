@@ -8,7 +8,7 @@ import SearchBar from './containers/SearchBar.jsx'
 import Dashboard from './components/Dashboard.jsx'
 
 
-import SentimentPlot from './containers/SentimentPlot.jsx'
+import SentimentPlot from './containers/DashView.jsx'
 import TimeLine from './containers/TimeLine.jsx'
 import Piechart from './views/containers/PieChart.jsx'
 import Table from './containers/Table.jsx'
