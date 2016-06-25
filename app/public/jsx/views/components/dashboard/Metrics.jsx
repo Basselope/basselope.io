@@ -58,7 +58,7 @@ class Metrics extends React.Component {
 
   render() {
     console.log(this.props);
-    if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.pathname.includes('table')) {
+    if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.path === 'table') {
       return <div></div>;
     }
 
