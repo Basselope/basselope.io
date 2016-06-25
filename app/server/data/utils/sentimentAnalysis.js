@@ -102,7 +102,6 @@ function sentimentAnalyzer() {
         }
     }
     const analyze = (textObject) => {
-
         let rankingHolder = [];
         let negativeSentiments = 0;
         let positiveSentiments = 0;
@@ -111,6 +110,7 @@ function sentimentAnalyzer() {
             let curr = textObject[postKey];
             let content = curr.content;
             for (var contentKey in content) {
+                //console.log(content[contentKey].text)
                 nlpAnalysis(content[contentKey].text);
             	let currentSentiment = sentiment(content[contentKey].text);
                 if (currentSentiment.positive.length != 0 || currentSentiment.negative.length != 0) {
@@ -137,6 +137,7 @@ function sentimentAnalyzer() {
                 }
             }
         }
+        //console.log(JSON.stringify(textObject))
         let normalData = normal_dist_data_filter(rankingHolder);
 		negativeSentiments	 = negativeSentiments/rankingHolder.length
 		positiveSentiments	 = positiveSentiments/rankingHolder.length
@@ -175,11 +176,13 @@ function sentimentAnalyzer() {
         //     data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
         // }
         data_W_analysis.trendingTopics = sortable;
+        console.log("DONE",data_W_analysis)
         return data_W_analysis;
     };
     return {
         twitter: analyze,
-        reddit: analyze
+        reddit: analyze,
+        wiki: analyze
     };
 }
 

@@ -45,12 +45,28 @@ const call = {
       .catch(response => console.log(response));
       }
     },
- 
-  wiki: {
+    
+ wiki: axios.create({
+    method: 'get',
+    url: 'https://en.wikinews.org/w/api.php',
+    params: {
+      action: "query",
+      list:"search",
+      srlimit: 50,
+      format:"json", 
+      srwhat:"text",
+      srprop:"timestamp%7Csnippet%7Cwordcount%7Credirectsnippet",
+      continue:""
+    }
+  }),
+  wikitemp: {
     request: (params) => { //FIX ME
-      console.log(params.q)
-       return axios.get("https://en.wikinews.org/w/api.php?action=query&list=search&srlimit=50&srsearch="+params.q+"&format=json&srwhat=text&srprop=timestamp%7Csnippet%7Cwordcount%7Credirectsnippet&continue=")
+      console.log("PARAMs",params.params.q)
+       
+       return axios.get("https://en.wikinews.org/w/api.php", params )
         .then(function(response){
+                console.log("response",response)
+
           //res.send(response.data)
            console.log(response.data); // ex.: { user: 'Your User'}
           console.log(response.status); 
@@ -66,7 +82,7 @@ const data = {
   twitter: (res) => res.data.statuses,
   reddit: (res) => res,
   alchemy: (res) => res,
-  wiki: (res) => res
+  wiki: (res) => res.data.query.search
 };
 
 const q = {
@@ -82,7 +98,7 @@ const q = {
   }),
   wiki: (query) => ({
     params: {
-      q: query
+      srsearch: query
     }
   }),
   alchemy: (query,path) => ({
@@ -98,8 +114,12 @@ const fetch = (src, query) => {
     return axios.all(query.map((val) => call[src].request(q[src](val)))) //TODO REVIEW SPREAD
       .then(axios.spread((...res) => res.reduce((curr, val) => curr.concat(data[src](val)),[])))
       .then((data) => sentiment[src](Struct(data, src)));
+
   return call[src].request(q[src](query))
-    .then((res) => sentiment[src](Struct(data[src](res), src)));
+    .then((res) => {
+    //console.log("SENTIMENT",sentiment)
+      sentiment[src](Struct(data[src](res), src));
+    }).catch((err) => console.log(err));
 };
 
 

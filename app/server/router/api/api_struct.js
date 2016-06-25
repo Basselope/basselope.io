@@ -4,23 +4,20 @@ const moment = require('moment');
 
 
 const wiki_content_struct = (newsSource) => ({
-  id: newsSource.id_str,
-  text: newsSource.title,
-
+  id: newsSource.title || "UNDEFINED",
+  text: newsSource.title || "",
   vote_count: newsSource.favorites_count || 0,
   down_count: null,
   share_count: newsSource.retweet_count || 0,
-
-  links: newsSource.entities.urls.map((item) => item.url),
-  tags: newsSource.entities.hashtags.map((item) => item.text),
-  mentions_to: newsSource.entities.user_mentions.map((item) => item.id_str),
-  responds_to: newsSource.in_reply_to_user_id_str || null,
-
-  location: newsSource.coordinates || null,
-  created_at: moment.utc(new Date(newsSource.timestamp)).toObject()
-
+  links: newsSource.urls || null,
+  tags: newsSource.tags || null,
+  mentions_to: null,
+  responds_to: null,
+  location:  null,
+  created_at: newsSource.timestamp || null
 })
-const wiki_account_struct = (newsSource) => ({
+
+const wiki_author_struct = (newsSource) => ({
   id: "wiki",
   img: newsSource.user || null,
   name: newsSource.name || null,
@@ -88,7 +85,8 @@ const reddit_content_struct = (post) => ({
 
 const keygen = {
   twitter: (tweet) => tweet.user.id,
-  reddit: (post) => post.data.id
+  reddit: (post) => post.data.id,
+  wiki: (news) => HashString(news.title)
 };
 
 const Author = {
@@ -110,13 +108,27 @@ const Struct = (val, src) => {
   content = [Content[src](val)];
   return {author,content};
 };
+const HashString = (hashText) =>{
+  var hash = 0, i, chr, len;
+  if (hashText.length === 0) return hash;
+  for (i = 0, len = hashText.length; i < len; i++) {
+    chr   = hashText.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; 
+  }
+  
+  return hash;
 
+
+}
 module.exports = function(res, src) {
-  return _.reduce(res, function(curr, val) {
-    if(keygen[src](val) in curr)
+ return  _.reduce(res, function(curr, val) {
+    if(keygen[src](val) in curr){
       curr[keygen[src](val)].content.push(Content[src](val));
-    else
+    }
+    else{
       curr[keygen[src](val)] = Struct(val, src);
+    }
     return curr;
   }, {});
 };

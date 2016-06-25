@@ -146,19 +146,15 @@ function d3Time() {
         var m = [80, 80, 80, 80];
         var w = 600;
         var h = 300;
-
         console.log("RANGES", ranges)
         var x = d3.scale.linear().domain([0, positiveData.length]).range([0, w]);
         var y = d3.scale.linear().domain([ranges.yMin, ranges.yMax]).range([h, 0]);
         var line = d3.svg.line()
             .x(function(d, i) {
-                //console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(d) + ' using our xScale.');
                 return x(i); //TODO: Here it only iterates on index, not date. s
             })
             .y(function(d) {
-                //console.log('Plotting Y value for data point: ' + d.avgScore + ' to be at: ' + y(d.avgScore) + " using our yScale.");
                 return y(d.avgScore);
-
             }).interpolate("monotone")
         svg.append("path").attr("d", line(positiveData))
             .style("fill", "#000000")
