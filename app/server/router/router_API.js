@@ -1,7 +1,8 @@
 'use strict';
 const apiStruct = require('./api/api_struct.js');
 const api_fetch = require('./api/api_fetch.js');
-var bingHandle = require('./api/config/getBing.js');
+const bingHandle = require('./api/config/getBing.js');
+const alchemyHandle = require('./api/config/getAlchemy.js');
 const loginHandler = require('../data/utils/signup_in.js');
 
 module.exports = function(req, res, next) {
@@ -15,7 +16,7 @@ module.exports = function(req, res, next) {
 			break;
 		case '/login':
 
-			loginHandler.signIn(req,res, next); 
+			loginHandler.signIn(req, res, next);
 			console.log("IN LOGIN", req.body);
 			// api_fetch('twitter', [req.body.query,'#'+req.body.query])
 			// 	.then((ret) => res.status(200).send(ret))
@@ -30,7 +31,12 @@ module.exports = function(req, res, next) {
 			bingHandle.getBing(req, res, next);
       break;
 		case '/_api/bing/suggestions':
-			bingHandle.getBing(req,res,next);
+			bingHandle.getBing(req, res, next);
 			break;
+    case '/_api/alchemy/search':
+      alchemyHandle(req, res, next)
+        .then((ret) => res.status(200).send(ret))
+        .catch((err) => res.status(400).send(err));
+      break;
 	}
 }

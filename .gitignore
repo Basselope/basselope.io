@@ -4,3 +4,4 @@ node_modules
 npm-debug.log
 app/public/assets/
 app/server/data/db/basselope.sql
+app/server/router/api/config/api.js

@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard.jsx'
 
 import SentimentPlot from './containers/SentimentPlot.jsx'
 import TimeLine from './containers/TimeLine.jsx'
+import Piechart from './containers/Piechart.jsx'
 import Table from './containers/Table.jsx'
 
 export default (
@@ -18,6 +19,7 @@ export default (
     <Route path=":term" component={Dashboard}>
       <Route path="toneplot" component={SentimentPlot} />
       <Route path="timeline" component={TimeLine} />
+      <Route path="piechart" component={Piechart} />
       <Route path="table" component={Table} />
     </Route>
   </Route>

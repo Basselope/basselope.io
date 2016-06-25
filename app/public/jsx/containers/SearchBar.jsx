@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router'
 import { fetchBing } from '../actions/bing.jsx'
 import { fetchReddit } from '../actions/reddit.jsx'
 import { fetchTwitter } from '../actions/twitter.jsx'
+import { fetchAlchemy } from '../actions/alchemy.jsx'
 import BingList from './BingList.jsx'
 import HoverInfo from './HoverInfo.jsx'
 
@@ -30,6 +31,7 @@ class SearchBar extends React.Component {
 
     this.props.fetchReddit(this.state.term);
     this.props.fetchTwitter(this.state.term);
+    // this.props.fetchAlchemy(this.state.term);
     this.setState({ term: '' });
 
     const path = `${this.state.term}/toneplot`.replace(/\W^[/]/g, '-');
@@ -59,7 +61,7 @@ class SearchBar extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter }, dispatch);
+  return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter, fetchAlchemy }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar)

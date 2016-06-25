@@ -15,7 +15,7 @@ import Metrics from './Metrics.jsx'
 import NavBar from '../components/NavBar.jsx'
 
 
-const RD3Component = rd3.Component;
+const RD3Component = rd3.Component
 
 class SentimentPlot extends React.Component {
 
@@ -47,9 +47,9 @@ class SentimentPlot extends React.Component {
 }
 
 const mapStateToProps = (state,props) => ({
-    d3: time(state.twitter.data, state.reddit.data),
-    data: {twitter:state.twitter.data, reddit:state.reddit.data}
-  });
+  d3: node(state.twitter.data, state.reddit.data),
+  data: {twitter:state.twitter.data, reddit:state.reddit.data}
+})
 
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators({ fetchTwitter, fetchReddit }, dispatch);
