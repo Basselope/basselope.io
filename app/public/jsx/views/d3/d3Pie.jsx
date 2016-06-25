@@ -22,16 +22,22 @@ const node = document.createElement('div');
     .attr("width", w)
     .attr("height", h);
 
-function createNode(...data) {
-  console.log('first', data)
+function createNode(data) {
+  let loldata = data;
   let resolved = false;
-  if(data)
-    resolved = data.reduce((curr,val) => typeof curr === 'number' ? val : false, 0);
-  if(!resolved)
+  let numbersData = [];
+  let i = -1;
+  if(data) {
+    resolved = true;
+    data.forEach(num => numbersData.push(num[1]));
+  }
+  if(!resolved) {
     return document.createElement('div');
+  }
+  console.log(numbersData, data)
   //Set up groups
   var arcs = svg.selectAll("g.arc")
-    .data(pie(data))
+    .data(pie(numbersData))
     .enter()
     .append("g")
     .attr("class", "arc")
@@ -51,9 +57,9 @@ function createNode(...data) {
     })
     .attr("text-anchor", "middle")
     .text(function(d) {
-      return d.value;
+      i++;
+      return data[i][0];
     });
-  console.log(data, node);
   return node;
 }
 

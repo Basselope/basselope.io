@@ -17,11 +17,11 @@ class PieChart extends React.Component {
   // }
 
   render() {
-
+    console.log(this.props)
     return (
-      <div>
-        <div>PieChart</div>
-         <RD3Component data={this.props.d3} />
+      <div style={{textAlign: 'center'}}>
+        <h1>Pie Chart of most common words with <b>{this.props.params.term}</b></h1>
+        <RD3Component data={this.props.d3} />
       </div>
     );
   }
@@ -29,7 +29,7 @@ class PieChart extends React.Component {
 
 const mapStateToProps = (state) => {
   // return { reddit: state.reddit, twitter: state.twitter };
-  return { d3: node(state.reddit.data.trendingTopics, state.twitter.data.trendingTopics) };
+  return { d3: node(state.reddit.data.trendingTopics) };
 }
 
 export default connect(mapStateToProps)(PieChart)
