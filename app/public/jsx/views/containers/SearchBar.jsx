@@ -8,7 +8,7 @@ import { fetchReddit } from '../../actions/reddit.jsx'
 import { fetchTwitter } from '../../actions/twitter.jsx'
 import { fetchAlchemy } from '../../actions/alchemy.jsx'
 import SList from '../components/searchbar/SList.jsx'
-
+import HoverInfo from '../components/searchbar/HoverInfo.jsx'
 
 
 class SearchBar extends React.Component {
@@ -46,12 +46,13 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
+        <HoverInfo />
         <form onSubmit={this.onFormSubmit} className="container">
           <div className="input-field">
             <div className="row">
               <div className="col s8 offset-s2 m4 offset-m4">
                 <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
-                <SList term={this.state.term} bingListClick={this.bingListClick} />
+                <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
               </div>
             </div>
           </div>

@@ -1,11 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Row, Col, Card, Button } from 'react-materialize'
 require('materialize-loader');
 
 class HoverInfo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {hover:false};
+
+    this.state = { hover:false };
+
     this.mouseOver = this.mouseOver.bind(this);
     this.mouseOut = this.mouseOut.bind(this);
   }
@@ -16,35 +19,32 @@ class HoverInfo extends React.Component {
   }
 
   mouseOut (val) {
-        this.setState({hover: false});
+    this.setState({hover: false});
+  }
+
+  renderSummary() {
+    if (this.state.hover) {
+      return (
+        <Card className='blue-grey darken-1' textClassName='white-text'>
+          Basselope is a sentiment analysis application that gives a positive or negative view on keywords
+          <br />
+          Simply search in the input box for anything you would like to see data visualization on
+        </Card>
+      );
+    }
   }
 
   render() {
-    var position = {position:"absolute"};
-    var label = "";
-    var content = ""
-    var display = {display:"none", position:"absolute"}
-        if (this.state.hover) {
-            label = "Normal Graph";
-            content = "Graph displays sentiment of trending data against the sentiment's social impact";
-            display={display:"block", position:"absolute", bottom:"0px"};
-        }
-        var self = this;
-        return(
-              <div>
-                <span onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} > <img style={{width:"20px", position: "absolute", bottom: "0px"}} src='https://openclipart.org/image/2400px/svg_to_png/234546/Info-Button.png'/> </span>
-                <div style = {display} className="row">
-                  <div className="col s12 m6" >
-                    <div className="card blue-grey darken-1">
-                      <div className="card-content white-text">
-                        <span className="card-title">{label}</span>
-                        <p>{content}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              )
+    return (
+      <div>
+        <Row>
+          <Button onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} floating icon='info_outline' />
+        </Row>
+          <Col style={{position: 'fixed', right: 0}} m={3} s={6}>
+            {this.renderSummary()}
+          </Col>
+      </div>
+    );
   }
 }
 

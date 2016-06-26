@@ -22,38 +22,45 @@ const node = document.createElement('div');
     .attr("width", w)
     .attr("height", h);
 
-function createNode(...data) {
-  console.log('first', data)
+function createNode(data) {
+  let loldata = data;
   let resolved = false;
-  if(data)
-    resolved = data.reduce((curr,val) => typeof curr === 'number' ? val : false, 0);
-  if(!resolved)
-    return document.createElement('div');
+  let numbersData = [];
+  let i = -1;
+  // if(data) {
+  //   resolved = true;
+  //   data.forEach(num => numbersData.push(num[1]));
+  // }
+  // if(!resolved) {
+  //   return document.createElement('div');
+  // }
+  console.log(numbersData, data)
   //Set up groups
-  var arcs = svg.selectAll("g.arc")
-    .data(pie(data))
-    .enter()
-    .append("g")
-    .attr("class", "arc")
-    .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
+  // var arcs = svg.selectAll("g.arc")
+  //   .data(pie(numbersData))
+  //   .enter()
+  //   .append("g")
+  //   .attr("class", "arc")
+  //   .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
 
-  //Draw arc paths
-  arcs.append("path")
-    .attr("fill", function(d, i) {
-      return color(i);
-    })
-    .attr("d", arc);
+  // //Draw arc paths
+  // arcs.append("path")
+  //   .attr("fill", function(d, i) {
+  //     return color(i);
+  //   })
+  //   .attr("d", arc);
 
-  //Labels
-  arcs.append("text")
-    .attr("transform", function(d) {
-      return "translate(" + arc.centroid(d) + ")";
-    })
-    .attr("text-anchor", "middle")
-    .text(function(d) {
-      return d.value;
-    });
-  console.log(data, node);
+  // //Labels
+  // arcs.append("text")
+  //   .attr("transform", function(d) {
+  //     return "translate(" + arc.centroid(d) + ")";
+  //   })
+  //   .attr("text-anchor", "middle")
+  //   .text(function(d) {
+  //     i++;
+  //     return data[i][0];
+  //   });
+
   return node;
 }
 

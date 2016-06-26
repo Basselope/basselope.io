@@ -168,7 +168,7 @@ function sentimentAnalyzer() {
                 if(key.trim().indexOf(" ")==-1&&key.trim().indexOf("'")==-1&&key.trim().indexOf(".")==-1&&key.trim().indexOf("@")==-1)
                     sortable.push([key, topics[key]])
                 }
-        sortable.sort(
+        sortable = sortable.sort(
             function(a, b) {
                 return b[1] - a[1]
             }
