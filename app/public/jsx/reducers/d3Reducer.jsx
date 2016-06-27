@@ -9,7 +9,6 @@ import d3Pie from '../views/d3/d3Pie.jsx'
 const INITIAL_STATE = { data: {twitter: null, reddit: null }, graph: { plot: null, time: null } };
 
 
-
 const d3Reducer = (state = INITIAL_STATE, action) => {
 
   switch(action.type) {

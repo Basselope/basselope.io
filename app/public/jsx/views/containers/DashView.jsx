@@ -1,19 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import d3Render from '../components/dashboard/Graph.jsx'
+import d3 from '../components/dashboard/Graph.jsx'
 
 
 class SentimentPlot extends React.Component {
 
   constructor(props) { super(props) }
 
+  setView() {
+    let view = this.props.params.view;
+    let g = this.props.d3.graph;
+    let render = (view in g) && !!g[view] ? d3.Graph(g[view]) : d3.Preload();
+    return render;
+  }
+
   render() {
     let view = this.props.params.view;
     let g = this.props.d3.graph;
+    // let node = (view in g) ? d3.Graph(g[view]) : d3.Preload();
     return (
       <div className="dash-view">
-        { (view in g) ? d3Render(g[view]) : d3Render('something went wrong :(') }
+        { d3.Graph(g[view]) }
       </div>
     );
   }
