@@ -108,27 +108,23 @@ const Struct = (val, src) => {
   content = [Content[src](val)];
   return {author,content};
 };
+
 const HashString = (hashText) =>{
   var hash = 0, i, chr, len;
   if (hashText.length === 0) return hash;
   for (i = 0, len = hashText.length; i < len; i++) {
-    chr   = hashText.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
-    hash |= 0; 
+    chr = hashText.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0;
   }
-  
   return hash;
-
-
 }
 module.exports = function(res, src) {
  return  _.reduce(res, function(curr, val) {
-    if(keygen[src](val) in curr){
+    if(keygen[src](val) in curr)
       curr[keygen[src](val)].content.push(Content[src](val));
-    }
-    else{
+    else
       curr[keygen[src](val)] = Struct(val, src);
-    }
     return curr;
   }, {});
 };

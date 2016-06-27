@@ -41,16 +41,9 @@ module.exports = function(req, res, next) {
         .catch((err) => res.status(400).send(err));
       break;
 	case '/_api/wiki/search':
-		console.log(wiki, "herep", req.body.query);
-		// wiki({ apiUrl: 'http://fr.wikipedia.org/w/api.php' }).search("trump")
-		//wiki.toString();
-		// wiki().page(req.body.query)
-  //   .then(page => page.info('alter_ego'))
-  //   .then(console.log);
 		api_fetch("wiki", req.body.query)
-		 	.then((ret) => {console.log(ret);
-		 		res.status(200).send(ret)})
-  //       	.catch((err) => res.status(400).send(err));
+		 	.then((ret) => res.status(200).send(ret))
+			 .catch((err) => res.status(400).send(err));
 		  	break; 
 	}
 }

@@ -177,6 +177,7 @@ function sentimentAnalyzer() {
         // }
         data_W_analysis.trendingTopics = sortable;
         //console.log("DONE",data_W_analysis)
+      console.log("FINAL RETURN", data_W_analysis)
         return data_W_analysis;
     };
     return {
