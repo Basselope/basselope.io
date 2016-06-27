@@ -6,6 +6,7 @@ const Struct = require('./api_struct');
 const sentiment = require('./../../data/utils/sentimentAnalysis.js');
 const api = require('./config/api.js');
 
+
 const call = {
   twitter: axios.create({
     method: 'get',
@@ -44,13 +45,45 @@ const call = {
       .then(response => alchemyData)
       .catch(response => console.log(response));
       }
+    },
+    
+ wiki: axios.create({
+    method: 'get',
+    url: 'https://en.wikinews.org/w/api.php',
+    params: {
+      action: "query",
+      list:"search",
+      srlimit: 50,
+      format:"json", 
+      srwhat:"text",
+      srprop:"timestamp%7Csnippet%7Cwordcount%7Credirectsnippet",
+      continue:""
     }
-};
+  }),
+  wikitemp: {
+    request: (params) => { //FIX ME
+      console.log("PARAMs",params.params.q)
+       
+       return axios.get("https://en.wikinews.org/w/api.php", params )
+        .then(function(response){
+                console.log("response",response)
+
+          //res.send(response.data)
+           console.log(response.data); // ex.: { user: 'Your User'}
+          console.log(response.status); 
+          return response;
+         // ex.: 200
+        });  
+      }
+    }
+  };
+
 
 const data = {
   twitter: (res) => res.data.statuses,
   reddit: (res) => res,
-  alchemy: (res) => res
+  alchemy: (res) => res,
+  wiki: (res) => res.data.query.search
 };
 
 const q = {
@@ -64,7 +97,12 @@ const q = {
       q: query
     }
   }),
-  alchemy: (query, path) => ({
+  wiki: (query) => ({
+    params: {
+      srsearch: query
+    }
+  }),
+  alchemy: (query,path) => ({
     params: {
       q: query
     }
@@ -72,12 +110,15 @@ const q = {
 };
 
 const fetch = (src, query) => {
+  console.log(src)
   if(Array.isArray(query))
-    return axios.all(query.map((val) => call[src].request(q[src](val))))
+    return axios.all(query.map((val) => call[src].request(q[src](val)))) //TODO REVIEW SPREAD
       .then(axios.spread((...res) => res.reduce((curr, val) => curr.concat(data[src](val)),[])))
       .then((data) => sentiment[src](Struct(data, src)));
+  console.log("LALALALA",q[src](query));
   return call[src].request(q[src](query))
-    .then((res) => sentiment[src](Struct(data[src](res), src)));
+    .then((res) => sentiment[src](Struct(data[src](res), src)))
+    .catch((err) => console.log(err));
 };
 
 

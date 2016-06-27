@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Navbar, Row, Col, Chip } from 'react-materialize'
+import SearchBar from '../../containers/SearchBar.jsx'
 
 class Metrics extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class Metrics extends React.Component {
   }
 
   renderMean() {
+    console.log(this.props)
     let twitterMean = this.props.twitter.data.metricMean;
     let redditMean = this.props.reddit.data.metricMean;
     let twitterSum = this.props.twitter.data.set.length;
@@ -57,13 +59,14 @@ class Metrics extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log("CLIENT SIDE LIFE",this.props);
     if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.path === 'table') {
       return <div></div>;
     }
 
     return (
       <Navbar className='blue-grey lighten-2'>
+        <SearchBar style={{zIndex: 3}}/>
         <Row>
           {this.chipBuilder('Weighted Sentiment:', this.renderMean())}
           {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
@@ -77,7 +80,7 @@ class Metrics extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { reddit: state.reddit, twitter: state.twitter };
+  return { reddit: state.reddit, twitter: state.twitter, wiki: state.wiki };
 }
 
 export default connect(mapStateToProps)(Metrics)

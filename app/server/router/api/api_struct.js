@@ -2,6 +2,33 @@
 const _ = require('lodash');
 const moment = require('moment');
 
+
+const wiki_content_struct = (newsSource) => ({
+  id: newsSource.title || "UNDEFINED",
+  text: newsSource.title || "",
+  vote_count: newsSource.favorites_count || 0,
+  down_count: null,
+  share_count: newsSource.retweet_count || 0,
+  links: newsSource.urls || null,
+  tags: newsSource.tags || null,
+  mentions_to: null,
+  responds_to: null,
+  location:  null,
+  created_at: newsSource.timestamp || null
+})
+
+const wiki_author_struct = (newsSource) => ({
+  id: "wiki",
+  img: newsSource.user || null,
+  name: newsSource.name || null,
+  handle:  null,
+  status_count: null,
+  follow_count:  null,
+  listed_count:  null
+});
+
+
+
 const twitter_content_struct = (tweet) => ({
   id: tweet.id_str,
   text: tweet.text,
@@ -58,16 +85,20 @@ const reddit_content_struct = (post) => ({
 
 const keygen = {
   twitter: (tweet) => tweet.user.id,
-  reddit: (post) => post.data.id
+  reddit: (post) => post.data.id,
+  wiki: (news) => HashString(news.title)
 };
 
 const Author = {
   twitter: twitter_account_struct,
-  reddit: reddit_account_struct
+  reddit: reddit_account_struct,
+  wiki: wiki_author_struct
 };
 const Content = {
   twitter: twitter_content_struct,
-  reddit: reddit_content_struct
+  reddit: reddit_content_struct,
+  wiki: wiki_content_struct
+
 };
 
 const Struct = (val, src) => {
@@ -78,8 +109,18 @@ const Struct = (val, src) => {
   return {author,content};
 };
 
+const HashString = (hashText) =>{
+  var hash = 0, i, chr, len;
+  if (hashText.length === 0) return hash;
+  for (i = 0, len = hashText.length; i < len; i++) {
+    chr = hashText.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0;
+  }
+  return hash;
+}
 module.exports = function(res, src) {
-  return _.reduce(res, function(curr, val) {
+ return  _.reduce(res, function(curr, val) {
     if(keygen[src](val) in curr)
       curr[keygen[src](val)].content.push(Content[src](val));
     else
