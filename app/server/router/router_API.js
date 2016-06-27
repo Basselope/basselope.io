@@ -41,8 +41,11 @@ module.exports = function(req, res, next) {
         .catch((err) => res.status(400).send(err));
       break;
 	case '/_api/wiki/search':
+		console.log("WIKI OFFFFFFFF");
 		api_fetch("wiki", req.body.query)
-		 	.then((ret) => res.status(200).send(ret))
+		 	.then((ret) => {
+			  console.log("TEST",res)
+			  res.status(200).send(ret)})
 			 .catch((err) => res.status(400).send(err));
 		  	break; 
 	}

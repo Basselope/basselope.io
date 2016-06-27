@@ -7,6 +7,7 @@ import { fetchBing } from '../../actions/api/bing.jsx'
 import { fetchReddit } from '../../actions/api/reddit.jsx'
 import { fetchTwitter } from '../../actions/api/twitter.jsx'
 import { fetchAlchemy } from '../../actions/api/alchemy.jsx'
+import { fetchWikipedia } from '../../actions/api/wikipedia.jsx'
 import SList from '../components/searchbar/SList.jsx'
 import HoverInfo from '../components/searchbar/HoverInfo.jsx'
 
@@ -32,7 +33,7 @@ class SearchBar extends React.Component {
 
     this.props.fetchReddit(this.state.term);
     this.props.fetchTwitter(this.state.term);
-    // this.props.fetchAlchemy(this.state.term);
+    this.props.fetchWikipedia(this.state.term);
     this.setState({ term: '' });
 
     const path = `${this.state.term}/plot`.replace(/\W^[/]/g, '-');
@@ -46,16 +47,10 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        <HoverInfo />
-        <form onSubmit={this.onFormSubmit} className="container">
-          <div className="input-field">
-            <div className="row">
-              <div className="col s8 offset-s2 m4 offset-m4">
+        
+        <form onSubmit={this.onFormSubmit}>
                 <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
                 <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
-              </div>
-            </div>
-          </div>
         </form>
       </div>
     );
@@ -63,7 +58,7 @@ class SearchBar extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter, fetchAlchemy }, dispatch);
+  return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter, fetchWikipedia, fetchAlchemy }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(SearchBar)

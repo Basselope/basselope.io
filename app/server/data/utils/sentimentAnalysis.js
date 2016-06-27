@@ -12,13 +12,11 @@ function sentimentAnalyzer() {
         for(var index in topicAnalysis){
              topics[topicAnalysis[index].text] = topics[topicAnalysis[index].text] ? topics[topicAnalysis[index].text] +topicAnalysis[index].count : topicAnalysis[index].count
         }
-
-
     }
     const ranking = (content, author) => {
         let tweetText = content.text.replace(/\W+/g, " "),
             retweets = content.share_count || 0,
-            favorites = content.vote_count || 0,
+            favorites = content.vote_count || 1,
             downCount = content.down_count || 0,
             score = content.sentiment.score || 0,
             friends = author.follow_count || 1,
@@ -103,6 +101,7 @@ function sentimentAnalyzer() {
 
     }
     const analyze = (textObject) => {
+        //console.log("MEE",textObject)
         let rankingHolder = [];
         let negativeSentiments = 0;
         let positiveSentiments = 0;
@@ -178,7 +177,7 @@ function sentimentAnalyzer() {
         }
         data_W_analysis.trendingTopics = sortable;
         //console.log("DONE",data_W_analysis)
-      console.log("FINAL RETURN", data_W_analysis)
+     console.log("FINAL RETURN", data_W_analysis)
         return data_W_analysis;
     };
     return {
