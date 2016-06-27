@@ -1,40 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import rd3 from 'react-d3-library'
-const RD3Component = rd3.Component;
+import d3 from '../components/dashboard/Graph.jsx'
 
 
 class SentimentPlot extends React.Component {
 
-  constructor(props) {
-    super(props);
-    // this.d3Render.bind(this);
-  }
+  constructor(props) { super(props) }
 
-  d3Render(view) {
-    console.log(view);
+  setView() {
+    let view = this.props.params.view;
     let g = this.props.d3.graph;
-    let render = g.hasOwnProperty(view) && !!g[view] ? g[view] : document.createElement('div');
-    return (<RD3Component data={ render } />);
+    let render = (view in g) && !!g[view] ? d3.Graph(g[view]) : d3.Preload();
+    return render;
   }
 
   render() {
-    console.log('plot',this.props);
+    let view = this.props.params.view;
+    let g = this.props.d3.graph;
+    // let node = (view in g) ? d3.Graph(g[view]) : d3.Preload();
     return (
-      <div className="valign-wrapper" style={{ position: 'fixed', top: 0, bottom: 0, left: 0, right: 0 }}>
-        <div className="valign container center-align" style={{ left: 0, right: 0, overflow: 'visible' }}>
-          {this.d3Render(this.props.route.path)}
-        </div>
+      <div className="dash-view">
+        { d3.Graph(g[view]) }
       </div>
     );
   }
 
 }
 
-const mapStateToProps = (state,props) => ({
-  d3: state.d3,
-  data: {twitter:state.twitter.data, reddit:state.reddit.data}
-});
+const mapStateToProps = (state,props) => ({ d3: state.d3 });
 
 export default connect(mapStateToProps)(SentimentPlot)

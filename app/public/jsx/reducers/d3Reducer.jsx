@@ -1,5 +1,5 @@
-import { FETCH_REDDIT } from '../actions/reddit.jsx'
-import { FETCH_TWITTER } from '../actions/twitter.jsx'
+import { FETCH_REDDIT } from '../actions/api/reddit.jsx'
+import { FETCH_TWITTER } from '../actions/api/twitter.jsx'
 
 
 import d3Plot from '../views/d3/d3Plot.jsx'
@@ -7,7 +7,6 @@ import d3Time from '../views/d3/d3Time.jsx'
 import d3Pie from '../views/d3/d3Pie.jsx'
 
 const INITIAL_STATE = { data: {twitter: null, reddit: null }, graph: { plot: null, time: null } };
-
 
 
 const d3Reducer = (state = INITIAL_STATE, action) => {
@@ -30,7 +29,7 @@ const d3Reducer = (state = INITIAL_STATE, action) => {
           twitter: action.payload.data
         },
         graph: !state.data.reddit ? {...state.graph} : {
-          plot: state.graph.pie || d3Pie(action.payload.data, state.data.reddit),
+          pie: state.graph.pie || d3Pie(action.payload.data, state.data.reddit),
           plot: state.graph.plot || d3Plot(action.payload.data, state.data.reddit),
           time: state.graph.time || d3Time(action.payload.data, state.data.reddit)
         }

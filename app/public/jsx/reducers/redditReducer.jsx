@@ -1,4 +1,4 @@
-import { FETCH_REDDIT } from '../actions/reddit.jsx'
+import { FETCH_REDDIT } from '../actions/api/reddit.jsx'
 
 const INITIAL_STATE = { data: {} }
 

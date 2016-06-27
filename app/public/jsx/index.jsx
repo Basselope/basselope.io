@@ -16,6 +16,10 @@ const rootReducer = combineReducers({...reducers, routing: routerReducer});
 const store = createStore(rootReducer, applyMiddleware(ReduxPromise));
 const history = syncHistoryWithStore(browserHistory, store);
 
+
+require('materialize-loader');
+require('../scss/stylesheet.scss');
+
 render(
   <Provider store={store}>
     <Router routes={routes} history={history} />
