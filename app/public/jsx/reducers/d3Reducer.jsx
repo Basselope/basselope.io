@@ -1,5 +1,5 @@
-import { FETCH_REDDIT } from '../actions/reddit.jsx'
-import { FETCH_TWITTER } from '../actions/twitter.jsx'
+import { FETCH_REDDIT } from '../actions/api/reddit.jsx'
+import { FETCH_TWITTER } from '../actions/api/twitter.jsx'
 
 
 import d3Plot from '../views/d3/d3Plot.jsx'

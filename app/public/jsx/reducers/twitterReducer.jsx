@@ -1,4 +1,4 @@
-import { FETCH_TWITTER } from '../actions/twitter.jsx'
+import { FETCH_TWITTER } from '../actions/api/twitter.jsx'
 
 const INITIAL_STATE = { data: {} }
 

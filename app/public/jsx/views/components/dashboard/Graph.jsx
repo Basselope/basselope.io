@@ -12,8 +12,6 @@ const Preload = () => (
   </div>
 );
 
-
-
 const Graph = (node) => (
   <div className="valign-wrapper" style={{ position: 'fixed', top: 0, bottom: 0, left: 0, right: 0 }}>
     <div className="valign container center-align" style={{ left: 0, right: 0, overflow: 'visible' }}>
