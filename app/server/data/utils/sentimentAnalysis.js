@@ -45,8 +45,8 @@ function sentimentAnalyzer() {
     	let NegativeSentiments = [];
 
         let normalized = content.map(function(curr, index, arr) {
-        	if(curr[0]<0) NegativeSentiments.push(curr[0])
-        	else PositiveSentiments.push(curr[0])
+        	if(curr[0]<0) NegativeSentiments.push(curr[0]);
+        	else PositiveSentiments.push(curr[0]);
             return curr[0];
         });
         let sentimentsOnly = content.map(function(curr, index, arr) {
@@ -80,7 +80,7 @@ function sentimentAnalyzer() {
         let weightedSentiment = stats.mean(normalized) / spread;
           //stats.mean(normalized)<0?stats.mean(normalized)/(minVal):stats.mean(normalized)/(maxVal);
         return {
-            set: normalized,
+            set: content,
             mean: stats.mean(normalized),
             metricMean: weightedSentiment*100,
             weakMean: percentile,
@@ -100,6 +100,7 @@ function sentimentAnalyzer() {
                 on[dataKey] = from[dataKey]
             }
         }
+
     }
     const analyze = (textObject) => {
         let rankingHolder = [];
@@ -154,7 +155,7 @@ function sentimentAnalyzer() {
             data: textObject
         }
 
-        extendOn(data_W_analysis, [normalData,maxSentimentImpact]);
+        //extendOn(data_W_analysis, [normalData,maxSentimentImpact]);
 
         var sortable = [];
         for (var key in topics){
@@ -169,12 +170,12 @@ function sentimentAnalyzer() {
 
 
         //console.log("HERE",sortable.slice(0,20));
-        // for (let dataKey in normalData) {
-        //     data_W_analysis[dataKey] = normalData[dataKey]
-        // }
-        // for (let dataKey in maxSentimentImpact) {
-        //     data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
-        // }
+        for (let dataKey in normalData) {
+            data_W_analysis[dataKey] = normalData[dataKey]
+        }
+        for (let dataKey in maxSentimentImpact) {
+            data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
+        }
         data_W_analysis.trendingTopics = sortable;
         //console.log("DONE",data_W_analysis)
       console.log("FINAL RETURN", data_W_analysis)
