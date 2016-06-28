@@ -152,6 +152,7 @@ function d3Time() {
     var line = d3.svg.line()
       .x(function(d, i) {
         return x(i); //TODO: Here it only iterates on index, not date. s
+
       })
       .y(function(d) {
         return y(d.avgScore);

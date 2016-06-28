@@ -114,11 +114,9 @@ const fetch = (src, query) => {
   if(Array.isArray(query))
     return axios.all(query.map((val) => call[src].request(q[src](val)))) //TODO REVIEW SPREAD
       .then(axios.spread((...res) => res.reduce((curr, val) => curr.concat(data[src](val)),[])))
-      .then((data) => sentiment[src](Struct(data, src)));
-  console.log("LALALALA",q[src](query));
+      .then((data) => sentiment[src](Struct(data, src), query))
   return call[src].request(q[src](query))
-    .then((res) => sentiment[src](Struct(data[src](res), src)))
-    .catch((err) => console.log(err));
+    .then((res) => sentiment[src](Struct(data[src](res), src), query))
 };
 
 
