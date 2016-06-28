@@ -4,7 +4,7 @@ const api_fetch = require('./api/api_fetch.js');
 const bingHandle = require('./api/config/getBing.js');
 const alchemyHandle = require('./api/config/getAlchemy.js');
 const loginHandler = require('../data/utils/signup_in.js');
-const wiki  = require("wikijs");
+// const wiki  = require("wikijs");
 const axios = require('axios');
 
 module.exports = function(req, res, next) {
@@ -47,6 +47,6 @@ module.exports = function(req, res, next) {
 			  console.log("TEST",res)
 			  res.status(200).send(ret)})
 			 .catch((err) => res.status(400).send(err));
-		  	break; 
+		  	break;
 	}
 }
