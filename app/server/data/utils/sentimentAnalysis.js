@@ -179,15 +179,15 @@ function sentimentAnalyzer() {
         for (let dataKey in maxSentimentImpact) {
             data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
         }
-        console.log("test",queryString,">>>>>>>>>>>>>")
+        var trendingFiltered = [];
         for(var key in sortable){
-          if(sortable[key][0].trim().toLowerCase().indexOf(queryString.trim().toLowerCase())!=-1)
-            delete sortable[key]
+          if(sortable[key][0].trim().toLowerCase().indexOf(queryString.trim().toLowerCase())==-1)
+            trendingFiltered.push(sortable[key]);
         }
-        data_W_analysis.trendingTopics = sortable;
+        data_W_analysis.trendingTopics = trendingFiltered;
         data_W_analysis.query = queryString;
         //console.log("DONE",data_W_analysis)
-     console.log("FINAL RETURN", data_W_analysis)
+        //console.log("FINAL RETURN", trendingFiltered)
         return data_W_analysis;
     };
     return {
