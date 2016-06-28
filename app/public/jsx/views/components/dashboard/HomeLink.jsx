@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { Button } from 'react-materialize'
+import SearchBar from '../../containers/SearchBar.jsx'
 
 class HomeLink extends React.Component {
   constructor(props) {
@@ -10,10 +12,9 @@ class HomeLink extends React.Component {
   render() {
     // console.log(this.props.alchemy)
     return (
-      <Link to="/">
-        <Button value='Search' floating icon='search' tooltip='search'
-          className='blue-grey lighten-1'/>
-      </Link>
+      <div>
+
+      </div>
     );
   }
 }
