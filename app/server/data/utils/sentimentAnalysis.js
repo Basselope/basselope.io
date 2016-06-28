@@ -100,9 +100,10 @@ function sentimentAnalyzer() {
         }
 
     }
-    const analyze = (textObject) => {
+    const analyze = (textObject, queryString) => {
         //console.log("MEE",textObject)
-        //topics={};
+      queryString = Array.isArray(queryString)?queryString[0]:queryString;
+        topics={};
         let rankingHolder = [];
         let negativeSentiments = 0;
         let positiveSentiments = 0;
@@ -158,25 +159,33 @@ function sentimentAnalyzer() {
         //extendOn(data_W_analysis, [normalData,maxSentimentImpact]);
 
         var sortable = [];
-        for (var key in topics){
-                if(key.trim().indexOf(" ")==-1&&key.trim().indexOf("'")==-1&&key.trim().indexOf(".")==-1&&key.trim().indexOf("@")==-1)
+        for (var key in topics){ //TODO FIX FILTERING, IM JUST RUSHING
+
+                if( key.trim().indexOf(" ")==-1&&key.trim().indexOf("'")==-1&&key.trim().indexOf(".")==-1&&key.trim().indexOf("@")==-1)
                     sortable.push([key, topics[key]])
                 }
         sortable = sortable.sort(
             function(a, b) {
-                return b[1] - a[1]
+                return b[1] - a[1];
             }
-        ).slice(0,7)
+        ).slice(1,7);
 
 
         //console.log("HERE",sortable.slice(0,20));
+      
         for (let dataKey in normalData) {
             data_W_analysis[dataKey] = normalData[dataKey]
         }
         for (let dataKey in maxSentimentImpact) {
             data_W_analysis[dataKey] = maxSentimentImpact[dataKey]
         }
+        console.log("test",queryString,">>>>>>>>>>>>>")
+        for(var key in sortable){
+          if(sortable[key][0].trim().toLowerCase().indexOf(queryString.trim().toLowerCase())!=-1)
+            delete sortable[key]
+        }
         data_W_analysis.trendingTopics = sortable;
+        data_W_analysis.query = queryString;
         //console.log("DONE",data_W_analysis)
      console.log("FINAL RETURN", data_W_analysis)
         return data_W_analysis;
