@@ -172,7 +172,7 @@ function sentimentAnalyzer() {
 
 
         //console.log("HERE",sortable.slice(0,20));
-      
+
         for (let dataKey in normalData) {
             data_W_analysis[dataKey] = normalData[dataKey]
         }
