@@ -5,13 +5,12 @@ import React from 'react'
 
 import Metrics from './components/dashboard/Metrics.jsx'
 import Nav from './components/dashboard/NavBar.jsx'
-
+import HomeLink from './components/dashboard/HomeLink.jsx'
 
 
 const Dashboard = (props) => (
   <div>
     <Metrics path={props.route.path} />
-
     {props.children}
     <Nav baseURL={props.params.term} />
 
