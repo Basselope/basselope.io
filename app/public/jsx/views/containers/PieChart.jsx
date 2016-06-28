@@ -28,8 +28,7 @@ class PieChart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // return { reddit: state.reddit, twitter: state.twitter };
-  return { d3: node(state.reddit.data.trendingTopics) };
+  return { d3: state.d3 };
 }
 
 export default connect(mapStateToProps)(PieChart)

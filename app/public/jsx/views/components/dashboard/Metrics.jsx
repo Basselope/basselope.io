@@ -15,7 +15,7 @@ class Metrics extends React.Component {
     let twitterSum = this.props.twitter.data.set.length;
     let redditSum = this.props.reddit.data.set.length;
     let totalMean = (((twitterMean * twitterSum) + (redditMean * redditSum)) / (redditSum + twitterSum)).toFixed(1);
-    let displayMean = `${totalMean > 0 ? '+' : ''}${totalMean}%`;
+    let displayMean = `${totalMean > 0 ? '+' : ''}${totalMean}`;
     return displayMean;
   }
 
@@ -66,13 +66,12 @@ class Metrics extends React.Component {
 
     return (
       <Navbar className='blue-grey lighten-2'>
-        <SearchBar style={{zIndex: 3}}/>
-        <Row>
-          {this.chipBuilder('Weighted Sentiment:', this.renderMean())}
+        <Row style={{marginLeft: '200px'}}>
+          {this.chipBuilder('Weighted Sentiment (-100 to +100):', this.renderMean())}
+          {this.chipBuilder('Sample Size:', this.renderTotal())}
           {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
           {this.chipBuilder('Neutral:', `${this.renderNeutralPercent()}%`)}
           {this.chipBuilder('Positive:', `${this.renderPosPercent()}%`)}
-          {this.chipBuilder('Sample Size:', this.renderTotal())}
         </Row>
       </Navbar>
     );

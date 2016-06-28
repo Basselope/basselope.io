@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { browserHistory } from 'react-router'
+import { Button } from 'react-materialize'
 
 import { fetchBing } from '../../actions/api/bing.jsx'
 import { fetchReddit } from '../../actions/api/reddit.jsx'
@@ -47,10 +48,10 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        
-        <form onSubmit={this.onFormSubmit}>
-                <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
-                <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
+        <Button style={{marginLeft: '20px', marginTop: '40px'}} floating icon='search' className='blue-grey lighten-1' />
+        <form onSubmit={this.onFormSubmit} style={{width: '30%', marginLeft: '80px', marginTop: '-50px'}}>
+          <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
+          <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
         </form>
       </div>
     );
