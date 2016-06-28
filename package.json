@@ -11,10 +11,10 @@
     "data",
     "visualization",
     "interactive",
-    "data",
-    "svg"
+    "d3",
+    "react"
   ],
-  "author": "lukaswelinder",
+  "author": "Ben Chen, Rico Chen, Lukas Welinder",
   "license": "MIT",
   "dependencies": {
     "Sentimental": "^1.0.1",
