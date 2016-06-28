@@ -50,7 +50,7 @@ const axis =
 
 const metrics = (d,m) => {
   let mean = m.x(m.mean);
-  let dev = Math.sqrt(m.x(m.dev))*2;
+  let dev = m.x(m.dev)/2;
   return [{
     x: mean,
     y1: -50,
