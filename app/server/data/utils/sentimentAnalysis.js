@@ -5,7 +5,7 @@ let sentiment = require('sentiment'),
 
 
 function sentimentAnalyzer() {
-    const topics = {};
+    var topics = {};
     const nlpAnalysis = (textContent)=>{
         //console.log(nlp.text(textContent).topics());
         let topicAnalysis = nlp.text(textContent).topics();
@@ -102,6 +102,7 @@ function sentimentAnalyzer() {
     }
     const analyze = (textObject) => {
         //console.log("MEE",textObject)
+        //topics={};
         let rankingHolder = [];
         let negativeSentiments = 0;
         let positiveSentiments = 0;
