@@ -6,7 +6,7 @@ import d3Plot from '../views/d3/d3Plot.jsx'
 import d3Time from '../views/d3/d3Time.jsx'
 import d3Pie from '../views/d3/d3Pie.jsx'
 
-const INITIAL_STATE = { data: {twitter: null, reddit: null }, graph: { plot: null, time: null } };
+const INITIAL_STATE = { data: {twitter: null, reddit: null }, graph: { plot: null, time: null, pie: null } };
 
 
 const d3Reducer = (state = INITIAL_STATE, action) => {
