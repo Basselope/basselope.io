@@ -4,7 +4,7 @@
   "description": "Natural language census analytic tool.",
   "main": "app/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine-node spec",
+    "test": "mocha -w spec/public/setup.js spec/public/*[sS]pec.jsx ./node_modules/.bin/jasmine-node spec",
     "test:watch": "npm test -- --watch"
   },
   "keywords": [
@@ -39,6 +39,7 @@
     "lodash": "^4.13.1",
     "materialize": "^1.0.0",
     "materialize-css": "^0.97.6",
+    "mocha": "^2.5.3",
     "moment": "^2.13.0",
     "mz": "^2.4.0",
     "nlp-locale": "0.0.3",

@@ -15,8 +15,12 @@ class NavBar extends React.Component {
       <Button floating fab='vertical' icon='settings' large
           className='blue-grey darken-1'
           style={{bottom: '45px', right: '24px'}}>
+        <Link to={`/${this.props.baseURL}/table`}>
+          <Button floating icon='view_list' tooltip='table'
+            className='blue-grey lighten-1'/>
+        </Link>
         <Link to={`/${this.props.baseURL}/pie`}>
-          <Button floating icon='pie_chart' tooltip='table'
+          <Button floating icon='pie_chart' tooltip='pie'
             className='blue-grey lighten-1'/>
         </Link>
         <Link to={`/${this.props.baseURL}/time`}>
