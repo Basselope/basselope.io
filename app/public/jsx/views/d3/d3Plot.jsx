@@ -44,27 +44,32 @@ const axis =
     icon: 'sentiment_dissatisfied',
     x: -1
   },{
+    icon: 'sentiment_neutral',
+    x: 0
+  },{
     icon: 'sentiment_satisfied',
     x: 1
   }];
 
 const metrics = (d,m) => {
-  let mean = m.x(m.mean);
-  let dev = m.x(m.dev)/2;
+
   return [{
-    x: mean,
-    y1: -50,
-    y2: height+70,
-    class: 'plot-mean'
-  },{
-    x: mean - dev,
-    y1: height,
-    y2: height+50,
+    val: null,
+    x: m.x(m.mean - m.dev),
+    y1: -30,
+    y2: 20,
     class: 'plot-sdNeg'
   },{
-    x: mean + dev,
-    y1: height,
-    y2: height+50,
+    val: m.mean * 100,
+    x: m.x(m.mean),
+    y1: -42,
+    y2: height + 10,
+    class: 'plot-mean'
+  },{
+    val: null,
+    x: m.x(m.mean + m.dev),
+    y1: -30,
+    y2: 20,
     class: 'plot-sdPos'
   }]
 };
@@ -91,7 +96,13 @@ function transition(count) {
           .duration(700)
           .attr('x1', (d) => d.x)
           .attr('x2', (d) => d.x)
-          .style('opacity', .7);
+          .style('opacity', .9);
+
+        d3.select('.plot-metrics').selectAll('text')
+          .transition()
+          .duration(700)
+          .attr('x', (d) => d.x)
+          .style('opacity', .9);
 
         d3.select('.plot-axis').selectAll('text')
           .transition()
@@ -138,19 +149,31 @@ const createNode = function(...data) {
         .style('opacity',.5);
     });
 
-  svg.append('g')
+  let metricGroup = svg.append('g')
     .attr('class', 'plot-metrics')
-  .selectAll('line')
+  .selectAll()
     .data(metrics(d,m))
-    .enter().append('line')
+    .enter();
+
+  metricGroup.append('line')
     .attr('y1', (d) => d.y1)
     .attr('y2', (d) => d.y2)
     .attr('x1', width/2)
     .attr('x2', width/2)
-    .attr("stroke", "gray")
+    .attr("stroke", "grey")
     .attr("stroke-width", 3)
     .attr('class', (d) => d.class)
     .style('opacity',0);
+
+  metricGroup.append('text')
+    .text((d) => (d.val ? `${d.val > 0 ? '+' : ''}${Math.round(d.val)}` : null))
+    .attr('y', 0 - 50)
+    .attr('x', (d) => width/2)
+    .attr('font-family', 'Varela Round')
+    .attr('font-size', '19px')
+    .style("text-anchor", "middle")
+    .style('fill', 'grey')
+    .style('opacity', 0);
 
   let axisGroup = svg.append('g')
     .attr('class', 'plot-axis')
@@ -160,7 +183,7 @@ const createNode = function(...data) {
 
   axisGroup.append('text')
     .text((d) => d.icon)
-    .attr('y', height + 120)
+    .attr('y', height + 50)
     .attr('x', (d) => m.x(d.x * m.xRangeMax))
     .attr('font-family', 'Material Icons')
     .attr('font-size', '42px')
@@ -168,9 +191,9 @@ const createNode = function(...data) {
     .style('fill', (d) => d3.rgb(m.c(d.x)).darker(1.3))
     .style('opacity', 0);
 
-  axisGroup.append('g:text')
+  axisGroup.append('text')
     .text((d) => (d.x ? `${d.x > 0 ? '+' : ''}${Math.round(d.x * m.xRangeMax * 100)}` : null))
-    .attr('y', height + 70)
+    .attr('y', height)
     .attr('x', (d) => m.x(d.x * m.xRangeMax))
     .attr('font-family', 'Varela Round')
     .attr('font-size', '19px')

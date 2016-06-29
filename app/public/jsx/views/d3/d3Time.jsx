@@ -4,32 +4,6 @@ const node = document.createElement('div');
 
 function d3Time() {
 
-  function combineData(dataSet) {
-    let newObject = {};
-    let newObjectCount = {};
-    for (var key in dataSet) {
-      var current = dataSet[key];
-      if (!newObject[current.dateFormat]) {
-        newObject[current.dateFormat] = current
-      } else {
-        newObject[current.dateFormat] = {
-          dateOrig: current.dateOrig,
-          dateFormat: current.dateFormat,
-          avgScore: newObject[current.dateFormat].avgScore + current.avgScore,
-          positiveSentiments: newObject[current.dateFormat].positiveSentiments + current.positiveSentiments,
-          negativeSentiments: newObject[current.dateFormat].negativeSentiments + current.positiveSentiments
-        }
-      }
-      newObjectCount[current.dateFormat] = (newObjectCount[current.dateFormat] ? newObjectCount[current.dateFormat] + 1 : 1)
-    }
-    var data = [];
-    for (var key in newObject) {
-      newObject[key].avgScore = newObject[key].avgScore / newObjectCount[key]
-      data.push(newObject[key])
-    }
-    return data;
-  }
-
   function prefix_postfix(dataContent) {
     dataContent.sort(function(a, b) {
       return a.dateFormat - b.dateFormat;
@@ -82,20 +56,38 @@ function d3Time() {
     }
   }
 
-  // function copyObject(copyMe) {
-  //     let temp = {};
-  //     for (var key in copyMe) {
-  //         temp[key] = copyMe[key];
-  //     }
-  //     return temp;
-  // }
 
   function formatDate(unformated) {
     let theDate = unformated.years + "" + ('0' + unformated.months).slice(-2) + "" + ('0' + unformated.date).slice(-2);
     return Number(theDate); //theDate.getYear() + "" + (theDate.getMonth() + 1) + "" + (theDate.getDay() + 1) + "" + theDate.getHours()
   }
 
-  const color = d3.scale.linear().range(['#f80', '#08f']).domain([-10, 10]);
+  function combineData(dataSet) {
+    let newObject = {};
+    let newObjectCount = {};
+    for (var key in dataSet) {
+      var current = dataSet[key];
+      if (!newObject[current.dateFormat]) {
+        newObject[current.dateFormat] = current
+      } else {
+        newObject[current.dateFormat] = {
+          dateOrig: current.dateOrig,
+          dateFormat: current.dateFormat,
+          avgScore: newObject[current.dateFormat].avgScore + current.avgScore,
+          positiveSentiments: newObject[current.dateFormat].positiveSentiments + current.positiveSentiments,
+          negativeSentiments: newObject[current.dateFormat].negativeSentiments + current.negativeSentiments
+        }
+      }
+      newObjectCount[current.dateFormat] = (newObjectCount[current.dateFormat] ? newObjectCount[current.dateFormat] + 1 : 1)
+    }
+    var data = [];
+    for (var key in newObject) {
+      newObject[key].avgScore = newObject[key].avgScore / newObjectCount[key]
+      data.push(newObject[key])
+    }
+    return data;
+  }
+
 
   var svg = d3.select(node).append("svg")
     .attr("width", 600)
@@ -107,7 +99,7 @@ function d3Time() {
     if (passedData)
       resolved = passedData.reduce((curr, val) => curr ? val.hasOwnProperty('set') : false, true);
     if (!resolved)
-      return document.createElement('div'); // = passedData.reduce((curr,val) => [].concat(curr,val.data), []);
+      return null; // = passedData.reduce((curr,val) => [].concat(curr,val.data), []);
     let data = [];
     let dataObject = {};
 
@@ -134,36 +126,64 @@ function d3Time() {
     let seperatedData = posNegFilter(data);
     let positiveData = combineData(seperatedData.positive);
     let negativeData = combineData(seperatedData.negative);
+
     ranges.yMin = Math.min.apply(Math, negativeData.map(function(o) {
       return o.avgScore;
     })); // (negativeData[1].avgScore)
     ranges.yMax = Math.max.apply(Math, positiveData.map(function(o) {
       return o.avgScore;
     })); // (positiveData[positiveData.length-2].avgScore)
+
     console.log("POSITIVEDATA", positiveData, seperatedData.positive);
     console.log("NEGATIVEDATA", negativeData, seperatedData.negative);
     //console.log(ranges)
     var m = [80, 80, 80, 80];
     var w = 600;
     var h = 300;
-    console.log("RANGES", ranges)
+    console.log("RANGES", ranges);
+
+    let yMaxRange = Math.max(Math.abs(ranges.yMin), ranges.yMax);
+    const color = d3.scale.linear().domain([ranges.yMin, ranges.yMax]).range(['#f80', '#08f']);
     var x = d3.scale.linear().domain([0, positiveData.length]).range([0, w]);
-    var y = d3.scale.linear().domain([ranges.yMin, ranges.yMax]).range([h, 0]);
+    var y = d3.scale.linear().domain([-yMaxRange, yMaxRange]).range([h, 0]);
     var line = d3.svg.line()
       .x(function(d, i) {
         return x(i); //TODO: Here it only iterates on index, not date. s
       })
       .y(function(d) {
         return y(d.avgScore);
-      }).interpolate("monotone")
-    svg.append("path").attr("d", line(positiveData))
-      .style("fill", "#000000")
-      .style("stroke-width", 2)
-      .style("stroke", "#000000");
-    svg.append("path").attr("d", line(negativeData))
-      .style("fill", "#FFC400")
-      .style("stroke-width", 2)
-      .style("stroke", "#FFC400");
+      }).interpolate("basis");
+
+    let path = line(positiveData) + line(negativeData);
+
+    var gradient = svg.append("svg:defs")
+      .append("svg:linearGradient")
+      .attr("id", "gradient")
+      .attr("x1", "100%")
+      .attr("y1", "100%")
+      .attr("x2", "100%")
+      .attr("y2", "0%")
+      .attr("spreadMethod", "pad")
+      .attr('gradientUnits', 'userSpaceOnUse');
+
+// Define the gradient colors
+    gradient.append("svg:stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "#f80")
+      .attr("stop-opacity", 1);
+
+    gradient.append("svg:stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#08f")
+      .attr("stop-opacity", 1);
+
+    svg.append('g').attr('fill', 'url(#gradient)')
+      .append('path')
+      .attr('d', path);
+    // svg.append("path").attr("d", line(positiveData))
+    //   .style('fill', 'url(#gradient');
+    // svg.append("path").attr("d", line(negativeData))
+    //   .style('fill', 'url(#gradient');
     return svg[0][0];
   };
   return {
