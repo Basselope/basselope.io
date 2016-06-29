@@ -27,7 +27,6 @@ const Graph = (node, title) => (
     <div className="valign container center-align" style={{ left: 0, right: 0, overflow: 'visible' }}>
       { node ? (<div className="graphTitle">  {Header(title)}</div>) : (<Preloader />) }
       <RD3Component data={ node  || document.createElement('div') } />
-
     </div>
   </div>
 );
