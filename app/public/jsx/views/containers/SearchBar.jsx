@@ -37,7 +37,7 @@ class SearchBar extends React.Component {
     this.props.fetchWikipedia(this.state.term);
     this.setState({ term: '' });
 
-    const path = `${this.state.term}/plot`.replace(/\W^[/]/g, '-');
+    const path = `/${this.state.term}/plot`.replace(/\W^[/]/g, '-');
     browserHistory.push(path);
   }
 
@@ -49,7 +49,7 @@ class SearchBar extends React.Component {
     return (
       <div>
         <Button style={{marginLeft: '20px', marginTop: '40px'}} floating icon='search' className='blue-grey lighten-1' />
-        <form onSubmit={this.onFormSubmit} style={{width: '30%', marginLeft: '80px', marginTop: '-50px'}}>
+        <form onSubmit={this.onFormSubmit}>
           <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
           <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
         </form>
