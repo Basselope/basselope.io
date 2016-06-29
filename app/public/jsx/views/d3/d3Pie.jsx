@@ -2,55 +2,61 @@ import d3 from 'd3'
 
 const node = document.createElement('div');
 
-  var w = 300;
-  var h = 300;
+  const w = 300;
+  const h = 300;
 
-  var outerRadius = w / 2;
-  var innerRadius = 0;
-  var arc = d3.svg.arc()
+  const outerRadius = w / 2;
+  const innerRadius = 0;
+  const arc = d3.svg.arc()
     .innerRadius(innerRadius)
     .outerRadius(outerRadius);
 
-  var pie = d3.layout.pie();//.value((d) => d[1]);
+  const pie = d3.layout.pie();
 
-  //Easy colors accessible via a 10-step ordinal scale
-  var color = d3.scale.category10();
 
-  //Create SVG element
-  var svg = d3.select(node)
+  const color = d3.scale.category10();
+
+
+  const svg = d3.select(node)
     .append('svg')
     .attr('width', w)
     .attr('height', h);
 
 function createNode(...data) {
-
   let resolved = false;
   if(data)
     resolved = data.reduce((curr,val) => val || curr ? val.hasOwnProperty('trendingTopics') : false, true);
   if(!resolved)
     return null;
 
-  let topics = data.reduce((curr,val) => [].concat(curr,val.trendingTopics), []);
 
-  let angles = topics.map((val) => val[1]);
+  let topics = data.reduce((curr,val) => [].concat(curr,val.trendingTopics), []).sort((a, b) => b[1] - a[1]);
+  let filteredTopics = [];
+  topics.forEach((val) => {
+    if (filteredTopics.indexOf(val) === -1) {
+      filteredTopics.push(val);
+    }
+  });
 
-  var arcs = svg.selectAll('g.arc')
+  let angles = filteredTopics.map((val) => val[1]).slice(0, 7);
+
+  const arcs = svg.selectAll('g.arc')
     .data(pie(angles))
-  .enter().append('g')
+    .enter().append('g')
     .attr('class', 'arc')
     .attr('transform', `translate(${outerRadius},${outerRadius})`);
 
-  // //Draw arc paths
+
   arcs.append('path')
     .attr('fill', (d,i) => color(i))
     .attr('d', arc)
     .style('opacity', .5);
 
-  // //Labels
+
   arcs.append('text')
     .attr('transform', (d) => `translate(${arc.centroid(d)})`)
     .attr('text-anchor', 'middle')
-    .text((d,i) => topics[i]);
+    .text((d,i) => filteredTopics[i][0]);
 
   return svg[0][0];
 
