@@ -101,8 +101,8 @@ class Home extends React.Component {
 
   tabBuilder() {
     return (
-      <Tabs style={{backgroundColor: 'inherit'}} className='tab-demo z-depth-1'>
-        <Tab title="About Collatio" active>{this.hoverPopUp(this.aboutColl())}</Tab>
+      <Tabs className='tab-demo z-depth-1'>
+        <Tab title="About Basselope" active>{this.hoverPopUp(this.aboutColl())}</Tab>
         <Tab title="About The Team" >{this.hoverPopUp(this.aboutUs())}</Tab>
         <Tab title="About The Tech">{this.hoverPopUp(this.aboutTech())}</Tab>
         <Tab title="Source">{this.hoverPopUp(this.aboutColl())}</Tab>
@@ -118,7 +118,7 @@ class Home extends React.Component {
 
         <div style={{height:'200vh'}}>
           <div style={{height:'100vh'}}>
-            <p className="collection-header" style={{'textAlign': 'CENTER', 'fontSize': '60px' }}>Collatio.io</p>
+            <p className="collection-header" style={{'textAlign': 'CENTER', 'fontSize': '60px' }}>Basselope</p>
             <p className="collection-item" style={{'textAlign': 'center'}}> A Natural Language Processing sentiment analysis tool on social media content</p>
             <div style={{zIndex: 3, width: '50%', left: 0, right: 0, margin: 'auto'}} >
               <SearchBar />
