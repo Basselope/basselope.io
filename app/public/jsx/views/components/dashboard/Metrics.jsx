@@ -62,9 +62,9 @@ class Metrics extends React.Component {
 
     return (
       <Navbar className='blue-grey lighten-2'>
-        <Row style={{marginLeft: '200px'}}>
+        <Row>
           {this.chipBuilder('Search', <SearchBar />)}
-          {this.chipBuilder('Weighted Sentiment (-100 to +100):', this.renderMean())}
+          {this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}
           {this.chipBuilder('Sample Size:', this.renderTotal())}
           {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
           {this.chipBuilder('Neutral:', `${this.renderNeutralPercent()}%`)}
