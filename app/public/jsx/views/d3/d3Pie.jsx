@@ -30,15 +30,10 @@ function createNode(...data) {
     return null;
 
 
-  let topics = data.reduce((curr,val) => [].concat(curr,val.trendingTopics), []).sort((a, b) => b[1] - a[1]);
-  let filteredTopics = [];
-  topics.forEach((val) => {
-    if (filteredTopics.indexOf(val) === -1) {
-      filteredTopics.push(val);
-    }
-  });
+  let topics = data.reduce((curr,val) => [].concat(curr,val.trendingTopics), []).sort((a, b) => b[1] - a[1]).slice(0, 7);
 
-  let angles = filteredTopics.map((val) => val[1]).slice(0, 7);
+
+  let angles = topics.map((val) => val[1]);
 
   const arcs = svg.selectAll('g.arc')
     .data(pie(angles))
@@ -56,7 +51,7 @@ function createNode(...data) {
   arcs.append('text')
     .attr('transform', (d) => `translate(${arc.centroid(d)})`)
     .attr('text-anchor', 'middle')
-    .text((d,i) => filteredTopics[i][0]);
+    .text((d,i) => topics[i][0]);
 
   return svg[0][0];
 
