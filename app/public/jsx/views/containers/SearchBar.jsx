@@ -48,7 +48,6 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        <Button style={{marginLeft: '20px', marginTop: '40px'}} floating icon='search' className='blue-grey lighten-1' />
         <form onSubmit={this.onFormSubmit}>
           <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
           <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />

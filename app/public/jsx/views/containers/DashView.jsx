@@ -18,10 +18,22 @@ class SentimentPlot extends React.Component {
   render() {
     let view = this.props.params.view;
     let g = this.props.d3.graph;
+    let title="Graph";
+    switch(view){
+      case "pie":
+        title="Related Topics";
+        break;
+      case "plot":
+        title = "Sentiment Analysis over Weighted Ranking";
+        break;
+      case "time":
+        title="Sentiment Tone over Time";
+        break;
+    }
     // let node = (view in g) ? d3.Graph(g[view]) : d3.Preload();
     return (
       <div className="dash-view">
-        { d3.Graph(g[view]) }
+        { d3.Graph(g[view], title) }
       </div>
     );
   }
