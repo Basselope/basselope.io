@@ -42,10 +42,9 @@ function createNode(...data) {
 
   // //Draw arc paths
   arcs.append('path')
-    .attr('fill', function(d, i) {
-      return color(i);
-    })
-    .attr('d', arc);
+    .attr('fill', (d,i) => color(i))
+    .attr('d', arc)
+    .style('opacity', .5);
 
   // //Labels
   arcs.append('text')
