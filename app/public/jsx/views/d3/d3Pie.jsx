@@ -23,6 +23,8 @@ const node = document.createElement('div');
     .attr('height', h);
 
 function createNode(...data) {
+  console.log("DATA DATA DATA DATA DATA",data)
+
   let resolved = false;
   if(data)
     resolved = data.reduce((curr,val) => val || curr ? val.hasOwnProperty('trendingTopics') : false, true);
@@ -32,7 +34,7 @@ function createNode(...data) {
 
   let topics = data.reduce((curr,val) => [].concat(curr,val.trendingTopics), []).sort((a, b) => b[1] - a[1]).slice(0, 7);
 
-
+  console.log("CHECK IT OUT",data, topics)
   let angles = topics.map((val) => val[1]);
 
   const arcs = svg.selectAll('g.arc')
