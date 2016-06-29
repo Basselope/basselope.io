@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Navbar, Row, Col, Chip } from 'react-materialize'
+import { Navbar, Row, Col, Chip, Button } from 'react-materialize'
 import SearchBar from '../../containers/SearchBar.jsx'
 
 class Metrics extends React.Component {
@@ -50,11 +50,7 @@ class Metrics extends React.Component {
 
   chipBuilder(title, stats) {
     return (
-      <Col>
-        <Chip>
-          {title} {stats}
-        </Chip>
-      </Col>
+      <Button waves='light'>{title} {stats}</Button>
     );
   }
 
@@ -67,6 +63,7 @@ class Metrics extends React.Component {
     return (
       <Navbar className='blue-grey lighten-2'>
         <Row style={{marginLeft: '200px'}}>
+          {this.chipBuilder('Search', <SearchBar />)}
           {this.chipBuilder('Weighted Sentiment (-100 to +100):', this.renderMean())}
           {this.chipBuilder('Sample Size:', this.renderTotal())}
           {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
