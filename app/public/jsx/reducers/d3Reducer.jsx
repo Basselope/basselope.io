@@ -10,7 +10,7 @@ import d3Pie from '../views/d3/d3Pie.jsx'
 const INITIAL_STATE = { data: { twitter: null, reddit: null }, graph: { plot: null, time: null, pie: null } };
 
 
-const d3Reducer = (state = INITIAL_STATE, action) => {
+const d3Reducer = (state, action) => {
 
   switch(action.type) {
     case RESET_STATE:

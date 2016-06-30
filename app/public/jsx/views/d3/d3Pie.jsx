@@ -128,18 +128,22 @@ function createNode(...data) {
 
 
   arcs.append('text')
-    .attr("transform", function(d) { //set the label's origin to the center of the arc
-      //we have to make sure to set these before calling arc.centroid
-      console.log(d)
-      d.outerRadius = outerRadius + 50; // Set Outer Coordinate
-      d.innerRadius = outerRadius + 45; // Set Inner Coordinate
-      return "translate(" + arc.centroid(d) +")";
-    }).attr("text-anchor", function(d) {
-      // are we past the center?
-      return (d.endAngle + d.startAngle)/2 > Math.PI ?
-        "end" : "start";
-    })
+    .attr('transform', (d) => `translate(${arc.centroid(d)})`)
+    .attr('text-anchor', 'middle')
     .text((d,i) => topics[i][0]);
+  
+    // .attr("transform", function(d) { //set the label's origin to the center of the arc
+    //   //we have to make sure to set these before calling arc.centroid
+    //   console.log(d)
+    //   d.outerRadius = outerRadius + 50; // Set Outer Coordinate
+    //   d.innerRadius = outerRadius + 45; // Set Inner Coordinate
+    //   return "translate(" + arc.centroid(d) +")";
+    // }).attr("text-anchor", function(d) {
+    //   // are we past the center?
+    //   return (d.endAngle + d.startAngle)/2 > Math.PI ?
+    //     "end" : "start";
+    // })
+    // .text((d,i) => topics[i][0]);
 
   return svg[0][0];
 

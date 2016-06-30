@@ -49,21 +49,19 @@ class Home extends React.Component {
   aboutColl(){
     return (
       <div>Basselope
-        When browsing through popular social media platforms such as twitter or reddit, have you ever wanted to know what other people thought of a particular topic? For example, the recent NBA finals where the calvs beat the warriors. Is Lebron James winning and Stephen Curry losing a positive or negative outcome? We created an application called Basselope that performs data visualization of social media content using sentiment analysis. For example, a sample piece of data would be a tweet that says: Curry deserved to win! and we use our algorithm to determine this tweets sentiment.
+        <p>When browsing through popular social media platforms such as twitter or reddit, have you ever wanted to know what other people thought of a particular topic? For example, the recent NBA finals where the calvs beat the warriors. Is Lebron James winning and Stephen Curry losing a positive or negative outcome? We created an application called Basselope that performs data visualization of social media content using sentiment analysis. For example, a sample piece of data would be a tweet that says: Curry deserved to win! and we use our algorithm to determine this tweets sentiment.</p>
 
-        Simply by searching a topic in Basselope, a data visualized graph is displayed that shows a sample size of aggregated social media content and its sentiment values. Each bubble is a data piece and the size of the bubble, as well as its height indicates its strength. Whereas the horizontal axis displays the bubble's sentiment. So in this case, the metrics at the top and the graph show that lebron james has an overall 'positive or negative' weighted sentiment, maybe because he just won an NBA championship. How our sentiment works is … 'explain more about algorithm here'
+        <p>Simply by searching a topic in Basselope, a data visualized graph is displayed that shows a sample size of aggregated social media content and its sentiment values. Each bubble is a data piece and the size of the bubble, as well as its height indicates its strength. Whereas the horizontal axis displays the bubble's sentiment. So in this case, the metrics at the top and the graph show that lebron james has an overall 'positive or negative' weighted sentiment, maybe because he just won an NBA championship. How our sentiment works is … 'explain more about algorithm here'</p>
 
-        What if we want to see what people thought of Lebron James before he won the championship? We have a timeplot that shows the sentiment for a topic in the past and present. Based on the graph, it seems he had a negative sentiment before, and only recently has his sentiment been positive.
+        <p>What if we want to see what people thought of Lebron James before he won the championship? We have a timeplot that shows the sentiment for a topic in the past and present. Based on the graph, it seems he had a negative sentiment before, and only recently has his sentiment been positive.</p>
 
-        Ok, that's cool and all but what about topics that are related to lebron james? Oh, then just click this pie chart! It shows the most common words associated with the searched topic, and it seems people like to say 'x' and lebron james in the same sentence.
+          <p> Ok, that's cool and all but what about topics that are related to lebron james? Oh, then just click this pie chart! It shows the most common words associated with the searched topic, and it seems people like to say 'x' and lebron james in the same sentence.</p>
 
-        Of course, for the very curious user who wants to see the actual tweet or comment that led to the sentiment analysis of lebron james, they can go to the table. It shows all of our data from our api sources twitter, reddit and Wikipedia. Let's choose a sample, *go to reddit comment* User 'x' commented 'xxxxxxx lebron james xxxxxxx' with 20 upvotes!
+            <p>Of course, for the very curious user who wants to see the actual tweet or comment that led to the sentiment analysis of lebron james, they can go to the table. It shows all of our data from our api sources twitter, reddit and Wikipedia. Let's choose a sample, *go to reddit comment* User 'x' commented 'xxxxxxx lebron james xxxxxxx' with 20 upvotes!</p>
 
-        Now we can confirm that other people hate Lebron James just as much as us!
+        <p> Now we can confirm that other people hate Lebron James just as much as us!
         The technologies we used are react and redux on the front-end
-        We used express and nodejs on the back-end
-
-        For the build tools, we used webpack to bundle the files and gulp</div>
+        We used express and nodejs on the back-end. For the build tools, we used webpack to bundle the files and gulp</p></div>
     )
   }
 
