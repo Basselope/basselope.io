@@ -1,5 +1,6 @@
 import d3 from 'd3'
 
+function d3Pie () {
 const node = document.createElement('div');
 
 function getTopics (data){
@@ -148,5 +149,7 @@ function createNode(...data) {
   return svg[0][0];
 
 }
+  return createNode;
+}
 
-export default createNode
+export default d3Pie

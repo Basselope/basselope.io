@@ -62,18 +62,16 @@ class Metrics extends React.Component {
 
     return (
       <Navbar className='blue-grey lighten-2'>
-
-          <Dropdown trigger={
-            <Button>Metrics</Button>
-            }>
-            <a>{this.chipBuilder('Search', <SearchBar />)}</a>
-            <a>{this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}</a>
-            <a>{this.chipBuilder('Sample Size:', this.renderTotal())}</a>
-            <NavItem>{this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}</NavItem>
-            <NavItem>{this.chipBuilder('Neutral:', `${this.renderNeutralPercent()}%`)}</NavItem>
-            <NavItem>{this.chipBuilder('Positive:', `${this.renderPosPercent()}%`)}</NavItem>
-          </Dropdown>
-
+        <Navbar className='blue-grey lighten-2'>
+          <Row>
+            {this.chipBuilder('Search', <SearchBar />)}
+            {this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}
+            {this.chipBuilder('Sample Size:', this.renderTotal())}
+            {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
+            {this.chipBuilder('Neutral:', `${this.renderNeutralPercent()}%`)}
+            {this.chipBuilder('Positive:', `${this.renderPosPercent()}%`)}
+          </Row>
+        </Navbar>
 
       </Navbar>
     );

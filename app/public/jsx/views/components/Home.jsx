@@ -24,7 +24,7 @@ class Home extends React.Component {
       <Row>
         <Col m={4} s={12}>
           <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"} waves='light'/>}
-                title="Ben Chen"
+                title="Ben Chen   (+Oliver)"
                 reveal={<p>Product Owner<br/>Ben Chen graduated from NYU with a computer scienc</p>}>
             <p><a href="https://github.com/byc219">Github</a></p>
           </Card>
