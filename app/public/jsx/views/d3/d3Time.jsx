@@ -65,7 +65,7 @@ const Map = (content) => {
     .x((d,i) => X(i))
     .y0((d,i) => Y(d.values.negative.avg))
     .y1((d,i) => Y(d.values.positive.avg))
-    .interpolate('cardinal')(d);
+    .interpolate('monotone')(d);
 
   // let Mean = d3.mean(d,(val) => val[0]);
   // let Dev = d3.deviation(d,(val) => val[0]);
@@ -95,54 +95,22 @@ const Map = (content) => {
 const markers = (m) => {
 
   return [{
-    x1: 0-33,
-    x2: width+33,
+    x1: m.maxim.negative - m.d.length/7,
+    x2: m.maxim.negative + m.d.length/7,
     y: m.yRange[0],
     class: 'time-min'
   },{
-    x1: 0-100,
-    x2: width+100,
+    x1: 0 - m.d.length/7,
+    x2: m.d.length + m.d.length/7,
     y: 0,
     class: 'time-zero'
   },{
-    x1: 0-33,
-    x2: width+33,
+    x1: m.maxim.positive - m.d.length/7,
+    x2: m.maxim.positive + m.d.length/7,
     y: m.yRange[1],
     class: 'time-max'
   }]
 };
-
-// function transition(count) {
-//   d3.select('.plot-data').selectAll('circle')
-//     .transition()
-//     .delay((d,i) => (i * 33 + (count - i)))
-//     .duration(420)
-//     .each((d,i) => {
-//       if(i === count-1) {
-//
-//         d3.select('.plot-metrics').selectAll('line')
-//           .transition()
-//           .duration(700)
-//           .attr('x1', (d) => d.x)
-//           .attr('x2', (d) => d.x)
-//           .style('opacity', .9);
-//
-//         d3.select('.plot-metrics').selectAll('text')
-//           .transition()
-//           .duration(700)
-//           .attr('x', (d) => d.x)
-//           .style('opacity', .9);
-//
-//         d3.select('.plot-axis').selectAll('text')
-//           .transition()
-//           .duration(300)
-//           .style('opacity', .7);
-//
-//       }
-//     })
-//     .attr('r', (d) => d.r)
-//     .attr('cy', (d) => d.y);
-// }
 
 const append = {
   data: (timeLine,m) => {
@@ -161,63 +129,63 @@ const append = {
       .append('g').attr('class',(d) => d.class);
 
     markerGroups.append('line')
-      .attr('x1', (d) => d.x1)
-      .attr('x2', (d) => d.x2)
+      .attr('x1', (d) => m.x(d.x1))
+      .attr('x2', (d) => m.x(d.x2))
       .attr('y1', (d) => m.y(d.y))
       .attr('y2', (d) => m.y(d.y))
       .attr('class',(d) => d.class)
-      .attr('stroke', '#000')
+      .attr('stroke', 'grey')
       .attr('stroke-width', 3)
-      .style('opacity', .3);
+      .style('opacity', 1);
 
-    timeMarkers.append('line')
+    let formatDate = (val) => `${val.slice(-2)} / ${val.slice(4,6)} / ${val.slice(0,4)}`;
+
+    let maxNeg = timeMarkers.append('g').attr('class', 'time-max-pos');
+    let dateNeg = m.d[m.maxim.negative].key;
+
+    maxNeg.append('line')
       .attr('x1', m.x(m.maxim.negative))
       .attr('x2', m.x(m.maxim.negative))
       .attr('y1', m.y(0))
-      .attr('y2', m.y(m.yRange[0]) + 33)
-      .attr('stroke', '#000')
-      .attr('stroke-width', 5)
-      .style('opacity', .3);
+      .attr('y2', m.y(m.yRange[0]))
+      .attr('stroke', 'grey')
+      .attr('stroke-width', 3)
+      .style('opacity', 1);
 
-    timeMarkers.append('line')
+    maxNeg.append('text')
+      .text(`${Math.round(m.d[m.maxim.negative].values.negative.avg * 100)}/100 on ${formatDate(dateNeg)}`)
+      .attr('y', m.y(m.yRange[0]) + 33)
+      .attr('x', m.x(m.maxim.negative))
+      .attr('font-family', 'Varela Round')
+      .attr('font-size', '17px')
+      .style("text-anchor", "middle")
+      .style('fill', 'grey')
+      .style('opacity', 1);
+
+    let maxPos = timeMarkers.append('g').attr('class', 'time-max-neg');
+    let datePos = m.d[m.maxim.positive].key;
+
+    maxPos.append('line')
       .attr('x1', m.x(m.maxim.positive))
       .attr('x2', m.x(m.maxim.positive))
       .attr('y1', m.y(0))
-      .attr('y2', m.y(m.yRange[1]) - 33)
-      .attr('stroke', '#000')
-      .attr('stroke-width', 5)
-      .style('opacity', .3);
+      .attr('y2', m.y(m.yRange[1]))
+      .attr('stroke', 'grey')
+      .attr('stroke-width', 3)
+      .style('opacity', 1);
+
+    maxPos.append('text')
+      .text(`+${Math.round(m.d[m.maxim.positive].values.positive.avg * 100)}/100 on ${formatDate(datePos)}`)
+      .attr('y', m.y(m.yRange[1]) - 22)
+      .attr('x', m.x(m.maxim.positive))
+      .attr('font-family', 'Varela Round')
+      .attr('font-size', '17px')
+      .style("text-anchor", "middle")
+      .style('fill', 'grey')
+      .style('opacity', 1);
 
   },
   gradient: (svg) => {
-    let opacity = svg.append("svg:defs")
-      .append("svg:linearGradient")
-      .attr("id", "opacity")
-      .attr("x1", "0%")
-      .attr("y1", "100%")
-      .attr("x2", "100%")
-      .attr("y2", "100%")
-      .attr("spreadMethod", "pad");
-
-    opacity.append("svg:stop")
-      .attr("offset", "0%")
-      // .attr("stop-color", "#000")
-      .attr("stop-opacity", 0);
-
-    opacity.append("svg:stop")
-      .attr("offset", "10%")
-      // .attr("stop-color", "#fff")
-      .attr("stop-opacity", 1);
-
-    opacity.append("svg:stop")
-      .attr("offset", "90%")
-      // .attr("stop-color", "#fff")
-      .attr("stop-opacity", 1);
-
-    opacity.append("svg:stop")
-      .attr("offset", "100%")
-      // .attr("stop-color", "#000")
-      .attr("stop-opacity", 0);
 
     let gradient = svg.append("svg:defs")
       .append("svg:linearGradient")
