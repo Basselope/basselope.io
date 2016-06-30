@@ -9,6 +9,7 @@ import { fetchReddit } from '../../actions/api/reddit.jsx'
 import { fetchTwitter } from '../../actions/api/twitter.jsx'
 import { fetchAlchemy } from '../../actions/api/alchemy.jsx'
 import { fetchWikipedia } from '../../actions/api/wikipedia.jsx'
+import { resetState } from '../../actions/resetState.jsx'
 import SList from '../components/searchbar/SList.jsx'
 import HoverInfo from '../components/searchbar/HoverInfo.jsx'
 
@@ -31,6 +32,7 @@ class SearchBar extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    this.props.resetState();
 
     this.props.fetchReddit(this.state.term);
     this.props.fetchTwitter(this.state.term);
@@ -58,7 +60,7 @@ class SearchBar extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter, fetchWikipedia, fetchAlchemy }, dispatch);
+  return bindActionCreators({ fetchBing, fetchReddit, fetchTwitter, fetchWikipedia, fetchAlchemy, resetState }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(SearchBar)

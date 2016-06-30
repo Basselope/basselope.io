@@ -1,17 +1,20 @@
 import { FETCH_REDDIT } from '../actions/api/reddit.jsx'
 import { FETCH_TWITTER } from '../actions/api/twitter.jsx'
+import { RESET_STATE } from '../actions/resetState.jsx'
 
 
 import d3Plot from '../views/d3/d3Plot.jsx'
 import d3Time from '../views/d3/d3Time.jsx'
 import d3Pie from '../views/d3/d3Pie.jsx'
 
-const INITIAL_STATE = { data: {twitter: null, reddit: null }, graph: { plot: null, time: null, pie: null } };
+const INITIAL_STATE = { data: { twitter: null, reddit: null }, graph: { plot: null, time: null, pie: null } };
 
 
 const d3Reducer = (state = INITIAL_STATE, action) => {
 
   switch(action.type) {
+    case RESET_STATE:
+      return { ...INITIAL_STATE };
     case FETCH_REDDIT:
       return { ...state,
         data: { ...state.data,
