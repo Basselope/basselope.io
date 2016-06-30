@@ -17,6 +17,7 @@ const call = {
     },
     params: {
       count: 100,
+      result_type: 'popular',
       include_entities: true
     }
   }),
@@ -94,7 +95,8 @@ const q = {
   }),
   reddit: (query, path) => ({
     params: {
-      q: query
+      q: query,
+      sort: 'hot'
     }
   }),
   wiki: (query) => ({

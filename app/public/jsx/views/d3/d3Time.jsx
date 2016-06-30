@@ -1,193 +1,225 @@
 import d3 from 'd3'
+import _ from 'lodash'
 
 const node = document.createElement('div');
-
 const width = 700,
       height = 300;
 
-function d3Time() {
+const svg = d3.select(node).append('svg')
+  .attr('width', width)
+  .attr('height', height)
+  .style('overflow', 'visible');
 
-  function prefix_postfix(dataContent) {
-    dataContent.sort(function(a, b) {
-      return a.dateFormat - b.dateFormat;
-    });
-    var lower = {
-      dateOrig: dataContent[0].dateOrig, //years+"-"+data[0].created_at.months+"-"+data[0].created_at.date,
-      dateFormat: dataContent[0].dateFormat - 1,
-      avgScore: 0,
-      positiveSentiments: 0,
-      negativeSentiments: 0
-    };
-    var top = {
-      dateOrig: dataContent[0].dateOrig, //years+"-"+data[0].created_at.months+"-"+data[0].created_at.date,
-      dateFormat: dataContent[dataContent.length - 1].dateFormat + 1,
-      avgScore: 0,
-      positiveSentiments: 0,
-      negativeSentiments: 0
-    };
-    dataContent.unshift(lower);
-    dataContent.push(top);
-  }
-
-  function formatDate(unformated) {
-    let theDate = unformated.years + "" + ('0' + unformated.months).slice(-2) + "" + ('0' + unformated.date).slice(-2);
-    return Number(theDate); //theDate.getYear() + "" + (theDate.getMonth() + 1) + "" + (theDate.getDay() + 1) + "" + theDate.getHours()
-  }
-
-  function posNegFilter(data) {
-    let positiveData = [];
-    let negativeData = [];
-    for (var key in data) {
-      let curr = data[key];
-      let temp = {
-        dateOrig: curr.dateOrig,
-        dateFormat: curr.dateFormat,
-        avgScore: 0,
-        positiveSentiments: curr.positiveSentiments,
-        negativeSentiments: curr.negativeSentiments
-      };
-      if (curr.avgScore < 0) {
-        negativeData.push(curr);
-        positiveData.push(temp);
-      }
-      else if (curr.avgScore > 0) {
-        positiveData.push(curr);
-        negativeData.push(temp);
-      } else {
-        positiveData.push(temp);
-        negativeData.push(temp);
-      }
-    }
-    return {
-      positive: positiveData,
-      negative: negativeData
-    }
-  }
-
-  function combineData(dataSet) {
-    let newObject = {};
-    let newObjectCount = {};
-    for (var key in dataSet) {
-      var current = dataSet[key];
-      if (!newObject[current.dateFormat]) {
-        newObject[current.dateFormat] = current
-      } else {
-        newObject[current.dateFormat] = {
-          dateOrig: current.dateOrig,
-          dateFormat: current.dateFormat,
-          avgScore: newObject[current.dateFormat].avgScore + current.avgScore,
-          positiveSentiments: newObject[current.dateFormat].positiveSentiments + current.positiveSentiments,
-          negativeSentiments: newObject[current.dateFormat].negativeSentiments + current.negativeSentiments
-        }
-      }
-      newObjectCount[current.dateFormat] = (newObjectCount[current.dateFormat] ? newObjectCount[current.dateFormat] + 1 : 1)
-    }
-    var data = [];
-    for (var key in newObject) {
-      newObject[key].avgScore = newObject[key].avgScore / newObjectCount[key]
-      data.push(newObject[key])
-    }
-    return data;
-  }
-
-  function parseData(passedData) {
-    let data = [];
-    // let dataObject = {};
-    // let ranges = {}
-    for (var dataSources in passedData) {
-      let d = passedData[dataSources].data
-      for (var postKey in d) {
-        let content = d[postKey].content;
-        for (var contentKey in content) {
-          var sentimentScore = content[contentKey].sentiment.score;
-          var formattedDate = (formatDate(content[contentKey].created_at));
-          var temp = {
-            dateOrig: content[contentKey].created_at, //content[contentKey].created_at.years + "-" + content[contentKey].created_at.months + "-" + content[contentKey].created_at.date,
-            dateFormat: formattedDate,
-            avgScore: content[contentKey].sentiment.score,
-            positiveSentiments: content[contentKey].sentiment.positive.length,
-            negativeSentiments: content[contentKey].sentiment.negative.length
+const nest = (content) => {
+  // creates a key from content.created_at object 'YYYYMMDD'
+  let timeKey = (v) =>
+    Number(`${v.created_at.years}${('0' + v.created_at.months).slice(-2)}${('0' + v.created_at.date).slice(-2)}`);
+  return d3.nest()
+    .key((d) => timeKey(d))
+    .sortKeys(d3.ascending)
+    .entries(content)
+    .reduce((curr,d) => {
+      // if(d.values.length < 4)
+      //   return curr;
+      return [].concat(curr, { key: d.key,
+        values: d.values.reduce((curr, v, i) => {
+          let pushVal = (nest, val) => {
+            curr[nest].t += val;
+            curr[nest].avg = curr[nest].t / (i + 1);
+            curr[nest].values.push({ content: v, value: val });
           };
-          data.push(temp);
-        }
-      }
-    }
-    return prefix_postfix(data);
+
+          let s = v.sentiment;
+          let value = ( s.score * s.comparative ) / ( s.words.length * 5 );
+          s.comparative < 0 ? pushVal('negative', -value) : pushVal('positive', value);
+
+          return curr;
+        },{ negative:{ values:[], avg:0, t:0}, positive:{ values:[], avg:0, t:0} })
+      });
+    },[]);
+};
+
+const Map = (content) => {
+
+  let d = nest(content);
+
+  let xRange = d3.extent(d,(val) => Number(val.key));
+
+  let yMax = d3.max(d,(val) => val.values.positive.avg);
+  let yMin = d3.min(d,(val) => val.values.negative.avg);
+  let yRangeMax = Math.max(Math.abs(yMin),yMax);
+
+  let Maxim = d.reduce((curr,val,i) => {
+    let pos = val.values.positive.avg;
+    let neg = val.values.negative.avg;
+    curr.positive = (curr.positive === null && pos === yMax) ? i : curr.positive;
+    curr.negative = (curr.negative === null && neg === yMin) ? i : curr.negative;
+    return curr;
+  }, {positive: null, negative: null});
+
+  let Y = (v) => d3.scale.linear().domain([-yRangeMax,yRangeMax]).range([height, 0])(v);
+  // let X = (v) => d3.scale.linear().domain(xRange).range([0, width])(v);
+  let X = (v) => d3.scale.linear().domain([0,d.length-1]).range([0, width])(v);
+
+  let Area = d3.svg.area()
+    .x((d,i) => X(i))
+    .y0((d,i) => Y(d.values.negative.avg))
+    .y1((d,i) => Y(d.values.positive.avg))
+    .interpolate('cardinal')(d);
+
+  // let Mean = d3.mean(d,(val) => val[0]);
+  // let Dev = d3.deviation(d,(val) => val[0]);
+
+  // let R = (v) =>  3 + d3.scale.sqrt().domain(yRange).range([1,13])(Math.abs(v));
+  // let Color = (v) => d3.scale.linear().domain([-xRangeMax,xRangeMax]).range(['#f80', '#08f'])(v);
+
+  return {
+    d: d,
+
+    // c: Color,
+    // r: R,
+    x: X,
+    y: Y,
+
+    area: Area,
+    maxim: Maxim,
+
+    xRange: xRange,
+    yRange: [yMin,yMax],
+    yRangeMax: yRangeMax
+    // mean: Mean,
+    // dev: Dev
   }
+};
 
-  const svg = d3.select(node).append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .style('overflow', 'visible');
+const markers = (m) => {
 
-  const createNode = function(...data) {
+  return [{
+    x1: 0-33,
+    x2: width+33,
+    y: m.yRange[0],
+    class: 'time-min'
+  },{
+    x1: 0-100,
+    x2: width+100,
+    y: 0,
+    class: 'time-zero'
+  },{
+    x1: 0-33,
+    x2: width+33,
+    y: m.yRange[1],
+    class: 'time-max'
+  }]
+};
 
-    let resolved = false;
-    if (data)
-      resolved = data.reduce((curr, val) => curr ? val.hasOwnProperty('set') : false, true);
-    if (!resolved)
-      return null; // = passedData.reduce((curr,val) => [].concat(curr,val.data), []);
+// function transition(count) {
+//   d3.select('.plot-data').selectAll('circle')
+//     .transition()
+//     .delay((d,i) => (i * 33 + (count - i)))
+//     .duration(420)
+//     .each((d,i) => {
+//       if(i === count-1) {
+//
+//         d3.select('.plot-metrics').selectAll('line')
+//           .transition()
+//           .duration(700)
+//           .attr('x1', (d) => d.x)
+//           .attr('x2', (d) => d.x)
+//           .style('opacity', .9);
+//
+//         d3.select('.plot-metrics').selectAll('text')
+//           .transition()
+//           .duration(700)
+//           .attr('x', (d) => d.x)
+//           .style('opacity', .9);
+//
+//         d3.select('.plot-axis').selectAll('text')
+//           .transition()
+//           .duration(300)
+//           .style('opacity', .7);
+//
+//       }
+//     })
+//     .attr('r', (d) => d.r)
+//     .attr('cy', (d) => d.y);
+// }
 
+const append = {
+  data: (timeLine,m) => {
+    let timeData = timeLine.append('g').attr('class','time-data');
 
-    let d3Data = parseData(data);
-    let seperatedData = posNegFilter(d3Data);
-    let positiveData = combineData(seperatedData.positive);
-    let negativeData = combineData(seperatedData.negative);
-    console.log(seperatedData);
+    return timeData.append('path')
+      .attr('d', m.area)
+      .attr('fill', 'url(#gradient)')
+      .style('opacity', 'url(#opacity)');
+  },
+  markers: (timeLine,m) => {
+    let timeMarkers = timeLine.append('svg:g');
 
-    // let yMin = Math.min.apply(Math, negativeData.map(function(o) {
-    //   return o.avgScore;
-    // })); // (negativeData[1].avgScore)
-    // let yMax = Math.max.apply(Math, positiveData.map(function(o) {
-    //   return o.avgScore;
-    // })); // (positiveData[positiveData.length-2].avgScore)
+    let markerGroups = timeMarkers.selectAll()
+      .data(markers(m)).enter()
+      .append('g').attr('class',(d) => d.class);
 
-    let yMin = d3.min(negativeData,(d) => d.avgScore);
-    let yMax = d3.max(positiveData,(d) => d.avgScore);
+    markerGroups.append('line')
+      .attr('x1', (d) => d.x1)
+      .attr('x2', (d) => d.x2)
+      .attr('y1', (d) => m.y(d.y))
+      .attr('y2', (d) => m.y(d.y))
+      .attr('class',(d) => d.class)
+      .attr('stroke', '#000')
+      .attr('stroke-width', 3)
+      .style('opacity', .3);
 
-    console.log("POSITIVEDATA", positiveData, seperatedData.positive);
-    console.log("NEGATIVEDATA", negativeData, seperatedData.negative);
+    timeMarkers.append('line')
+      .attr('x1', m.x(m.maxim.negative))
+      .attr('x2', m.x(m.maxim.negative))
+      .attr('y1', m.y(0))
+      .attr('y2', m.y(m.yRange[0]) + 33)
+      .attr('stroke', '#000')
+      .attr('stroke-width', 5)
+      .style('opacity', .3);
 
-    // var m = [80, 80, 80, 80];
-    var w = 600;
-    var h = 300;
+    timeMarkers.append('line')
+      .attr('x1', m.x(m.maxim.positive))
+      .attr('x2', m.x(m.maxim.positive))
+      .attr('y1', m.y(0))
+      .attr('y2', m.y(m.yRange[1]) - 33)
+      .attr('stroke', '#000')
+      .attr('stroke-width', 5)
+      .style('opacity', .3);
 
-    let yMaxRange = Math.max(Math.abs(yMin), yMax);
+  },
+  gradient: (svg) => {
+    let opacity = svg.append("svg:defs")
+      .append("svg:linearGradient")
+      .attr("id", "opacity")
+      .attr("x1", "0%")
+      .attr("y1", "100%")
+      .attr("x2", "100%")
+      .attr("y2", "100%")
+      .attr("spreadMethod", "pad");
 
-    // const color = d3.scale.linear().domain([ranges.yMin, ranges.yMax]).range(['#f80', '#08f']);
-    var x = d3.scale.linear().domain([0, positiveData.length]).range([0, w]);
-    var y = d3.scale.linear().domain([-yMaxRange, yMaxRange]).range([h, 0]);
+    opacity.append("svg:stop")
+      .attr("offset", "0%")
+      // .attr("stop-color", "#000")
+      .attr("stop-opacity", 0);
 
+    opacity.append("svg:stop")
+      .attr("offset", "10%")
+      // .attr("stop-color", "#fff")
+      .attr("stop-opacity", 1);
 
-    // var line = d3.svg.line()
-    //   .x(function(d, i) {
-    //     return x(i); //TODO: Here it only iterates on index, not date. s
-    //   })
-    //   .y(function(d) {
-    //     return y(d.avgScore);
-    //   }).interpolate("basis");
+    opacity.append("svg:stop")
+      .attr("offset", "90%")
+      // .attr("stop-color", "#fff")
+      .attr("stop-opacity", 1);
 
-    let tics = Math.max(positiveData.length,negativeData.length);
+    opacity.append("svg:stop")
+      .attr("offset", "100%")
+      // .attr("stop-color", "#000")
+      .attr("stop-opacity", 0);
 
-    let max = d3.svg.line()
-      .x((d,i) => x(i))
-      .y(y(yMax))(Array(tics));
-
-    let min = d3.svg.line()
-      .x((d,i) => x(i))
-      .y(y(yMin))(Array(tics));
-
-    let area = d3.svg.area()
-      .x((d,i) => x(i))
-      .y0((d,i) => y(negativeData[i].avgScore))
-      .y1((d,i) => y(positiveData[i].avgScore))
-      .interpolate('basis')(Array(tics));
-
-
-
-    // let path = area(positiveData); //line(positiveData) + line(negativeData);
-
-    var gradient = svg.append("svg:defs")
+    let gradient = svg.append("svg:defs")
       .append("svg:linearGradient")
       .attr("id", "gradient")
       .attr("x1", "100%")
@@ -197,7 +229,6 @@ function d3Time() {
       .attr("spreadMethod", "pad")
       .attr('gradientUnits', 'userSpaceOnUse');
 
-// Define the gradient colors
     gradient.append("svg:stop")
       .attr("offset", "0%")
       .attr("stop-color", "#f80")
@@ -207,41 +238,32 @@ function d3Time() {
       .attr("offset", "100%")
       .attr("stop-color", "#08f")
       .attr("stop-opacity", 1);
-
-    let graph = svg.append('g').attr('class', 'time-line');
-
-    graph.append('path')
-      .attr('d', area)
-      .attr('fill', 'url(#gradient)');
-
-    graph.append('line')
-      .attr('x1', -20)
-      .attr('x2', width + 20)
-      .attr('y1', y(yMax))
-      .attr('y2', y(yMax))
-      .attr('stroke', '#333')
-      .attr('stroke-width', 2)
-      .style('opacity', .5);
-
-    graph.append('line')
-      .attr('x1', -20)
-      .attr('x2', width + 20)
-      .attr('y1', y(yMin))
-      .attr('y2', y(yMin))
-      .attr('stroke', '#333')
-      .attr('stroke-width', 2)
-      .style('opacity', .5);
-    // svg.select('g.time-line').append
-
-
-    // svg.append("path").attr("d", line(positiveData))
-    //   .style('fill', 'url(#gradient');
-    // svg.append("path").attr("d", line(negativeData))
-    //   .style('fill', 'url(#gradient');
-    return svg[0][0];
-  };
-  return {
-    createNode: createNode
   }
-}
-export default d3Time().createNode;
+};
+
+const createNode = function(...data) {
+  let resolved = false;
+  if(data)
+    resolved = data.reduce((curr,val) => val || curr ? val.hasOwnProperty('data') : false, true);
+  if(!resolved)
+    return null;
+
+  // create array of all 'content' from data input
+  let content = data.reduce((curr,val) => [].concat(curr, _.reduce(val.data,(curr,val) =>
+    [].concat(curr,val.content || []),[])), []);
+
+
+  let m = Map(content);
+  let timeLine = svg.append('g').attr('class', 'time-line');
+
+  append.gradient(svg);
+
+  append.data(timeLine,m);
+  append.markers(timeLine,m);
+
+
+
+  return svg[0][0];
+};
+
+export default createNode
