@@ -19,36 +19,51 @@ class Home extends React.Component {
       </Col>
     )
   }
-  aboutColl(){
+  aboutUs(){
     return (
       <Row>
         <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"} waves='light'/>}
+          <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"} waves='light'/>}
                 title="Ben Chen"
-                reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
-            <p><a href="#">This is a link</a></p>
+                reveal={<p>Product Owner<br/>Ben Chen graduated from NYU with a computer scienc</p>}>
+            <p><a href="https://github.com/byc219">Github</a></p>
           </Card>
         </Col>
         <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"} waves='light'/>}
+          <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"} waves='light'/>}
                 title="Rico Chen"
-                reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
-            <p><a href="#">This is a link</a></p>
+                reveal={<p>Engineer<br/>  Rico is a human with info about him</p>}>
+            <p><a href="https://github.com/ricochen">Github</a></p>
           </Card>
         </Col>
         <Col m={4} s={12}>
           <Card header={<CardTitle reveal image={"https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"} waves='light'/>}
                 title="Lukas Welinder"
-                reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
-            <p><a href="#">This is a link</a></p>
+                reveal={<p>Scrum Master<br/> Lukas is a human with stuff about him</p>}>
+            <p><a href="https://github.com/lukaswelinder">Github</a></p>
           </Card>
         </Col>
       </Row>
     )
   }
-  aboutUs(){
+  aboutColl(){
     return (
-      <div>ABOUT US CONTENT</div>
+      <div>Basselope
+        When browsing through popular social media platforms such as twitter or reddit, have you ever wanted to know what other people thought of a particular topic? For example, the recent NBA finals where the calvs beat the warriors. Is Lebron James winning and Stephen Curry losing a positive or negative outcome? We created an application called Basselope that performs data visualization of social media content using sentiment analysis. For example, a sample piece of data would be a tweet that says: Curry deserved to win! and we use our algorithm to determine this tweets sentiment.
+
+        Simply by searching a topic in Basselope, a data visualized graph is displayed that shows a sample size of aggregated social media content and its sentiment values. Each bubble is a data piece and the size of the bubble, as well as its height indicates its strength. Whereas the horizontal axis displays the bubble's sentiment. So in this case, the metrics at the top and the graph show that lebron james has an overall 'positive or negative' weighted sentiment, maybe because he just won an NBA championship. How our sentiment works is … 'explain more about algorithm here'
+
+        What if we want to see what people thought of Lebron James before he won the championship? We have a timeplot that shows the sentiment for a topic in the past and present. Based on the graph, it seems he had a negative sentiment before, and only recently has his sentiment been positive.
+
+        Ok, that's cool and all but what about topics that are related to lebron james? Oh, then just click this pie chart! It shows the most common words associated with the searched topic, and it seems people like to say 'x' and lebron james in the same sentence.
+
+        Of course, for the very curious user who wants to see the actual tweet or comment that led to the sentiment analysis of lebron james, they can go to the table. It shows all of our data from our api sources twitter, reddit and Wikipedia. Let's choose a sample, *go to reddit comment* User 'x' commented 'xxxxxxx lebron james xxxxxxx' with 20 upvotes!
+
+        Now we can confirm that other people hate Lebron James just as much as us!
+        The technologies we used are react and redux on the front-end
+        We used express and nodejs on the back-end
+
+        For the build tools, we used webpack to bundle the files and gulp</div>
     )
   }
 
