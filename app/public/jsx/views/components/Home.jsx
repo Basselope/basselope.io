@@ -98,7 +98,6 @@ class Home extends React.Component {
       </div>
     )
   }
-
   tabBuilder() {
     return (
       <Tabs className='tab-demo z-depth-1'>
