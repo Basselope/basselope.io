@@ -9,7 +9,6 @@ class Metrics extends React.Component {
   }
 
   renderMean() {
-    console.log(this.props)
     let twitterMean = this.props.twitter.data.metricMean;
     let redditMean = this.props.reddit.data.metricMean;
     let twitterSum = this.props.twitter.data.set.length;

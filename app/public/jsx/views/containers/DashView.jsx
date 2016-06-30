@@ -36,10 +36,12 @@ class SentimentPlot extends React.Component {
   }
 
   render() {
+
     let term = '';
     if (this.props.d3.data.reddit) {
       term = this.props.params.term;
     }
+
     let view = this.props.params.view;
     let g = this.props.d3.graph;
     let title="Graph";
@@ -54,11 +56,13 @@ class SentimentPlot extends React.Component {
         title="Sentiment Tone over Time";
         break;
     }
-    // let node = (view in g) ? d3.Graph(g[view]) : d3.Preload();
+
     return (
       <div className="dash-view">
+
       <h2 style={{marginTop: '80px', color: 'gray'}}><i>{term}</i></h2>
         { d3.Graph(g[view], title) }
+
       </div>
     );
   }
