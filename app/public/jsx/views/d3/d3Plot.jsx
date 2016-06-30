@@ -74,14 +74,14 @@ const metrics = (d,m) => {
   }]
 };
 
-function plot(d,m) {
+const plot = (d,m) => {
   return d.map((val) => ({
     c: m.c(val[0]),
     x: m.x(val[0]),
     y: m.y(val[1]),
     r: m.r(val[1])
   }));
-}
+};
 
 function transition(count) {
   d3.select('.plot-data').selectAll('circle')
