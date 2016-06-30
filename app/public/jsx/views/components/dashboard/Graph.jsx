@@ -13,9 +13,14 @@ const Preload = () => (
 );
 
 const Header = (info) =>(
-  <Row>
+  <Row style={{position: 'fixed',
+    bottom: '50px',
+    left: 0,
+    right: 0,
+    background: "none",
+    width: '100%'}}>
     <Col s={12}>
-      <Chip>
+      <Chip >
         {info}
       </Chip>
     </Col>
