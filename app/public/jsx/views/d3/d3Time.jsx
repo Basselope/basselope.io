@@ -1,6 +1,7 @@
 import d3 from 'd3'
 import _ from 'lodash'
 
+function d3Time(){
 const node = document.createElement('div');
 const width = 700,
       height = 300;
@@ -233,5 +234,6 @@ const createNode = function(...data) {
 
   return svg[0][0];
 };
-
-export default createNode
+  return createNode
+}
+export default d3Time

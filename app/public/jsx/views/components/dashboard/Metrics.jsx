@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Navbar, Row, Col, Chip, Button } from 'react-materialize'
+import { Navbar,Dropdown, Row, Col, Chip, Button, NavItem } from 'react-materialize'
 import SearchBar from '../../containers/SearchBar.jsx'
 
 class Metrics extends React.Component {
@@ -62,14 +62,17 @@ class Metrics extends React.Component {
 
     return (
       <Navbar className='blue-grey lighten-2'>
-        <Row>
-          {this.chipBuilder('Search', <SearchBar />)}
-          {this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}
-          {this.chipBuilder('Sample Size:', this.renderTotal())}
-          {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
-          {this.chipBuilder('Neutral:', `${this.renderNeutralPercent()}%`)}
-          {this.chipBuilder('Positive:', `${this.renderPosPercent()}%`)}
-        </Row>
+        <Navbar className='blue-grey lighten-2'>
+          <Row>
+            {this.chipBuilder('Search', <SearchBar />)}
+            {this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}
+            {this.chipBuilder('Sample Size:', this.renderTotal())}
+            {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
+            {this.chipBuilder('Neutral:', `${this.renderNeutralPercent()}%`)}
+            {this.chipBuilder('Positive:', `${this.renderPosPercent()}%`)}
+          </Row>
+        </Navbar>
+
       </Navbar>
     );
   }

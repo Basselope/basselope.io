@@ -1,5 +1,6 @@
 import d3 from 'd3'
 
+function d3Plot(){
 const node = document.createElement('div');
 
 const width = 600,
@@ -203,5 +204,7 @@ const createNode = function(...data) {
 
   return svg[0][0];
 };
+ return createNode;
+}
 
-export default createNode
+export default d3Plot

@@ -12,6 +12,7 @@ class NavBar extends React.Component {
 
   render() {
     return (
+      
       <Button floating fab='vertical' icon='settings' large
           className='blue-grey darken-1'
           style={{bottom: '45px', right: '24px'}}>
