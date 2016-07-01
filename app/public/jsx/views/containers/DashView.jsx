@@ -60,7 +60,7 @@ class SentimentPlot extends React.Component {
     return (
       <div className="dash-view">
 
-      <h2 style={{marginTop: '80px', color: 'gray'}}><i>{term}</i></h2>
+      <h2 style={{marginTop: '80px', color: 'gray'}}><i>{term.toUpperCase()}</i></h2>
         { d3.Graph(g[view], title) }
 
       </div>
