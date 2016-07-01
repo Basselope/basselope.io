@@ -2,15 +2,13 @@ const axios = require("axios");
 const router_API = require('../../app/server/router/router_API');
 
 describe("router_API", function() {
-  const baseURL = "http://localhost:8080/";
+  const baseURL = "basselope.io";
   let req = { url: '/_api/twitter/search', body: { query: 'pied piper' } };
   let POSTrequest = axios.post(`${baseURL}${req.url}`, req.body);
 
-  // beforeEach(function() {
-  //   jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-
-
-  // });
+  beforeEach(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+  });
 
   it("the request object should have a url and query property", function() {
     expect(req.url).toBeDefined();
@@ -19,15 +17,12 @@ describe("router_API", function() {
 
   it("should be a function that is called with a HTTP request", function() {
     expect(typeof router_API).toEqual('function');
-    // spyOn(router_API);
-    // expect(router_API).toHaveBeenCalledWith(POSTrequest);
   });
 
   it("should route to the path based on the URL", function(done) {
     req.url = '/_api/twitter/search';
     POSTrequest.then(response => {
       response = response || { statusCode: '', request: { uri: { path: '' } } };
-      console.log(response.request.uri.path)
       expect(response.request.uri.path).toEqual('/_api/twitter/search');
       done();
     });
