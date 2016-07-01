@@ -101,8 +101,8 @@ const markers = (m) => {
     y: m.yRange[0],
     class: 'time-min'
   },{
-    x1: 0 - m.d.length/7,
-    x2: m.d.length + m.d.length/7,
+    x1: 0 - (m.d.length)/7,
+    x2: (m.d.length-1) + m.d.length/7,
     y: 0,
     class: 'time-zero'
   },{
