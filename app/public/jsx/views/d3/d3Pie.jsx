@@ -93,11 +93,9 @@ function LevenshteinDistance($s1, $s2) {
 
     //responsive SVG needs these 2 attributes and no width and height attr
     .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "-100 0  600 600")
+    .attr("viewBox", "0 0 400 400")
     //class to make it responsive
     .classed("svg-content-responsive", true);
-// .attr('width', w)
-//     .attr('height', h);
 
 function createNode(...data) {
   //console.log("DATA DATA DATA DATA DATA",data)
