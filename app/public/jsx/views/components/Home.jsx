@@ -123,8 +123,6 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log("CLIENT SIDE LIFE",this.props);
-
 
     return (
 

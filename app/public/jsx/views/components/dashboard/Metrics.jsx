@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Navbar,Dropdown, Row, Col, Chip, Button, NavItem } from 'react-materialize'
+import { Navbar,Dropdown, Row, Col, Chip, Button, NavItem, Icon } from 'react-materialize'
 import SearchBar from '../../containers/SearchBar.jsx'
 
 class Metrics extends React.Component {
@@ -9,7 +9,6 @@ class Metrics extends React.Component {
   }
 
   renderMean() {
-    console.log(this.props)
     let twitterMean = this.props.twitter.data.metricMean;
     let redditMean = this.props.reddit.data.metricMean;
     let twitterSum = this.props.twitter.data.set.length;
@@ -50,33 +49,33 @@ class Metrics extends React.Component {
 
   chipBuilder(title, stats) {
     return (
-      <Button waves='light'>{title} {stats}</Button>
+      <Chip waves='light'>{title} {stats}</Chip>
     );
   }
 
   render() {
     console.log("CLIENT SIDE LIFE",this.props);
-    if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.path === 'table') {
+    if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.path === 'table')
       return <div></div>;
-    }
-
+    
     return (
-      <Navbar className='blue-grey lighten-2'>
         <Navbar className='blue-grey lighten-2'>
           <Row>
-            {this.chipBuilder('Search', <SearchBar />)}
-            {this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}
-            {this.chipBuilder('Sample Size:', this.renderTotal())}
-            {this.chipBuilder('Negative:', `${this.renderNegPercent()}%`)}
-            {this.chipBuilder('Neutral:', `${this.renderNeutralPercent()}%`)}
-            {this.chipBuilder('Positive:', `${this.renderPosPercent()}%`)}
+            <Icon className="left">search</Icon>
+            <Button className='col s10 m3 blue-grey darken-2 left-align' waves='light'><SearchBar /></Button>
+            <div className="right">
+              {this.chipBuilder('Total Samples:', this.renderTotal())}
+              {this.chipBuilder('Negative Posts:', `${this.renderNegPercent()}%`)}
+              {this.chipBuilder('Neutral Posts:', `${this.renderNeutralPercent()}%`)}
+              {this.chipBuilder('Positive Posts:', `${this.renderPosPercent()}%`)}
+            </div>
           </Row>
         </Navbar>
-
-      </Navbar>
     );
   }
 }
+
+// {this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}
 
 const mapStateToProps = (state) => {
   return { reddit: state.reddit, twitter: state.twitter, wiki: state.wiki };

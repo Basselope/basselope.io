@@ -14,7 +14,6 @@ export default (
     <IndexRoute component={Home} />
     <Route path=":term" component={Dashboard}>
       <Route path=":view" component={DashView} />
-      <Route path="pie" component={PieChart} />
     </Route>
   </Route>
 )
