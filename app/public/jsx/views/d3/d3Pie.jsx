@@ -10,11 +10,16 @@ function getTopics (data){
     var x = topics[key];
     finalTopics[x[0]] = finalTopics[x[0]]?finalTopics[x[0]]+x[1]:x[1]
   }
+  delete finalTopics['someone'];
   topics=[];
+
   for(var key in finalTopics){
     topics.push([key, finalTopics[key]])
   }
-  topics =topics.sort((a, b) => b[1] - a[1]).slice(0,5);
+  console.log(`TOPICS BEFORE ${topics}`)
+  topics =topics.sort((a, b) => b[1] - a[1]);
+  console.log(`TOPICS AFTER ${topics}`)
+
   return topics
 }
 function checkLevinsteins(topics){
@@ -106,7 +111,7 @@ function createNode(...data) {
   if(!resolved)
     return null;
   let topics  = getTopics(data);
-  topics = checkLevinsteins(topics);
+  topics = checkLevinsteins(topics).slice(0,5);
 
 
 
