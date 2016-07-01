@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Card } from 'react-materialize'
 
 import d3 from '../components/dashboard/Graph.jsx'
 
@@ -16,6 +17,10 @@ class SentimentPlot extends React.Component {
   }
 
   render() {
+    let term = '';
+    if (this.props.d3.data.reddit) {
+      term = this.props.params.term;
+    }
     let view = this.props.params.view;
     let g = this.props.d3.graph;
     let title="Graph";
@@ -33,6 +38,7 @@ class SentimentPlot extends React.Component {
     // let node = (view in g) ? d3.Graph(g[view]) : d3.Preload();
     return (
       <div className="dash-view">
+      <h2 style={{marginTop: '80px', color: 'gray'}}><i>{term}</i></h2>
         { d3.Graph(g[view], title) }
       </div>
     );
