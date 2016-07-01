@@ -200,7 +200,7 @@ function init() {
       .style('opacity', 0);
 
     axisGroup.append('text')
-      .text((d) => (d.x ? `${d.x > 0 ? '+' : ''}${Math.round(d.x * m.xRangeMax * 100)}` : null))
+      .text((d) => (d.x ? `${d.x > 0 ? '+' : ''}${Math.round(d.x * m.xRangeMax * 100)} / 100` : null))
       .attr('y', height)
       .attr('x', (d) => m.x(d.x * m.xRangeMax))
       .attr('font-family', 'Varela Round')

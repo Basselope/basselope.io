@@ -77,8 +77,8 @@ function LevenshteinDistance($s1, $s2) {
     return $nsDistance[$nRightLength];
   }
 }
-  const w = 400;
-  const h = 400;
+  const w = 300;
+  const h = 300;
 
   const outerRadius = w / 2;
   const innerRadius = 0;
@@ -94,13 +94,14 @@ function LevenshteinDistance($s1, $s2) {
 
   const svg = d3.select(node)
     .append('svg')
-    .classed("svg-container", true) //container class to make it responsive
+    // .classed("svg-container", true)
+    .attr("preserveAspectRatio", "xMaxYMax meet")
+    .attr("viewBox", "0 0 300 300")
+    .style('overflow', 'visible')
+    .style('max-width', '300px')
+    .style('max-height', '300px');
 
-    //responsive SVG needs these 2 attributes and no width and height attr
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "0 0 400 400")
-    //class to make it responsive
-    .classed("svg-content-responsive", true);
+    // .classed("svg-content-responsive", true);
 
 function createNode(...data) {
   //console.log("DATA DATA DATA DATA DATA",data)
@@ -136,9 +137,25 @@ function createNode(...data) {
 
 
   arcs.append('text')
-    .attr('transform', (d) => `translate(${arc.centroid(d)})`)
+    .text((d,i) => topics[i][0].toUpperCase())
+    .attr('transform', (d) => {
+      let c = arc.centroid(d);
+      return `translate(${2.7*c[0]}, ${2.7*c[1]})`;
+    })
     .attr('text-anchor', 'middle')
-    .text((d,i) => topics[i][0]);
+
+    .attr('font-family', 'Varela Round')
+    .attr('font-size', '19px');
+
+  arcs.append('text')
+    .text((d,i) => topics[i][1])
+    .attr('transform', (d) => {
+      let c = arc.centroid(d);
+      return `translate(${1.5*c[0]}, ${1.5*c[1]})`;
+    })
+    .attr('text-anchor', 'middle')
+    .attr('font-family', 'Varela Round')
+    .attr('font-size', '22px');
 
     // .attr("transform", function(d) { //set the label's origin to the center of the arc
     //   //we have to make sure to set these before calling arc.centroid
