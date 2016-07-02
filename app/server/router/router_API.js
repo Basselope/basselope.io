@@ -16,13 +16,11 @@ module.exports = function(req, res, next) {
 				.then((ret) => res.status(200).send(ret))
 				.catch((err) => res.status(400).send(err));
 			break;
-		case '/login':
-
-			loginHandler.signIn(req, res, next);
-			console.log("IN LOGIN", req.body);
-			// api_fetch('twitter', [req.body.query,'#'+req.body.query])
-			// 	.then((ret) => res.status(200).send(ret))
-			// 	.catch((err) => res.status(400).send(err));
+		case '/login': 
+			loginHandler.signIn(req, res, next); 
+			
+			
+			
 			break;
     case '/_api/reddit/search':
       api_fetch('reddit', req.body.query)
@@ -41,8 +39,8 @@ module.exports = function(req, res, next) {
         .catch((err) => res.status(400).send(err));
       break;
 	case '/_api/wiki/search':
-		console.log("WIKI OFFFFFFFF");
-		api_fetch("wiki", req.body.query)
+ 
+ 		api_fetch("wiki", req.body.query)
 		 	.then((ret) => {
 			  console.log("TEST",res)
 			  res.status(200).send(ret)})

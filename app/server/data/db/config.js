@@ -18,7 +18,7 @@ db.schema.hasTable('users').then(exists => {
       user.string('username', 100).unique();
       user.string('password', 100);
       user.timestamps();
-    }).then(() => console.log('Created users table'););
+    }).then(() => console.log('Created users table'));
   }
 });
 

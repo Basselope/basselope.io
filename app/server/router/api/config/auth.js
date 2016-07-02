@@ -22,7 +22,8 @@ request.end('grant_type=client_credentials');
 
 request.on('response', function(response) {
   if(response.statusCode !== 200) {
-    return console.log('Error ' + response.statusCode);
+    console.log('Error ' + response.statusCode);
+    return;
   }
   response.pipe(oauthJsonFile);
 });

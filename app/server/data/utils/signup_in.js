@@ -9,7 +9,7 @@ var authModule  = function(){
 		// });
 	}
 	function signup(req, res, next){
-		console.log("in signIn", req);
+		
 
 		//MAKE USERNAME
 		//const username = 
