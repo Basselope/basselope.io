@@ -63,21 +63,21 @@ class Metrics extends React.Component {
     return (
         <Navbar className='blue-grey lighten-2'>
           <Row>
-            <Icon className="left">search</Icon>
-            <Button className='col s10 m3 blue-grey darken-2 left-align' waves='light'><SearchBar /></Button>
+            <Button style={{width: '250px', paddingLeft: 0, paddingRight: 0, marginLeft: '12px'}}
+                    className='blue-grey darken-2' waves='light'>
+              <SearchBar />
+            </Button>
             <div className="right">
-              {this.chipBuilder('Total Samples:', this.renderTotal())}
-              {this.chipBuilder('Negative Posts:', `${this.renderNegPercent()}%`)}
-              {this.chipBuilder('Neutral Posts:', `${this.renderNeutralPercent()}%`)}
-              {this.chipBuilder('Positive Posts:', `${this.renderPosPercent()}%`)}
+              {this.chipBuilder('SAMPLES |', this.renderTotal())}
+              {this.chipBuilder('NEGATIVE |', `${this.renderNegPercent()}%`)}
+              {this.chipBuilder('NEUTRAL |', `${this.renderNeutralPercent()}%`)}
+              {this.chipBuilder('POSITIVE |', `${this.renderPosPercent()}%`)}
             </div>
           </Row>
         </Navbar>
     );
   }
 }
-
-// {this.chipBuilder('Sentiment (-100 to +100):', this.renderMean())}
 
 const mapStateToProps = (state) => {
   return { reddit: state.reddit, twitter: state.twitter, wiki: state.wiki };

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Navbar, Row, Col, CardPanel, Chip, CardTitle, Card, Tabs, Tab } from 'react-materialize'
 import SearchBar from '../containers/SearchBar.jsx'
 
+import Tech from './about/Tech.jsx'
+
 class Home extends React.Component {
 
   constructor(props) {
@@ -137,7 +139,7 @@ class Home extends React.Component {
           <div style={{height:'100vh'}}>
 
 
-            {this.tabBuilder()}
+            <Tech />
 
 
           </div>
