@@ -137,25 +137,25 @@ function createNode(...data) {
 
 
   arcs.append('text')
-    .text((d,i) => topics[i][0].toUpperCase())
+    .text((d,i) => topics[i][1] + ' references')
     .attr('transform', (d) => {
       let c = arc.centroid(d);
-      return `translate(${2.7*c[0]}, ${2.7*c[1]})`;
+      return `translate(${2.8*c[0]}, ${2.3*c[1]})`;
     })
     .attr('text-anchor', 'middle')
 
     .attr('font-family', 'Varela Round')
-    .attr('font-size', '19px');
+    .attr('font-size', '14px');
 
   arcs.append('text')
-    .text((d,i) => topics[i][1])
+    .text((d,i) => topics[i][0])
     .attr('transform', (d) => {
       let c = arc.centroid(d);
       return `translate(${1.5*c[0]}, ${1.5*c[1]})`;
     })
     .attr('text-anchor', 'middle')
     .attr('font-family', 'Varela Round')
-    .attr('font-size', '22px');
+    .attr('font-size', '16px');
 
     // .attr("transform", function(d) { //set the label's origin to the center of the arc
     //   //we have to make sure to set these before calling arc.centroid
