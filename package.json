@@ -1,7 +1,7 @@
 {
-  "name": "collatio",
+  "name": "Basselope",
   "version": "0.0.1",
-  "description": "Natural language census analytic tool.",
+  "description": "Natural language parsing of social media data showing visualizations of sentiment analysis",
   "main": "app/index.js",
   "scripts": {
     "test": "mocha -w spec/public/setup.js spec/public/*[sS]pec.jsx ./node_modules/.bin/jasmine-node spec",
