@@ -26,21 +26,21 @@ class Home extends React.Component {
           <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"} waves='light'/>}
                 title="Ben Chen   (+Oliver)"
                 reveal={<div>Product Owner<br/>Ben Chen graduated from NYU with a computer scienc</div>}>
-            <p><a href="https://github.com/byc219">Github</a></p>
+            <p><a href="https://github.com/byc219" target="_blank">Github</a></p>
           </Card>
         </Col>
         <Col m={4} s={12}>
           <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"} waves='light'/>}
                 title="Rico Chen"
                 reveal={<div>Full Stack Software Engineer<br/><br/>How much does a penguin weigh?...<div>Enough to break the ice! <br/>Hi, I'm Rico and one day I'd like to work at Pied Piper.</div></div>}>
-            <p><a href="https://github.com/ricochen">Github</a></p>
+            <p><a href="https://github.com/ricochen" target="_blank">Github</a></p>
           </Card>
         </Col>
         <Col m={4} s={12}>
           <Card header={<CardTitle reveal image={"https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"} waves='light'/>}
                 title="Lukas Welinder"
                 reveal={<div>Scrum Master<br/> Lukas is a human with stuff about him</div>}>
-            <p><a href="https://github.com/lukaswelinder">Github</a></p>
+            <p><a href="https://github.com/lukaswelinder" target="_blank">Github</a></p>
           </Card>
         </Col>
       </Row>
