@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Navbar,Dropdown, Row, Col, Chip, Button, NavItem, Icon } from 'react-materialize'
+import { Navbar, Dropdown, Row, Col, Chip, Button, NavItem, Icon } from 'react-materialize'
 import SearchBar from '../../containers/SearchBar.jsx'
 
 class Metrics extends React.Component {
@@ -57,7 +57,7 @@ class Metrics extends React.Component {
     console.log("CLIENT SIDE LIFE",this.props);
     if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.path === 'table')
       return <div></div>;
-    
+
     return (
         <Navbar className='blue-grey lighten-2'>
           <Row>

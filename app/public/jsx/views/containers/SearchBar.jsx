@@ -48,10 +48,11 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
-          <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} />
+          <input type='text' value={this.state.term} onChange={this.onInputChange} autoFocus={true} placeholder='search a topic' />
           <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
         </form>
       </div>
