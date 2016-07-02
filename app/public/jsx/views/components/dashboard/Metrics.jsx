@@ -49,7 +49,9 @@ class Metrics extends React.Component {
 
   chipBuilder(title, stats) {
     return (
-      <Chip waves='light'>{title} {stats}</Chip>
+      <Col>
+        <Chip waves='light'>{title} {stats}</Chip>
+      </Col>
     );
   }
 
