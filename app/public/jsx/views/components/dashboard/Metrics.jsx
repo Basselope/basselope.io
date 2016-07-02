@@ -64,7 +64,7 @@ class Metrics extends React.Component {
         <Navbar className='blue-grey lighten-2'>
           <Row>
             <Icon className="left">search</Icon>
-            <Button className='col s10 m3 blue-grey darken-2 left-align' waves='light'><SearchBar /></Button>
+            <Button className='col s10 m3 blue-grey darken-2' waves='light'><SearchBar /></Button>
             <div className="right">
               {this.chipBuilder('Total Samples:', this.renderTotal())}
               {this.chipBuilder('Negative Posts:', `${this.renderNegPercent()}%`)}
