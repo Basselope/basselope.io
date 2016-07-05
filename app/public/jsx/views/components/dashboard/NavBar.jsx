@@ -3,8 +3,6 @@ import { Link } from 'react-router'
 
 import { Button } from 'react-materialize'
 
-import SearchBar from '../../containers/SearchBar.jsx'
-
 class NavBar extends React.Component {
   constructor(props) {
     super(props);

@@ -7,7 +7,7 @@ class BingList extends React.Component {
   }
 
   renderBingList() {
-    return this.props.bing.data.map(suggestion => {
+    return this.props.bing.data.slice(0,5).map(suggestion => {
       return (
         <a key={suggestion} style={{cursor: 'pointer'}} className="collection-item blue-grey-text text-darken-2"
           onMouseOver={() => this.props.bingListClick(suggestion)} onClick={() => this.props.formSubmit(event)}>

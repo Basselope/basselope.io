@@ -9,16 +9,16 @@ body, html {
   background-attachment: fixed;
 }
 
-p > a {
-  color: #a1887f !important;
-  text-shadow: -2px 2px 3px rgba(255, 196, 0, 0.3);
-  transition: all 200ms ease-in-out;
-}
-p > a:hover {
-  color: #4e342e !important;
-  text-shadow: -3px 3px 5px rgba(255, 196, 0, 0.4);
-  transition: all 200ms ease-in-out;
-}
+//p > a {
+//  color: #a1887f !important;
+//  text-shadow: -2px 2px 3px rgba(255, 196, 0, 0.3);
+//  transition: all 200ms ease-in-out;
+//}
+//p > a:hover {
+//  color: #4e342e !important;
+//  text-shadow: -3px 3px 5px rgba(255, 196, 0, 0.4);
+//  transition: all 200ms ease-in-out;
+//}
 
 label {
   z-index: -1;
@@ -38,6 +38,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #546e7a;
   box-shadow: 0 1px 0 0 #546e7a;
   font-size: 19px;
+}
+
+a.active {
+  border-bottom: 5px solid #546e7a;
 }
 
 .button {
