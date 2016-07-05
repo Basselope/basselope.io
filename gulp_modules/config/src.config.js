@@ -13,6 +13,7 @@ const server = {
 const public = {
   root: 'app/public',
   index: ['app/public/index.html'],
+  assets: ['app/public/assets/**/*'],
   jsx: {
     index: ['app/public/jsx/index.jsx'],
     all: ['app/public/jsx/**/*.jsx']
@@ -33,6 +34,7 @@ const app = {
 
 const dest = {
   root: 'app/public/dist',
+  assets: 'app/public/dist/assets',
   js: 'app/public/dist/js',
   css: 'app/public/dist/css'
 };

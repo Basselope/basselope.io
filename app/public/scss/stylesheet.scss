@@ -28,15 +28,15 @@ input {
   z-index: 1000
 }
 
-input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #ff9100;
-  box-shadow: 0 1px 0 0 #ff9100;
+input[type=search]:focus:not([readonly]) {
+  border-bottom: 1px solid #546e7a;
+  box-shadow: 0 1px 0 0 #546e7a;
   font-size: 19px;
 }
 
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #ff9100;
-  box-shadow: 0 1px 0 0 #ff9100;
+  border-bottom: 1px solid #546e7a;
+  box-shadow: 0 1px 0 0 #546e7a;
   font-size: 19px;
 }
 
