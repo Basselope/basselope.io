@@ -56,6 +56,9 @@ gulp.task('lint', function() {
 gulp.task('pack', function() {
   gulp.src(src.public.index)
     .pipe(gulp.dest(src.dest.root));
+  gulp.src(src.public.assets)
+    .pipe(gulp.dest(src.dest.assets));
+  
   return gulp.src(src.public.jsx.index)
     .pipe(run.named())
     .pipe(web.pack(ENV_WPT))

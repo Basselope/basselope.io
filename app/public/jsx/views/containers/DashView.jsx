@@ -47,20 +47,19 @@ class SentimentPlot extends React.Component {
     let title="Graph";
     switch(view){
       case "pie":
-        title="Related Topics";
+        title="RELATED TOPICS BY COUNT";
         break;
       case "plot":
-        title = "Sentiment Analysis over Weighted Ranking";
+        title = "SENTIMENT SPREAD & WEIGHTED RANKING";
         break;
       case "time":
-        title="Sentiment Tone over Time";
+        title="SENTIMENT EXTREMES OVER TIME";
         break;
     }
 
     return (
       <div className="dash-view">
-
-      <h2 style={{marginTop: '80px', color: 'gray'}}><i>{term.toUpperCase()}</i></h2>
+        
         { d3.Graph(g[view], title) }
 
       </div>

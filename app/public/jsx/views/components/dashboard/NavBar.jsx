@@ -3,8 +3,6 @@ import { Link } from 'react-router'
 
 import { Button } from 'react-materialize'
 
-import SearchBar from '../../containers/SearchBar.jsx'
-
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +11,7 @@ class NavBar extends React.Component {
   render() {
     return (
       
-      <Button floating fab='vertical' icon='settings' large
+      <Button floating fab='vertical' icon='mode_edit' large
           className='blue-grey darken-1'
           style={{bottom: '45px', right: '24px'}}>
         <Link to={`/${this.props.baseURL}/pie`}>

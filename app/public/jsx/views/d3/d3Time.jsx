@@ -139,7 +139,7 @@ const append = {
       .attr('stroke-width', 3)
       .style('opacity', 1);
 
-    let formatDate = (val) => `${val.slice(-2)} / ${val.slice(4,6)} / ${val.slice(0,4)}`;
+    let formatDate = (val) => `${val.slice(-2)}/${val.slice(4,6)}/${val.slice(0,4)}`;
 
     let maxNeg = timeMarkers.append('g').attr('class', 'time-max-pos');
     let dateNeg = m.d[m.maxim.negative].key;

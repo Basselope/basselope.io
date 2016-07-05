@@ -1,11 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Navbar, Dropdown, Row, Col, Chip, Button, NavItem, Icon } from 'react-materialize'
+import { Breadcrumb, Row, Col, Chip, Button, MenuItem } from 'react-materialize'
 import SearchBar from '../../containers/SearchBar.jsx'
 
 class Metrics extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  renderCrumbs() {
+    let view = '';
+    switch(this.props.params.view) {
+      case 'plot':
+        view = 'sentiment distribution';
+        break;
+      case 'pie':
+        view = 'related topics by occurance';
+        break;
+      case 'time':
+        view = 'sentiment extremes over time';
+        break;
+      default:
+        view = '~';
+        break;
+    }
+    return `${this.props.params.term}: ${view}`;
   }
 
   renderMean() {
@@ -56,31 +75,39 @@ class Metrics extends React.Component {
   }
 
   render() {
-    console.log("CLIENT SIDE LIFE",this.props);
-    if (!this.props.twitter.data.hasOwnProperty('mean') || !this.props.reddit.data.hasOwnProperty('mean') || this.props.path === 'table')
-      return <div></div>;
-
+    let hide = !this.props.twitter.data.hasOwnProperty('set') || !this.props.reddit.data.hasOwnProperty('set');
     return (
-        <Navbar className='blue-grey lighten-2'>
-          <Row>
-            <Button style={{width: '250px', paddingLeft: 0, paddingRight: 0, marginLeft: '12px'}}
-                    className='blue-grey darken-2' waves='light'>
-              <SearchBar />
-            </Button>
-            <div className="right">
-              {this.chipBuilder('SAMPLES |', this.renderTotal())}
-              {this.chipBuilder('NEGATIVE |', `${this.renderNegPercent()}%`)}
-              {this.chipBuilder('NEUTRAL |', `${this.renderNeutralPercent()}%`)}
-              {this.chipBuilder('POSITIVE |', `${this.renderPosPercent()}%`)}
-            </div>
-          </Row>
-        </Navbar>
+      <div>
+        <nav style={{position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1}} className='blue-grey lighten-2'>
+          <div className="nav-wrapper blue-grey lighten-2 z-depth-2">
+            <Row>
+              <Button style={{width: '250px', paddingLeft: 0, paddingRight: 0, marginLeft: '12px'}}
+                      className='blue-grey darken-2' waves='light'>
+                <SearchBar />
+              </Button>
+            </Row>
+          </div>
+          <div className="center-align blue-grey lighten-3 z-depth-1">
+            <Row>
+              <Col className="flow-text blue-grey-text text-darken-1 left">
+                  {hide ? null : `~ ${this.props.params.term.toUpperCase()}`}
+              </Col>
+              <div className="hide-on-med-and-down right">
+                {hide ? null : this.chipBuilder('samples |', this.renderTotal())}
+                {hide ? null : this.chipBuilder('negative |', `${this.renderNegPercent()}%`)}
+                {hide ? null : this.chipBuilder('neutral |', `${this.renderNeutralPercent()}%`)}
+                {hide ? null : this.chipBuilder('positive |', `${this.renderPosPercent()}%`)}
+              </div>
+            </Row>
+          </div>
+        </nav>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return { reddit: state.reddit, twitter: state.twitter, wiki: state.wiki };
-}
+};
 
 export default connect(mapStateToProps)(Metrics)

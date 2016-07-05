@@ -14,99 +14,149 @@ class Home extends React.Component {
 
   hoverPopUp(content){
     return(
-      <Col m={12} s={12}>
-        <CardPanel style={{backgroundColor: 'inherit'}} textClassName='white-text' className='z-depth-1'>
+      <div>
            {content}
-        </CardPanel>
-      </Col>
+      </div>
     )
   }
   aboutUs(){
     return (
-      <Row>
-        <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"} waves='light'/>}
-                title="Ben Chen   (+Oliver)"
-                reveal={<div>Product Owner<br/>Ben Chen graduated from NYU with a computer scienc</div>}>
-            <p><a href="https://github.com/byc219" target="_blank">Github</a></p>
-          </Card>
-        </Col>
-        <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"} waves='light'/>}
-                title="Rico Chen"
-                reveal={<div>Full Stack Software Engineer<br/><br/>How much does a penguin weigh?...<div>Enough to break the ice! <br/>Hi, I'm Rico and one day I'd like to work at Pied Piper.</div></div>}>
-            <p><a href="https://github.com/ricochen" target="_blank">Github</a></p>
-          </Card>
-        </Col>
-        <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"} waves='light'/>}
-                title="Lukas Welinder"
-                reveal={<div>Scrum Master<br/> Lukas is a human with stuff about him</div>}>
-            <p><a href="https://github.com/lukaswelinder" target="_blank">Github</a></p>
-          </Card>
-        </Col>
-      </Row>
+      <div style={{fontSize: '22px', minHeight: '50vh'}} className="valign-wrapper">
+        <Row className="center-align valign">
+
+          <Col m={4} s={10} className="offset-s1">
+
+            <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"/>
+
+            <div className="blue-grey-text text-lighten-1">Ben Chen</div>
+            <span>
+
+                <a style={{fontSize: '13px'}} href="https://github.com/byc219" target="_blank">
+                  github
+                </a>
+
+
+            </span>
+          </Col>
+
+          <Col m={4} s={10} className="offset-s1">
+
+
+              <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"/>
+
+            <div className="blue-grey-text text-lighten-1">Rico Chen</div>
+            <span>
+
+              <a style={{fontSize: '13px'}} href="https://github.com/ricochen" target="_blank">
+                github
+              </a>
+
+
+            </span>
+          </Col>
+
+          <Col m={4} s={10} className="offset-s1">
+
+            <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"/>
+
+            <div className="blue-grey-text text-lighten-1">Lukas Welinder</div>
+            <span>
+
+              <a style={{fontSize: '13px'}} href="https://github.com/lukaswelinder" target="_blank">
+                github
+              </a>
+
+
+            </span>
+          </Col>
+
+        </Row>
+      </div>
     )
   }
   aboutColl(){
     return (
-      <div>Basselope
-        <p>When browsing through popular social media platforms such as twitter or reddit, have you ever wanted to know what other people thought of a particular topic? For example, the recent NBA finals where the calvs beat the warriors. Is Lebron James winning and Stephen Curry losing a positive or negative outcome? We created an application called Basselope that performs data visualization of social media content using sentiment analysis. For example, a sample piece of data would be a tweet that says: Curry deserved to win! and we use our algorithm to determine this tweets sentiment.</p>
+      <div style={{fontSize: '17px'}} className="container center-align blue-grey-text text-darken-1">
+        <p>
+          Ever wonder how people felt about a particular topic? The general sentiment or tone towards it in conversations around the web?
+        </p>
 
-        <p>Simply by searching a topic in Basselope, a data visualized graph is displayed that shows a sample size of aggregated social media content and its sentiment values. Each bubble is a data piece and the size of the bubble, as well as its height indicates its strength. Whereas the horizontal axis displays the bubble's sentiment. So in this case, the metrics at the top and the graph show that lebron james has an overall 'positive or negative' weighted sentiment, maybe because he just won an NBA championship. How our sentiment works is … 'explain more about algorithm here'</p>
+        <p>
+          Qualitative data like that is hugely important in branding and marketing. However, it's a realm of data analytics that, until recently, has remained under-explored due to limitations in technology.
+        </p>
 
-        <p>What if we want to see what people thought of Lebron James before he won the championship? We have a timeplot that shows the sentiment for a topic in the past and present. Based on the graph, it seems he had a negative sentiment before, and only recently has his sentiment been positive.</p>
+        <p>
+          Basselope seeks to aggregate, analyze, and visualize the sentiment of conversation around any given term across a wide range of sources. Go ahead and give it a try:
+        </p>
 
-          <p> Ok, that's cool and all but what about topics that are related to lebron james? Oh, then just click this pie chart! It shows the most common words associated with the searched topic, and it seems people like to say 'x' and lebron james in the same sentence.</p>
+        <div className="col s10 offset-s1 m6 offset-m3">
+          <SearchBar />
+        </div>
 
-            <p>Of course, for the very curious user who wants to see the actual tweet or comment that led to the sentiment analysis of lebron james, they can go to the table. It shows all of our data from our api sources twitter, reddit and Wikipedia. Let's choose a sample, *go to reddit comment* User 'x' commented 'xxxxxxx lebron james xxxxxxx' with 20 upvotes!</p>
+      </div>
 
-        <p> Now we can confirm that other people hate Lebron James just as much as us!
-        The technologies we used are react and redux on the front-end
-        We used express and nodejs on the back-end. For the build tools, we used webpack to bundle the files and gulp</p></div>
+
     )
   }
-
+// <div className="flow-text blue-grey-text text-darken-1">React</div>
   aboutTech(){
     return (
-      <div style={{textAlign: 'center'}}>
-        <h4>Tech Stack</h4>
+      <div className="center-align">
         <Row>
-          <Col m={12} s={12} l={12}>
-            <Col m={4} s={4} l={4}>
-              <img src="http://blog.tryolabs.com/wp-content/uploads/2015/04/logo-578x270.png" />
+          <div style={{fontSize: '17px'}} className="container blue-grey-text text-darken-1">
+            <p>
+              Basselope was developed with performance in mind, leveraging the async & parallel capabilities of Node.js on the back-end.
+            </p>
+            <p>
+              The front-end utilizes React, Redux, and D3.js to efficiently manage the view, data-flow, and visualization of the data returned by the server.
+            </p>
+            <p>
+              Our data is aggregated from a range of sources including Reddit, Twitter, and WikiNews.
+            </p>
+          </div>
+        </Row>
+        <Row>
+          <Col s={12}>
+            <Col s={1} className="offset-s4">
+
+                <img className="responsive-img" src="/assets/nodejs_logo.svg" />
+
             </Col>
-            <Col m={4} s={4} l={4}>
-              <img src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png" />
+            <Col s={1}>
+
+              <img className="responsive-img" src="/assets/react_logo.svg" />
+
             </Col>
-            <Col m={4} s={4} l={4}>
-              <img src="https://camo.githubusercontent.com/66747a6e05a799aec9c6e04a3e721ca567748e8b/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f313336353838312f313931383337332f32653035373166612d376462632d313165332d383436352d3839356632393164343366652e706e67" />
+            <Col s={1}>
+
+              <img className="responsive-img" src="/assets/redux_logo.svg" />
+
+            </Col>
+            <Col s={1}>
+
+              <img className="responsive-img" src="/assets/d3_logo.svg" />
+
             </Col>
           </Col>
         </Row>
         <Row>
-          <Col m={12} s={12} l={12}>
-            <Col m={4} s={4} l={4}>
-              <img src="http://vonectech.com/assets/global/img/expressjs.jpg.pagespeed.ce.UXzx2bpBWs.jpg" />
+          <Col s={12}>
+            <Col s={1} className="offset-s4">
+
+              <img className="responsive-img" src="/assets/twitter_logo.svg" />
+
             </Col>
-            <Col m={4} s={4} l={4}>
-              <img src="https://nodeblog.files.wordpress.com/2011/07/nodejs.png" />
+
+            <Col s={2}>
+              <Col s={10} className="offset-s1">
+                <img className="responsive-img" src="/assets/wikinews_logo.svg" />
+              </Col>
             </Col>
-            <Col m={4} s={4} l={4}>
-              <img src="http://design.altervista.org/wp-content/uploads/2015/01/Materialize.png" />Materialize CSS
-            </Col>
-          </Col>
-        </Row>
-        <Row>
-          <Col m={12} s={12} l={12}>
-            <Col m={4} s={4} l={4}>
-              <img src="http://blog.apiabroad.com/wp-content/uploads/2015/03/reddit-logo.png" /> <h2>API</h2>
-            </Col>
-            <Col m={4} s={4} l={4}>
-              <img src="http://img.labnol.org/di/wikipedia_logo.png" /> <h2>API</h2>
-            </Col>
-            <Col m={4} s={4} l={4}>
-              <img src="http://i1.wp.com/enthusiastprogrammer.com/wp-content/uploads/2015/04/twitter-logo-blue.png" /> <h2>API</h2>
+
+            <Col s={1}>
+
+              <img className="responsive-img" src="/assets/reddit_logo.svg" />
+
             </Col>
           </Col>
         </Row>
@@ -115,12 +165,22 @@ class Home extends React.Component {
   }
   tabBuilder() {
     return (
-      <Tabs className='tab-demo z-depth-1'>
-        <Tab title="About Basselope" active>{this.hoverPopUp(this.aboutColl())}</Tab>
-        <Tab title="About The Team" >{this.hoverPopUp(this.aboutUs())}</Tab>
-        <Tab title="About The Tech">{this.hoverPopUp(this.aboutTech())}</Tab>
-        <Tab title="Source">{this.hoverPopUp(this.aboutColl())}</Tab>
-      </Tabs>
+      <div className="container">
+        <Tabs>
+          <Tab className='blue-grey lighten-2'
+          title={(<div className="flow-text blue-grey-text text-darken-2">BASSELOPE</div>)} active>
+            {this.hoverPopUp(this.aboutColl())}
+          </Tab>
+          <Tab className='blue-grey lighten-2 blue-grey-text text-darken-2'
+               title={(<div className="flow-text blue-grey-text text-darken-2">THE TEAM</div>)}>
+            {this.hoverPopUp(this.aboutUs())}
+          </Tab>
+          <Tab className='blue-grey lighten-2 blue-grey-text text-darken-2'
+               title={(<div className="flow-text blue-grey-text text-darken-2">THE TECH</div>)}>
+            {this.hoverPopUp(this.aboutTech())}
+          </Tab>
+        </Tabs>
+      </div>
     );
   }
 
@@ -128,22 +188,13 @@ class Home extends React.Component {
 
     return (
 
-        <div style={{height:'200vh'}}>
-          <div style={{height:'100vh'}}>
-            <p className="collection-header" style={{'textAlign': 'CENTER', 'fontSize': '60px' }}>Basselope</p>
-            <p className="collection-item" style={{'textAlign': 'center'}}> A Natural Language Processing sentiment analysis tool on social media content</p>
-            <div style={{zIndex: 3, width: '50%', left: 0, right: 0, margin: 'auto'}} >
-              <SearchBar />
-            </div>
+
+          <div style={{minHeight: '100vh'}}>
+            <Row style={{minHeight: '100%'}}>
+              {this.tabBuilder()}
+            </Row>
           </div>
-          <div style={{height:'100vh'}}>
 
-
-            <Tech />
-
-
-          </div>
-        </div>
 
 
     );
