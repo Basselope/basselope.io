@@ -21,29 +21,57 @@ class Home extends React.Component {
   }
   aboutUs(){
     return (
-      <Row>
-        <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"} waves='light'/>}
-                title="Ben Chen   (+Oliver)"
-                reveal={<div>Product Owner<br/>Ben Chen graduated from NYU with a computer scienc</div>}>
-            <p><a href="https://github.com/byc219" target="_blank">Github</a></p>
-          </Card>
-        </Col>
-        <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"} waves='light'/>}
-                title="Rico Chen"
-                reveal={<div>Full Stack Software Engineer<br/><br/>How much does a penguin weigh?...<div>Enough to break the ice! <br/>Hi, I'm Rico and one day I'd like to work at Pied Piper.</div></div>}>
-            <p><a href="https://github.com/ricochen" target="_blank">Github</a></p>
-          </Card>
-        </Col>
-        <Col m={4} s={12}>
-          <Card header={<CardTitle reveal image={"https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"} waves='light'/>}
-                title="Lukas Welinder"
-                reveal={<div>Scrum Master<br/> Lukas is a human with stuff about him</div>}>
-            <p><a href="https://github.com/lukaswelinder" target="_blank">Github</a></p>
-          </Card>
-        </Col>
-      </Row>
+      <div style={{fontSize: '22px', minHeight: '50vh'}} className="valign-wrapper">
+        <Row className="center-align valign">
+
+          <Col m={4} s={10} className="offset-s1">
+
+            <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"/>
+
+            <div className="blue-grey-text text-lighten-1">Ben Chen</div>
+            <span>
+
+                <a style={{fontSize: '13px'}} href="https://github.com/byc219" target="_blank">
+                  github
+                </a>
+
+
+            </span>
+          </Col>
+
+          <Col m={4} s={10} className="offset-s1">
+
+
+              <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"/>
+
+            <div className="blue-grey-text text-lighten-1">Rico Chen</div>
+            <span>
+
+              <a style={{fontSize: '13px'}} href="https://github.com/ricochen" target="_blank">
+                github
+              </a>
+
+
+            </span>
+          </Col>
+
+          <Col m={4} s={10} className="offset-s1">
+
+            <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"/>
+
+            <div className="blue-grey-text text-lighten-1">Lukas Welinder</div>
+            <span>
+
+              <a style={{fontSize: '13px'}} href="https://github.com/lukaswelinder" target="_blank">
+                github
+              </a>
+
+
+            </span>
+          </Col>
+
+        </Row>
+      </div>
     )
   }
   aboutColl(){
@@ -162,7 +190,7 @@ class Home extends React.Component {
 
 
           <div style={{minHeight: '100vh'}}>
-            <Row>
+            <Row style={{minHeight: '100%'}}>
               {this.tabBuilder()}
             </Row>
           </div>
