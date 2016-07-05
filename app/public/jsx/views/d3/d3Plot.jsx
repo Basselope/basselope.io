@@ -5,8 +5,8 @@ function init() {
 
   const node = document.createElement('div');
 
-  const width = 600,
-    height = 300;
+  const width = 700,
+    height = 250;
 
   const svg = d3.select(node).append('svg')
     .attr('class', 'plot-graph')
