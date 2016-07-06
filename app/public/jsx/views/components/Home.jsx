@@ -21,34 +21,21 @@ class Home extends React.Component {
   }
   aboutUs(){
     return (
-      <div style={{fontSize: '22px', minHeight: '50vh'}} className="valign-wrapper">
+      <div style={{fontSize: '24px', minHeight: '50vh'}} className="valign-wrapper">
         <Row className="center-align valign">
 
           <Col m={4} s={10} className="offset-s1">
 
-            <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"/>
+            <img style={{padding: '10% 10% 10% 10%', marginBottom: '-20px'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/2400070?v=3&s=460"/>
 
-            <div className="blue-grey-text text-lighten-1">Ben Chen</div>
+            <div>Ben Chen</div>
             <span>
 
-                <a style={{fontSize: '13px'}} href="https://github.com/byc219" target="_blank">
-                  github
-                </a>
-
-
-            </span>
-          </Col>
-
-          <Col m={4} s={10} className="offset-s1">
-
-
-              <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"/>
-
-            <div className="blue-grey-text text-lighten-1">Rico Chen</div>
-            <span>
-
-              <a style={{fontSize: '13px'}} href="https://github.com/ricochen" target="_blank">
-                github
+              <a style={{fontSize: '16px'}} href="https://github.com/byc219" target="_blank">
+                GitHub
+              </a>
+              <a style={{fontSize: '16px', marginLeft: '15px'}} href="https://www.linkedin.com/in/benychen" target="_blank">
+                LinkedIn
               </a>
 
 
@@ -57,13 +44,35 @@ class Home extends React.Component {
 
           <Col m={4} s={10} className="offset-s1">
 
-            <img style={{padding: '20% 20% 20% 20%'}} className="responsive-img circle" src="https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"/>
 
-            <div className="blue-grey-text text-lighten-1">Lukas Welinder</div>
+            <img style={{padding: '10% 10% 10% 10%', marginBottom: '-20px'}} className="responsive-img circle" src="https://avatars2.githubusercontent.com/u/16439986?v=3&s=400"/>
+
+            <div>Rico Chen</div>
             <span>
 
-              <a style={{fontSize: '13px'}} href="https://github.com/lukaswelinder" target="_blank">
-                github
+              <a style={{fontSize: '16px'}} href="https://github.com/ricochen" target="_blank">
+                GitHub
+              </a>
+              <a style={{fontSize: '16px', marginLeft: '15px'}} href="https://www.linkedin.com/in/ricochenx" target="_blank">
+                LinkedIn
+              </a>
+
+
+            </span>
+          </Col>
+
+          <Col m={4} s={10} className="offset-s1">
+
+            <img style={{padding: '10% 10% 10% 10%', marginBottom: '-20px'}} className="responsive-img circle" src="https://avatars1.githubusercontent.com/u/15223543?v=3&s=400"/>
+
+            <div>Lukas Welinder</div>
+            <span>
+
+              <a style={{fontSize: '16px'}} href="https://github.com/lukaswelinder" target="_blank">
+                GitHub
+              </a>
+              <a style={{fontSize: '16px', marginLeft: '15px'}} href="https://www.linkedin.com/in/lukaswelinder" target="_blank">
+                LinkedIn
               </a>
 
 
@@ -78,15 +87,13 @@ class Home extends React.Component {
     return (
       <div style={{fontSize: '17px'}} className="container center-align blue-grey-text text-darken-1">
         <p>
-          Ever wonder how people felt about a particular topic? The general sentiment or tone towards it in conversations around the web?
+          Ever wonder how people felt about a particular topic? <br />The general sentiment or tone towards it in conversations around the web?
         </p>
 
         <p>
-          Qualitative data like that is hugely important in branding and marketing. However, it's a realm of data analytics that, until recently, has remained under-explored due to limitations in technology.
-        </p>
-
-        <p>
-          Basselope seeks to aggregate, analyze, and visualize the sentiment of conversation around any given term across a wide range of sources. Go ahead and give it a try:
+          Qualitative data, such as knowing the positive and negative view of a topic can be invaluable.
+          By leveraging social media data, Basselope seeks to aggregate, analyze, and visualize the sentiment of conversation around any given term.
+          Go ahead and give it a try:
         </p>
 
         <div className="col s10 offset-s1 m6 offset-m3">
@@ -105,13 +112,13 @@ class Home extends React.Component {
         <Row>
           <div style={{fontSize: '17px'}} className="container blue-grey-text text-darken-1">
             <p>
-              Basselope was developed with performance in mind, leveraging the async & parallel capabilities of Node.js on the back-end.
+              Basselope was developed with performance in mind, leveraging the async & parallel capabilities of Node.js and Express on the back-end.
             </p>
             <p>
               The front-end utilizes React, Redux, and D3.js to efficiently manage the view, data-flow, and visualization of the data returned by the server.
             </p>
             <p>
-              Our data is aggregated from a range of sources including Reddit, Twitter, and WikiNews.
+              Our data is aggregated from a range of sources including Twitter, WikiNews, and Reddit.
             </p>
           </div>
         </Row>
