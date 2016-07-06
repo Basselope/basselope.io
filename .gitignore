@@ -1,4 +1,6 @@
 app/public/dist
-.idea/codeStyleSettings.xml
-.idea/workspace.xml
-/node_modules/
+node_modules
+.idea
+npm-debug.log
+app/server/data/db/basselope.sql
+app/server/router/api/config/api.js

@@ -1,0 +1,120 @@
+body, html {
+  padding: 0,0,0,0;
+  margin: 0,0,0,0;
+  height: 100vh;
+  background: #8e9eab; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #8e9eab , #eef2f3); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #8e9eab , #eef2f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+//p > a {
+//  color: #a1887f !important;
+//  text-shadow: -2px 2px 3px rgba(255, 196, 0, 0.3);
+//  transition: all 200ms ease-in-out;
+//}
+//p > a:hover {
+//  color: #4e342e !important;
+//  text-shadow: -3px 3px 5px rgba(255, 196, 0, 0.4);
+//  transition: all 200ms ease-in-out;
+//}
+
+label {
+  z-index: -1;
+}
+
+input {
+  z-index: 1000
+}
+
+input[type=search]:focus:not([readonly]) {
+  border-bottom: 1px solid #546e7a;
+  box-shadow: 0 1px 0 0 #546e7a;
+  font-size: 19px;
+}
+
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #546e7a;
+  box-shadow: 0 1px 0 0 #546e7a;
+  font-size: 19px;
+}
+
+a {
+  color: #546e7a !important;
+  text-shadow: 0px 0px 0px #546e7a;
+  transition: all 300ms ease-in-out;
+}
+
+a.active {
+  border-bottom: 5px solid #546e7a;
+}
+
+a:hover {
+  color: #546e7a !important;
+  text-shadow: -3px 3px 4px #546e7a;
+  transition: all 300ms ease-in-out;
+}
+
+.button {
+  z-index: 2000
+}
+
+.show {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.graphTitle{
+    top:0px;
+}
+
+img {
+    width: 300px;
+    height: auto;
+}
+
+
+
+//.d3-pie {
+//  display: inline-block;
+//  position: relative;
+//  width: 100%;
+//  padding-bottom: 100%; /* aspect ratio */
+//  //vertical-align: top;
+//  overflow: visible;
+//  max-width: 300px;
+//  margin: auto;
+//  left: 0;
+//  right: 0;
+//}
+.svg-content-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 70px;
+  left: 0;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    gray;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    gray;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    gray;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    gray;
+}
+
+
