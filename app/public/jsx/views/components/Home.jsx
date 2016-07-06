@@ -21,6 +21,7 @@ class Home extends React.Component {
   }
   aboutUs(){
     return (
+
       <div style={{fontSize: '22px', minHeight: '50vh'}} className="valign-wrapper">
         <Row className="center-align valign">
 

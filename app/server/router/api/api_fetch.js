@@ -25,7 +25,7 @@ const call = {
     request: (params) => {
       return axios.get('https://www.reddit.com/search.json', params)
         .then((res) => axios.all(res.data.data.children
-          .slice(0,7).map((val) => axios.get(`https://www.reddit.com${val.data.permalink.split('?')[0]}.json`))))
+          .slice(0,10).map((val) => axios.get(`https://www.reddit.com${val.data.permalink.split('?')[0]}.json`))))
         .then(axios.spread((...args) => args.reduce((curr, val) =>
             curr.concat(val.data.reduce((c,v) =>
               c.concat(v.data.children),[])),[])))
@@ -63,15 +63,15 @@ const call = {
   }),
   wikitemp: {
     request: (params) => { //FIX ME
-      console.log("PARAMs",params.params.q)
+
        
        return axios.get("https://en.wikinews.org/w/api.php", params )
         .then(function(response){
-                console.log("response",response)
+
 
           //res.send(response.data)
-           console.log(response.data); // ex.: { user: 'Your User'}
-          console.log(response.status); 
+            // ex.: { user: 'Your User'}
+
           return response;
          // ex.: 200
         });  
@@ -112,7 +112,7 @@ const q = {
 };
 
 const fetch = (src, query) => {
-  console.log(src)
+
   if(Array.isArray(query))
     return axios.all(query.map((val) => call[src].request(q[src](val)))) //TODO REVIEW SPREAD
       .then(axios.spread((...res) => res.reduce((curr, val) => curr.concat(data[src](val)),[])))
@@ -122,10 +122,8 @@ const fetch = (src, query) => {
 };
 
 
-// fetch('twitter', 'trump')
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
-//   fetch('reddit', 'trump')
-//   .then((res) => console.log(res))
-//   .catch((err) => console.log(err));
+  //
+  // fetch('reddit', 'trump')
+  // .then((res) => console.log(res))
+  // .catch((err) => console.log(err));
 module.exports = fetch;
