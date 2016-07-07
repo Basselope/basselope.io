@@ -16,7 +16,7 @@ WHEN LOGO IS COMPLETED
 ## Setup
 
 We use webpack to bundle our files and gulp to watch the client and server for any changes.
-During development, the server was running on localhost port 8080.
+During development, the server ran on localhost port 8080.
 
 * `npm install` to install our dependencies
 * `gulp launch --dir server` to bundle the files and start the server on localhost:8080
@@ -26,14 +26,14 @@ During development, the server was running on localhost port 8080.
 
 Development team consists of three full-stack engineers:
 
-* Ben Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/byc219)
-* Rico Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/ricochen)
-* Lukas Welinder [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/lukaswelinder)
+* Ben Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/byc219)[Linkedin Icon](https://www.linkedin.com/in/benychen)
+* Rico Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/ricochen)[Linkedin Icon](https://www.linkedin.com/in/ricochenx)
+* Lukas Welinder [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/lukaswelinder)[Linkedin Icon](https://www.linkedin.com/in/lukaswelinder)
 
 
 ## Future Implementations
 
-While Basselope is in a working-state and the initial, fast-paced development phase has concluded, basselope will continue to develope, improve, and change moving forward. That said, if you'd like to contribute, here are some things that currently need attention:
+We are always looking for ways to improve basselope, and will continue to develop the application moving forward. If you'd like to contribute, or have any ideas for feature implementations feel free to make a pull request. For our git workflow take a look at [CONTRIBUTING.md](https://github.com/Basselope/collatio/blob/dev/CONTRIBUTING.md). Below are some examples of features and optimizations we are currently working on:
 
 * Large data sets causing client to hang on call to Reddit API with no error response
 * Implement web-workers and consolidate client-side heavy lifting to improve performance
@@ -43,4 +43,3 @@ While Basselope is in a working-state and the initial, fast-paced development ph
 * SVG responsive styling improvements; some graphs getting clipped by metric-bar
 * Styling/layout issues in firefox and safari (shovel worthy issue)
 
-For our git workflow guide take a look at [CONTRIBUTING.md](https://github.com/Basselope/collatio/blob/dev/CONTRIBUTING.md)
