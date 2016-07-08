@@ -1,10 +1,6 @@
-<!--
-WHEN LOGO IS COMPLETED
-# [Logo](https://github.com/Basselope/basselope.io/app/public/assets/logo.jpg or png) Basselope
--->
 # Basselope
 
-[Basselope](http://basselope.io) is a web application that enriches data visualzation of sentiment values on social media data. Statistical analysis and natural language processing is used in our algorithm to parse out relevant metrics and trending data on a given topic.
+[Basselope](http://basselope.io) is a web application that extracts and visualizes sentiment values of social media content. Statistical analysis and natural language processing are heavily used in our algorithm to parse out relevant metrics and related topics. That enriched data is visualized on the client in ways that provide context and insight into popular opinion on the given topic.
 
 <!-- Basselope image here -->
 
@@ -26,20 +22,28 @@ During development, the server ran on localhost port 8080.
 
 Development team consists of three full-stack engineers:
 
-* Ben Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/byc219)[Linkedin Icon](https://www.linkedin.com/in/benychen)
-* Rico Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/ricochen)[Linkedin Icon](https://www.linkedin.com/in/ricochenx)
-* Lukas Welinder [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/lukaswelinder)[Linkedin Icon](https://www.linkedin.com/in/lukaswelinder)
+* Ben Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20 />](https://github.com/byc219) [<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />](https://www.linkedin.com/in/benychen)
+* Rico Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/ricochen) [[<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />]](https://www.linkedin.com/in/ricochenx)
+* Lukas Welinder [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/lukaswelinder)[[<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />]](https://www.linkedin.com/in/lukaswelinder)
 
 
-## Future Implementations
+## Future of Basselope
 
-We are always looking for ways to improve basselope, and will continue to develop the application moving forward. If you'd like to contribute, or have any ideas for feature implementations feel free to make a pull request. For our git workflow take a look at [CONTRIBUTING.md](https://github.com/Basselope/collatio/blob/dev/CONTRIBUTING.md). Below are some examples of features and optimizations we are currently working on:
+We are always looking for ways to improve Basselope. If you're interested in helping out, or have any ideas for features or fixes, feel free file and issue or make a pull request. For our git workflow and style guides, take a look at [CONTRIBUTING.md](https://github.com/Basselope/collatio/blob/dev/CONTRIBUTING.md). Below are some tasks that need attention:
 
-* Large data sets causing client to hang on call to Reddit API with no error response
+### Optimization
+
+* Distribute fetch & parse tasks across a cluster to reduce load on our front-facing server.
 * Implement web-workers and consolidate client-side heavy lifting to improve performance
-* `d3Plot.jsx` animation re-running when route is returned to
-    - Needs an action dispatch-callback to select node on animation `'end'` event
-    - Causes slowdowns when rendering over 300 data points
-* SVG responsive styling improvements; some graphs getting clipped by metric-bar
-* Styling/layout issues in firefox and safari (shovel worthy issue)
+    - also useful to improve ease of data flow and clarity of design patterns with regard to D3 & Redux
+
+### Fixes
+
+* Large data sets occasionally causing client to hang on call to Reddit API with no error response.
+* `d3Plot.jsx` animation re-running when route is returned to.
+    - needs an action dispatch as callback to re-select node on animation `'end'` event
+    - causes slowdowns when rendering over 300 data points
+* SVG responsive styling improvements and fixes
+    - some graphs getting clipped by metric-bar
+    - styling/layout issues in firefox and safari (shovel worthy issue)
 
