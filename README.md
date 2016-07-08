@@ -23,8 +23,8 @@ During development, the server ran on localhost port 8080.
 Development team consists of three full-stack engineers:
 
 * Ben Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20 />](https://github.com/byc219) [<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />](https://www.linkedin.com/in/benychen)
-* Rico Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/ricochen) [[<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />]](https://www.linkedin.com/in/ricochenx)
-* Lukas Welinder [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20>](https://github.com/lukaswelinder)[[<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />]](https://www.linkedin.com/in/lukaswelinder)
+* Rico Chen [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20 />](https://github.com/ricochen) [[<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />]](https://www.linkedin.com/in/ricochenx)
+* Lukas Welinder [<img src="http://cdn.flaticon.com/png/256/25231.png" width=20 />](https://github.com/lukaswelinder)[[<img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_black-512.png" width=20 />]](https://www.linkedin.com/in/lukaswelinder)
 
 
 ## Future of Basselope
