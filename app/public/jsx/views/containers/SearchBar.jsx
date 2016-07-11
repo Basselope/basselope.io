@@ -50,13 +50,16 @@ class SearchBar extends React.Component {
       <div>
         <form onSubmit={this.onFormSubmit}>
 
-            <input id="search" type='search' value={this.state.term}
-                   style={{paddingLeft: '5px', paddingRight: '5px'}}
-                   onChange={this.onInputChange}
-                   placeholder="Enter a topic..." />
+            <input
+              type='text'
+              value={this.state.term}
+              style={{paddingLeft: '5px', paddingRight: '5px'}}
+              onChange={this.onInputChange}
+              placeholder='Enter a topic...'
+            />
 
           <SList term={this.state.term} bingListClick={this.bingListClick} formSubmit={this.onFormSubmit} />
-          
+
         </form>
       </div>
     );
