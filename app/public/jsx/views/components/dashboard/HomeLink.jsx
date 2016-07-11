@@ -10,11 +10,8 @@ class HomeLink extends React.Component {
   }
 
   render() {
-    // console.log(this.props.alchemy)
     return (
-      <div>
-
-      </div>
+      <Link to={"/"} style={{zIndex: 10000, float: 'right'}}>Home</Link>
     );
   }
 }
