@@ -2,7 +2,7 @@
 
 [Basselope](http://basselope.io) is a web application that extracts and visualizes sentiment values of social media content. Statistical analysis and natural language processing are heavily used in our algorithm to parse out relevant metrics and related topics. That enriched data is visualized on the client in ways that provide context and insight into popular opinion on the given topic.
 
-![Basselope](https://github.com/Basselope/basselope.io/tree/dev/app/public/assets/basselope.jpg)
+![Basselope](https://github.com/Basselope/basselope.io/blob/dev/app/public/assets/basselope.jpg)
 
 
 ## Technology
