@@ -1,7 +1,6 @@
-var server = require("./server/server_config.js");
+const server = require("./server/server_config.js");
 
-var port = process.env.PORT || 8080;
-
+const port = process.env.PORT || 8080;
 
 server.listen(port);
 

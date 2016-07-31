@@ -1,6 +1,6 @@
-let sentiment = require('sentiment'),
-    stats = require("stats-lite"),
-    nlp = require("nlp_compromise")
+const sentiment = require('sentiment');
+const stats = require("stats-lite");
+const nlp = require("nlp_compromise");
 
 
 
