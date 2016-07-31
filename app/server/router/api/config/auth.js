@@ -1,12 +1,12 @@
 
-var https = require('https'),
+const https = require('https'),
 oauthJsonFile = require('fs').createWriteStream('oauth.json');
-var gettingAccess = {
+const gettingAccess = {
   consumerKey: '9Daz6zUNQKhNYzogJD040b3r1',
-  consumerSecretKey: 'sivAWFQ3r1MzfnvR1PULAoARrruhizjYpXb803jmx8YwvH4b1E' 
+  consumerSecretKey: 'sivAWFQ3r1MzfnvR1PULAoARrruhizjYpXb803jmx8YwvH4b1E'
 };
 
-var request = https.request({
+const request = https.request({
   method: 'POST',
   host: 'api.twitter.com',
   path: '/oauth2/token',
